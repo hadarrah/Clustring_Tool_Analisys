@@ -20,6 +20,18 @@ except ImportError:
     py3 = True
 
 import main_support
+from Utils import logger
+from Utils import configuration
+from Algorithm.main_flow import main as main_regression
+
+config = configuration.config().setup()
+log = logger.setup()
+log = logger.add_log_file(log, config)
+
+
+def start_regression():
+    main = main_regression(config)
+    main.run()
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
@@ -485,6 +497,7 @@ class Toplevel1:
         self.Button4.configure(highlightcolor="black")
         self.Button4.configure(pady="0")
         self.Button4.configure(text='''RUN!''')
+        self.Button4.configure(command=lambda : start_regression())
 
         self.Labelframe3 = tk.LabelFrame(self.TNotebook1_t2)
         self.Labelframe3.place(relx=0.051, rely=0.146, relheight=0.768

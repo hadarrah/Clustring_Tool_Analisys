@@ -1,4 +1,5 @@
 from Utils import logger
+from Utils import configuration
 import logging
 
 
@@ -18,3 +19,9 @@ class Chunk(object):
     def print_chunk_size(self):
         self.log.info("Size: " + self.chunk_size)
 
+
+if __name__ == "__main__":
+    # Unitest
+    config = configuration.config().setup()
+    chunk = Chunk(config)
+    # functions
