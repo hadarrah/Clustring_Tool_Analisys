@@ -23,5 +23,5 @@ class Chunk(object):
 if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
-    chunk = Chunk(config)
+    chunk2 = Chunk(config)
     # functions
