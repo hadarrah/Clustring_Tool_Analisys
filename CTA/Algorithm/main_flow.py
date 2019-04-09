@@ -26,4 +26,4 @@ if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
     main = main(config)
-    #main.run()
+    main.run()
