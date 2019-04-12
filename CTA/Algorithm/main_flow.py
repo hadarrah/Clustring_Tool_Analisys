@@ -10,7 +10,8 @@ class main(object):
         self.config = config
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.add_log_file(self.log, config)
+        self.log = logger.setup()
+        #self.log = logger.add_log_file(self.log, config)
 
     def run(self):
         self.log.info("NEW REGRESSION IS STARTING!")
