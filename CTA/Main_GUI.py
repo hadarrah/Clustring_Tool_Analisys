@@ -23,6 +23,7 @@ import main_support
 from Utils import logger
 from Utils import configuration
 from Algorithm.main_flow import main as main_regression
+from tkinter.filedialog import askopenfilenames, askopenfilename
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -136,18 +137,19 @@ class Toplevel1:
         self.load_text_button.configure(highlightcolor="black")
         self.load_text_button.configure(pady="0")
         self.load_text_button.configure(text='''Load Texts''')
+        self.load_text_button.configure(command=self.load_text_button_dialog)
 
-        self.Entry2 = tk.Entry(self.TNotebook1_t0)
-        self.Entry2.place(relx=0.339, rely=0.171,height=20, relwidth=0.278)
-        self.Entry2.configure(background="white")
-        self.Entry2.configure(disabledforeground="#a3a3a3")
-        self.Entry2.configure(font="TkFixedFont")
-        self.Entry2.configure(foreground="#000000")
-        self.Entry2.configure(highlightbackground="#d9d9d9")
-        self.Entry2.configure(highlightcolor="black")
-        self.Entry2.configure(insertbackground="black")
-        self.Entry2.configure(selectbackground="#c4c4c4")
-        self.Entry2.configure(selectforeground="black")
+        self.texts_entry = tk.Entry(self.TNotebook1_t0)
+        self.texts_entry.place(relx=0.339, rely=0.171,height=20, relwidth=0.278)
+        self.texts_entry.configure(background="white")
+        self.texts_entry.configure(disabledforeground="#a3a3a3")
+        self.texts_entry.configure(font="TkFixedFont")
+        self.texts_entry.configure(foreground="#000000")
+        self.texts_entry.configure(highlightbackground="#d9d9d9")
+        self.texts_entry.configure(highlightcolor="black")
+        self.texts_entry.configure(insertbackground="black")
+        self.texts_entry.configure(selectbackground="#c4c4c4")
+        self.texts_entry.configure(selectforeground="black")
 
         self.from_spinbox = tk.Spinbox(self.TNotebook1_t0, from_=5.0, to=100.0)
         self.from_spinbox.place(relx=0.356, rely=0.341, relheight=0.046
@@ -221,6 +223,7 @@ class Toplevel1:
         self.load_vec_button.configure(pady="0")
         self.load_vec_button.configure(state='disabled')
         self.load_vec_button.configure(text='''Load Vec''')
+        self.load_vec_button.configure(command=self.load_vec_button_dialog)
 
         self.add_word_emedding_Cbutton3 = tk.Checkbutton(self.TNotebook1_t0)
         self.add_word_emedding_Cbutton3.place(relx=0.136, rely=0.634, relheight=0.061
@@ -241,18 +244,18 @@ class Toplevel1:
 
 
 
-        self.Entry3 = tk.Entry(self.TNotebook1_t0)
-        self.Entry3.place(relx=0.356, rely=0.78,height=20, relwidth=0.278)
-        self.Entry3.configure(background="white")
-        self.Entry3.configure(disabledforeground="#a3a3a3")
-        self.Entry3.configure(font="TkFixedFont")
-        self.Entry3.configure(foreground="#000000")
-        self.Entry3.configure(highlightbackground="#d9d9d9")
-        self.Entry3.configure(highlightcolor="black")
-        self.Entry3.configure(insertbackground="black")
-        self.Entry3.configure(selectbackground="#c4c4c4")
-        self.Entry3.configure(selectforeground="black")
-        self.Entry3.configure(state='disabled')
+        self.vec_entry = tk.Entry(self.TNotebook1_t0)
+        self.vec_entry.place(relx=0.356, rely=0.78,height=20, relwidth=0.278)
+        self.vec_entry.configure(background="white")
+        self.vec_entry.configure(disabledforeground="#a3a3a3")
+        self.vec_entry.configure(font="TkFixedFont")
+        self.vec_entry.configure(foreground="#000000")
+        self.vec_entry.configure(highlightbackground="#d9d9d9")
+        self.vec_entry.configure(highlightcolor="black")
+        self.vec_entry.configure(insertbackground="black")
+        self.vec_entry.configure(selectbackground="#c4c4c4")
+        self.vec_entry.configure(selectforeground="black")
+        self.vec_entry.configure(state='disabled')
 
         self.TSeparator2 = ttk.Separator(self.TNotebook1_t0)
         self.TSeparator2.place(relx=0.085, rely=0.537, relwidth=0.847)
@@ -780,8 +783,18 @@ class Toplevel1:
         set = self.add_word_emedding_Cbutton_var.get()
         if (set):
             self.load_vec_button.configure(state=tk.ACTIVE)
+            self.vec_entry.configure(state=tk.NORMAL)
         else:
             self.load_vec_button.configure(state=tk.DISABLED)
+            self.vec_entry.configure(state=tk.DISABLED)
+
+    def load_text_button_dialog(self, event=None):
+        filename = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        self.texts_entry.insert(0, filename)
+
+    def load_vec_button_dialog(self, event=None):
+        filename = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
+        self.vec_entry.insert(0, filename)
 
     @staticmethod
     def popup1(event, *args, **kwargs):
