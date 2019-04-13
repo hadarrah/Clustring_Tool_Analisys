@@ -1,6 +1,6 @@
 import logging
 from Utils import logger
-from Algorithm.Chunk import Chunk
+from Algorithm.chunk import Chunk
 from Utils import configuration
 
 
