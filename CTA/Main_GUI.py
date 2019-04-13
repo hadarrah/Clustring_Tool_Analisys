@@ -24,15 +24,27 @@ from Utils import logger
 from Utils import configuration
 from Algorithm.main_flow import main as main_regression
 from tkinter.filedialog import askopenfilenames, askopenfilename
+from tkinter import messagebox
 
 config = configuration.config().setup()
 log = logger.setup()
-log = logger.add_log_file(log, config)
+#log = logger.add_log_file(log, config)
+doc_paths = None
+vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
 
-def start_regression():
-    main = main_regression(config)
+def start_regression(texts_input, vec_input):
+    # we should check if all the files are exist before running the algorithm
+    if (texts_input):
+        doc_paths = texts_input
+    else:
+        messagebox.showerror("Input Error", "You must insert a texts")
+        return
+
+    vec_path = vec_input if (vec_input) else None
+
+    main = main_regression(config, doc_paths, vec_path)
     main.run()
 
 def vp_start_gui():
@@ -499,18 +511,18 @@ class Toplevel1:
         self.Spinbox1.configure(state='disabled')
         self.Spinbox1.configure(textvariable=main_support.spinbox)
 
-        self.Button4 = tk.Button(self.TNotebook1_t2)
-        self.Button4.place(relx=0.458, rely=0.073, height=24, width=38)
-        self.Button4.configure(activebackground="#ececec")
-        self.Button4.configure(activeforeground="#000000")
-        self.Button4.configure(background="#d9d9d9")
-        self.Button4.configure(disabledforeground="#a3a3a3")
-        self.Button4.configure(foreground="#000000")
-        self.Button4.configure(highlightbackground="#d9d9d9")
-        self.Button4.configure(highlightcolor="black")
-        self.Button4.configure(pady="0")
-        self.Button4.configure(text='''RUN!''')
-        self.Button4.configure(command=lambda : start_regression())
+        self.run_button = tk.Button(self.TNotebook1_t2)
+        self.run_button.place(relx=0.458, rely=0.073, height=24, width=38)
+        self.run_button.configure(activebackground="#ececec")
+        self.run_button.configure(activeforeground="#000000")
+        self.run_button.configure(background="#d9d9d9")
+        self.run_button.configure(disabledforeground="#a3a3a3")
+        self.run_button.configure(foreground="#000000")
+        self.run_button.configure(highlightbackground="#d9d9d9")
+        self.run_button.configure(highlightcolor="black")
+        self.run_button.configure(pady="0")
+        self.run_button.configure(text='''RUN!''')
+        self.run_button.configure(command=lambda : start_regression(self.texts_entry.get(), self.vec_entry.get()))
 
         self.Labelframe3 = tk.LabelFrame(self.TNotebook1_t2)
         self.Labelframe3.place(relx=0.051, rely=0.146, relheight=0.768
@@ -789,12 +801,14 @@ class Toplevel1:
             self.vec_entry.configure(state=tk.DISABLED)
 
     def load_text_button_dialog(self, event=None):
-        filename = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
-        self.texts_entry.insert(0, filename)
+        doc_paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        self.texts_entry.insert(0, doc_paths)
+
 
     def load_vec_button_dialog(self, event=None):
-        filename = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
-        self.vec_entry.insert(0, filename)
+        vec_path = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
+        self.vec_entry.insert(0, vec_path)
+
 
     @staticmethod
     def popup1(event, *args, **kwargs):

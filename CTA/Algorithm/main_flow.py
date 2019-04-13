@@ -6,8 +6,10 @@ from Utils import configuration
 
 class main(object):
 
-    def __init__(self, config):
+    def __init__(self, config, documents, external_vec):
         self.config = config
+        self.documents = documents.split()
+        self.external_vec = external_vec
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
@@ -15,9 +17,7 @@ class main(object):
 
     def run(self):
         self.log.info("NEW REGRESSION IS STARTING!")
-        chunk = Chunk(self.config)
-        chunk.print_chunk_size()
-        chunk.print_delay()
+
         # Step 1
         # Step 2
         # Step 3...
