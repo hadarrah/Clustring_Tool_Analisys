@@ -180,6 +180,7 @@ class Toplevel1:
         var = tk.StringVar(root)
         var.set(config.get("CLUSTER", "from"))
         self.from_spinbox.configure(textvariable=var)
+        self.from_spinbox.configure(command=self.set_from_val)
 
         var = tk.StringVar(root)
         var.set(config.get("CLUSTER", "to"))
@@ -200,6 +201,7 @@ class Toplevel1:
         var = tk.StringVar(root)
         var.set(config.get("CLUSTER", "to"))
         self.to_spinbox.configure(textvariable=var)
+        self.to_spinbox.configure(command=self.set_to_val)
 
         self.Label4 = tk.Label(self.TNotebook1_t0)
         self.Label4.place(relx=0.169, rely=0.341, height=21, width=75)
@@ -798,6 +800,8 @@ class Toplevel1:
             self.vec_entry.configure(state=tk.NORMAL)
         else:
             self.load_vec_button.configure(state=tk.DISABLED)
+            self.vec_entry.delete(0,tk.END)
+            self.vec_entry.insert(0,"")
             self.vec_entry.configure(state=tk.DISABLED)
 
     def load_text_button_dialog(self, event=None):
@@ -809,6 +813,15 @@ class Toplevel1:
         vec_path = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
         self.vec_entry.insert(0, vec_path)
 
+    def set_from_val(self, event=None):
+        if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
+            self.from_spinbox.invoke("buttondown")
+        config.set("CLUSTER", "from", str(self.from_spinbox.get()))
+
+    def set_to_val(self, event=None):
+        if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
+            self.to_spinbox.invoke("buttonup")
+        config.set("CLUSTER", "to", str(self.to_spinbox.get()))
 
     @staticmethod
     def popup1(event, *args, **kwargs):
