@@ -20,10 +20,10 @@ class Model(object):
     """
     def __init__(self, config, filepath=None, documents=[]):
         self.architecture = 1 if (config.get("Word2Vec", "arch") == "Skip-Gram") else 0
-        self.training_model = 1 if (config.get("Word2Vec", "training_model") == "Hierarchical Softmax") else 0
+        self.training_model = 1 if (config.get("Word2Vec", "training_model") == "Softmax") else 0
         self.window = int(config.get("Word2Vec", "context_window"))
         self.dimension = int(config.get("Word2Vec", "dimension"))
-        self.delimiter = config.get("GENERAL", "text_delimiter")
+        self.delimiter = config.get("Word2Vec", "text_delimiter")
         self.file_path = filepath
         self.sentences = []
         self.vectors = None

@@ -26,5 +26,5 @@ class main(object):
 if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
-    main = main(config)
+    main = main(config, "blabla", None)
     main.run()
