@@ -109,4 +109,4 @@ if __name__ == "__main__":
     word = "אהבה"
     if (model.exist_in_vocab(word)):
         print(str(model.get_vector(word)))
-
+    print()

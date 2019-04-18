@@ -29,14 +29,14 @@ if __name__ == "__main__":
     # functions
 
     # option 1: external word embedding
-    model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Hadar\\Downloads\\wiki.he\\wiki.he.vec")
+    model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
 
     # option 2: create word embedding based on the documents collection
-    #documents = ["C:\\Users\\Hadar\\Downloads\\texts\\Bamidbar_chapter_B.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Bereshit_chapter_A.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\MelachimB_chapter_C.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Shoftim_chapter_H.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Yiov_chapter_A.txt"]
+    #documents = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\Bamidbar_chapter_B.txt",
+    #             "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\Bereshit_chapter_A.txt",
+    #             "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\MelachimB_chapter_C.txt",
+    #             "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\Shoftim_chapter_H.txt",
+    #             "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\Yiov_chapter_A.txt"]
 #
     #model = Word2VecWrapper.Model(config, documents=documents)
 
