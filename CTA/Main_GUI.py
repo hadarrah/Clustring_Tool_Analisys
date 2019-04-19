@@ -33,8 +33,9 @@ doc_paths = None
 vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
+DELIMITERS  = [r'\n', r'.', r'[.*?]']
 
-def start_regression(texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window):
+def start_regression(texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
         doc_paths = texts_input
@@ -51,6 +52,7 @@ def start_regression(texts_input, vec_input, enable_advanced, number_of_words, c
         config.set("Word2Vec", "arch", arch)
         config.set("Word2Vec", "training_model", training)
         config.set("Word2Vec", "context_window", context_window)
+        config.set("Word2Vec", "text_delimiter", delimiter)
 
     main = main_regression(config, doc_paths, vec_path)
     main.run()
@@ -283,7 +285,7 @@ class Toplevel1:
         self.TSeparator2.place(relx=0.085, rely=0.537, relwidth=0.847)
 
         self.Enable_Cbutton = tk.Checkbutton(self.TNotebook1_t1)
-        self.Enable_Cbutton.place(relx=0.051, rely=0.024, relheight=0.061
+        self.Enable_Cbutton.place(relx=0.051, rely=0.014, relheight=0.061
                 , relwidth=0.107)
         self.Enable_Cbutton.configure(activebackground="#ececec")
         self.Enable_Cbutton.configure(activeforeground="#000000")
@@ -300,7 +302,7 @@ class Toplevel1:
         self.Enable_Cbutton.deselect()
 
         self.Word2Vec_Labelframe = tk.LabelFrame(self.TNotebook1_t1)
-        self.Word2Vec_Labelframe.place(relx=0.068, rely=0.585, relheight=0.378
+        self.Word2Vec_Labelframe.place(relx=0.068, rely=0.500, relheight=0.478
                 , relwidth=0.898)
         self.Word2Vec_Labelframe.configure(relief='groove')
         self.Word2Vec_Labelframe.configure(foreground="black")
@@ -313,7 +315,7 @@ class Toplevel1:
         self.arch_var = tk.StringVar()
 
         self.Skip_Gram_Radiobutton = tk.Radiobutton(self.Word2Vec_Labelframe)
-        self.Skip_Gram_Radiobutton.place(relx=0.434, rely=0.194, relheight=0.161
+        self.Skip_Gram_Radiobutton.place(relx=0.400, rely=0.140, relheight=0.161
                 , relwidth=0.155, bordermode='ignore')
         self.Skip_Gram_Radiobutton.configure(activebackground="#ececec")
         self.Skip_Gram_Radiobutton.configure(activeforeground="#000000")
@@ -330,7 +332,7 @@ class Toplevel1:
 
 
         self.CBOW_Radiobutton = tk.Radiobutton(self.Word2Vec_Labelframe)
-        self.CBOW_Radiobutton.place(relx=0.679, rely=0.194, relheight=0.161
+        self.CBOW_Radiobutton.place(relx=0.600, rely=0.140, relheight=0.161
                 , relwidth=0.119, bordermode='ignore')
         self.CBOW_Radiobutton.configure(activebackground="#ececec")
         self.CBOW_Radiobutton.configure(activeforeground="#000000")
@@ -349,7 +351,7 @@ class Toplevel1:
         self.training_var = tk.StringVar()
 
         self.Softmax_Radiobutton = tk.Radiobutton(self.Word2Vec_Labelframe)
-        self.Softmax_Radiobutton.place(relx=0.434, rely=0.452, relheight=0.161
+        self.Softmax_Radiobutton.place(relx=0.400, rely=0.335, relheight=0.161
                 , relwidth=0.134, bordermode='ignore')
         self.Softmax_Radiobutton.configure(activebackground="#ececec")
         self.Softmax_Radiobutton.configure(activeforeground="#000000")
@@ -365,7 +367,7 @@ class Toplevel1:
         self.Softmax_Radiobutton.configure(value="Softmax")
 
         self.Negative_Sampling_Radiobutton = tk.Radiobutton(self.Word2Vec_Labelframe)
-        self.Negative_Sampling_Radiobutton.place(relx=0.679, rely=0.452, relheight=0.161
+        self.Negative_Sampling_Radiobutton.place(relx=0.600, rely=0.335, relheight=0.161
                 , relwidth=0.242, bordermode='ignore')
         self.Negative_Sampling_Radiobutton.configure(activebackground="#ececec")
         self.Negative_Sampling_Radiobutton.configure(activeforeground="#000000")
@@ -383,7 +385,7 @@ class Toplevel1:
         self.training_var.set(config.get("Word2Vec", "training_model"))
 
         self.Architecture_Label = tk.Label(self.Word2Vec_Labelframe)
-        self.Architecture_Label.place(relx=0.208, rely=0.194, height=21, width=74
+        self.Architecture_Label.place(relx=0.21, rely=0.150, height=21, width=74
                 , bordermode='ignore')
         self.Architecture_Label.configure(activebackground="#f9f9f9")
         self.Architecture_Label.configure(activeforeground="black")
@@ -395,7 +397,7 @@ class Toplevel1:
         self.Architecture_Label.configure(text='''Architecture:''')
 
         self.Model_Label = tk.Label(self.Word2Vec_Labelframe)
-        self.Model_Label.place(relx=0.255, rely=0.452, height=21, width=43
+        self.Model_Label.place(relx=0.270, rely=0.350, height=21, width=43
                 , bordermode='ignore')
         self.Model_Label.configure(activebackground="#f9f9f9")
         self.Model_Label.configure(activeforeground="black")
@@ -407,7 +409,7 @@ class Toplevel1:
         self.Model_Label.configure(text='''Model:''')
 
         self.Context_Windows_Label = tk.Label(self.Word2Vec_Labelframe)
-        self.Context_Windows_Label.place(relx=0.142, rely=0.71, height=21, width=102
+        self.Context_Windows_Label.place(relx=0.155, rely=0.580, height=21, width=102
                 , bordermode='ignore')
         self.Context_Windows_Label.configure(activebackground="#f9f9f9")
         self.Context_Windows_Label.configure(activeforeground="black")
@@ -418,8 +420,21 @@ class Toplevel1:
         self.Context_Windows_Label.configure(highlightcolor="black")
         self.Context_Windows_Label.configure(text='''Context Windows:''')
 
+        self.Delimiter_Label = tk.Label(self.Word2Vec_Labelframe)
+        self.Delimiter_Label.place(relx=0.197, rely=0.8, height=21, width=102
+                                         , bordermode='ignore')
+        self.Delimiter_Label.configure(activebackground="#f9f9f9")
+        self.Delimiter_Label.configure(activeforeground="black")
+        self.Delimiter_Label.configure(background="#d9d9d9")
+        self.Delimiter_Label.configure(disabledforeground="#a3a3a3")
+        self.Delimiter_Label.configure(foreground="#000000")
+        self.Delimiter_Label.configure(highlightbackground="#d9d9d9")
+        self.Delimiter_Label.configure(highlightcolor="black")
+        self.Delimiter_Label.configure(text='''Delimiter:''')
+
+
         self.Context_Windows_Spinbox = tk.Spinbox(self.Word2Vec_Labelframe, from_=1.0, to=100.0)
-        self.Context_Windows_Spinbox.place(relx=0.396, rely=0.71, relheight=0.123, relwidth=0.16
+        self.Context_Windows_Spinbox.place(relx=0.396, rely=0.580, relheight=0.100, relwidth=0.16
                 , bordermode='ignore')
         self.Context_Windows_Spinbox.configure(activebackground="#f9f9f9")
         self.Context_Windows_Spinbox.configure(background="white")
@@ -436,8 +451,20 @@ class Toplevel1:
         self.Context_Windows_var.set(config.get("Word2Vec", "context_window"))
         self.Context_Windows_Spinbox.configure(textvariable=self.Context_Windows_var)
 
+        self.Delimiter_var = tk.StringVar(root)
+        self.Delimiter_var.set(DELIMITERS[0])  # default value
+        self.Delimiter_window = tk.OptionMenu(self.Word2Vec_Labelframe, self.Delimiter_var, *DELIMITERS)
+        self.Delimiter_window.place(relx=0.392, rely=0.8, height=20, relwidth=0.17)
+        self.Delimiter_window.configure(background="white")
+        self.Delimiter_window.configure(disabledforeground="#a3a3a3")
+        self.Delimiter_window.configure(font="TkFixedFont")
+        self.Delimiter_window.configure(foreground="#000000")
+        self.Delimiter_window.configure(highlightbackground="#d9d9d9")
+        self.Delimiter_window.configure(highlightcolor="black")
+        self.Delimiter_window.configure(state='disabled')
+
         self.Chunks_Labelframe = tk.LabelFrame(self.TNotebook1_t1)
-        self.Chunks_Labelframe.place(relx=0.068, rely=0.268, relheight=0.305
+        self.Chunks_Labelframe.place(relx=0.068, rely=0.240, relheight=0.255
                 , relwidth=0.898)
         self.Chunks_Labelframe.configure(relief='groove')
         self.Chunks_Labelframe.configure(foreground="black")
@@ -448,7 +475,7 @@ class Toplevel1:
         self.Chunks_Labelframe.configure(width=530)
 
         self.Chunk_Size_Spinbox = tk.Spinbox(self.Chunks_Labelframe, from_=1.0, to=100.0)
-        self.Chunk_Size_Spinbox.place(relx=0.396, rely=0.24, relheight=0.152, relwidth=0.16
+        self.Chunk_Size_Spinbox.place(relx=0.396, rely=0.24, relheight=0.200, relwidth=0.16
                 , bordermode='ignore')
         self.Chunk_Size_Spinbox.configure(activebackground="#f9f9f9")
         self.Chunk_Size_Spinbox.configure(background="white")
@@ -466,7 +493,7 @@ class Toplevel1:
         self.Chunk_Size_Spinbox.configure(textvariable=self.Chunk_Size_var)
 
         self.Delay_Spinbox = tk.Spinbox(self.Chunks_Labelframe, from_=1.0, to=100.0)
-        self.Delay_Spinbox.place(relx=0.396, rely=0.56, relheight=0.152, relwidth=0.16
+        self.Delay_Spinbox.place(relx=0.396, rely=0.56, relheight=0.200, relwidth=0.16
                 , bordermode='ignore')
         self.Delay_Spinbox.configure(activebackground="#f9f9f9")
         self.Delay_Spinbox.configure(background="white")
@@ -484,7 +511,7 @@ class Toplevel1:
         self.Delay_Spinbox.configure(textvariable=self.Delay_var)
 
         self.Chunk_Size_Label = tk.Label(self.Chunks_Labelframe)
-        self.Chunk_Size_Label.place(relx=0.217, rely=0.24, height=21, width=67
+        self.Chunk_Size_Label.place(relx=0.225, rely=0.24, height=21, width=67
                 , bordermode='ignore')
         self.Chunk_Size_Label.configure(activebackground="#f9f9f9")
         self.Chunk_Size_Label.configure(activeforeground="black")
@@ -496,7 +523,7 @@ class Toplevel1:
         self.Chunk_Size_Label.configure(text='''Chunk Size:''')
 
         self.Delay_Label = tk.Label(self.Chunks_Labelframe)
-        self.Delay_Label.place(relx=0.17, rely=0.56, height=21, width=95
+        self.Delay_Label.place(relx=0.172, rely=0.56, height=21, width=95
                 , bordermode='ignore')
         self.Delay_Label.configure(activebackground="#f9f9f9")
         self.Delay_Label.configure(activeforeground="black")
@@ -508,7 +535,7 @@ class Toplevel1:
         self.Delay_Label.configure(text='''Delay Parameter:''')
 
         self.TFIDF_Labelframe = tk.LabelFrame(self.TNotebook1_t1)
-        self.TFIDF_Labelframe.place(relx=0.068, rely=0.098, relheight=0.159
+        self.TFIDF_Labelframe.place(relx=0.068, rely=0.078, relheight=0.159
                 , relwidth=0.898)
         self.TFIDF_Labelframe.configure(relief='groove')
         self.TFIDF_Labelframe.configure(foreground="black")
@@ -531,7 +558,7 @@ class Toplevel1:
         self.Number_Of_Words_Label.configure(text='''Number of Words in Document:''')
 
         self.Number_Of_Words_Spinbox = tk.Spinbox(self.TFIDF_Labelframe, from_=1.0, to=100.0)
-        self.Number_Of_Words_Spinbox.place(relx=0.396, rely=0.462, relheight=0.292
+        self.Number_Of_Words_Spinbox.place(relx=0.396, rely=0.462, relheight=0.400
                 , relwidth=0.16, bordermode='ignore')
         self.Number_Of_Words_Spinbox.configure(activebackground="#f9f9f9")
         self.Number_Of_Words_Spinbox.configure(background="white")
@@ -566,7 +593,8 @@ class Toplevel1:
                                                                     self.Delay_var.get(),
                                                                     self.arch_var.get(),
                                                                     self.training_var.get(),
-                                                                    self.Context_Windows_var.get()))
+                                                                    self.Context_Windows_var.get(),
+                                                                    self.Delimiter_var.get()))
 
         self.Labelframe3 = tk.LabelFrame(self.TNotebook1_t2)
         self.Labelframe3.place(relx=0.051, rely=0.146, relheight=0.768
@@ -876,6 +904,7 @@ class Toplevel1:
             self.Negative_Sampling_Radiobutton.configure(state="normal")
             self.CBOW_Radiobutton.configure(state="normal")
             self.Skip_Gram_Radiobutton.configure(state="normal")
+            self.Delimiter_window.configure(state="normal")
         else:
             self.Number_Of_Words_Spinbox.configure(state='disable')
             self.Delay_Spinbox.configure(state='disable')
@@ -885,6 +914,7 @@ class Toplevel1:
             self.Negative_Sampling_Radiobutton.configure(state="disable")
             self.CBOW_Radiobutton.configure(state="disable")
             self.Skip_Gram_Radiobutton.configure(state="disable")
+            self.Delimiter_window.configure(state="disable")
 
 
 
