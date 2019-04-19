@@ -25,6 +25,7 @@ from Utils import configuration
 from Algorithm.main_flow import main as main_regression
 from tkinter.filedialog import askopenfilenames, askopenfilename
 from tkinter import messagebox
+from PIL import ImageTk, Image
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -33,9 +34,11 @@ doc_paths = None
 vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
-DELIMITERS  = [r'\n', r'.', r'[.*?]']
+DELIMITERS = [r'\n', r'.', r'[.*?]']
+V_PATH = ".\\images\\green_v.png"
+X_PATH = ".\\images\\red_x.png"
 
-def start_regression(texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
+def start_regression(top, texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
         doc_paths = texts_input
@@ -54,8 +57,14 @@ def start_regression(texts_input, vec_input, enable_advanced, number_of_words, c
         config.set("Word2Vec", "context_window", context_window)
         config.set("Word2Vec", "text_delimiter", delimiter)
 
+    top.clean_all_steps()
+
     main = main_regression(config, doc_paths, vec_path)
-    main.run()
+    try:
+        main.run(top)
+    except Exception as e:
+        log.error(str(e))
+        top.set_x_stage(main.get_stage())
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
@@ -83,6 +92,8 @@ def destroy_Toplevel1():
     w = None
 
 class Toplevel1:
+
+
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
@@ -586,7 +597,7 @@ class Toplevel1:
         self.run_button.configure(highlightcolor="black")
         self.run_button.configure(pady="0")
         self.run_button.configure(text='''RUN!''')
-        self.run_button.configure(command=lambda : start_regression(self.texts_entry.get(), self.vec_entry.get(),
+        self.run_button.configure(command=lambda : start_regression(self, self.texts_entry.get(), self.vec_entry.get(),
                                                                     self.Enable_Cbutton_var.get(),
                                                                     self.Number_Of_Words_var.get(),
                                                                     self.Chunk_Size_var.get(),
@@ -596,125 +607,139 @@ class Toplevel1:
                                                                     self.Context_Windows_var.get(),
                                                                     self.Delimiter_var.get()))
 
-        self.Labelframe3 = tk.LabelFrame(self.TNotebook1_t2)
-        self.Labelframe3.place(relx=0.051, rely=0.146, relheight=0.768
+        self.Processing_Labelframe = tk.LabelFrame(self.TNotebook1_t2)
+        self.Processing_Labelframe.place(relx=0.051, rely=0.146, relheight=0.768
                 , relwidth=0.898)
-        self.Labelframe3.configure(relief='groove')
-        self.Labelframe3.configure(foreground="black")
-        self.Labelframe3.configure(labelanchor="n")
-        self.Labelframe3.configure(text='''Proccessing''')
-        self.Labelframe3.configure(background="#d9d9d9")
-        self.Labelframe3.configure(highlightbackground="#d9d9d9")
-        self.Labelframe3.configure(highlightcolor="black")
-        self.Labelframe3.configure(width=530)
+        self.Processing_Labelframe.configure(relief='groove')
+        self.Processing_Labelframe.configure(foreground="black")
+        self.Processing_Labelframe.configure(labelanchor="n")
+        self.Processing_Labelframe.configure(text='''Processing''')
+        self.Processing_Labelframe.configure(background="#d9d9d9")
+        self.Processing_Labelframe.configure(highlightbackground="#d9d9d9")
+        self.Processing_Labelframe.configure(highlightcolor="black")
+        self.Processing_Labelframe.configure(width=530)
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.038, rely=0.063, relheight=0.079
-                , relwidth=0.155, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(selectcolor="#ffffffffffff")
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''Word2Vec''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.v_img_word2vec = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_word2vec_label = tk.Label(self.Processing_Labelframe, image=self.v_img_word2vec, background="#d9d9d9")
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.038, rely=0.159, relheight=0.079
-                , relwidth=0.115, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''TF-IDF''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.x_img_word2vec = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_word2vec_label = tk.Label(self.Processing_Labelframe, image=self.x_img_word2vec, background="#d9d9d9")
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.009, rely=0.254, relheight=0.079
-                , relwidth=0.228, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''Filtering Text''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.Word2Vec_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Word2Vec_proc_label.place(relx=0.06, rely=0.0)
+        self.Word2Vec_proc_label.configure(activebackground="#f9f9f9")
+        self.Word2Vec_proc_label.configure(activeforeground="black")
+        self.Word2Vec_proc_label.configure(background="#d9d9d9")
+        self.Word2Vec_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Word2Vec_proc_label.configure(foreground="#000000")
+        self.Word2Vec_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Word2Vec_proc_label.configure(highlightcolor="black")
+        self.Word2Vec_proc_label.configure(text='''Word2Vec''')
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.047, rely=0.444, relheight=0.079
-                , relwidth=0.247, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''Create Square Matrix''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.v_img_tfidf = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_tfidf_label = tk.Label(self.Processing_Labelframe, image=self.v_img_tfidf, background="#d9d9d9")
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.038, rely=0.54, relheight=0.079
-                , relwidth=0.115, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''PAM''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.x_img_tfidf = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_tfidf_label = tk.Label(self.Processing_Labelframe, image=self.x_img_tfidf, background="#d9d9d9")
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.057, rely=0.635, relheight=0.079
-                , relwidth=0.115, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''Silhouette''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.TFIDF_proc_label = tk.Label(self.Processing_Labelframe)
+        self.TFIDF_proc_label.place(relx=0.06, rely=0.11)
+        self.TFIDF_proc_label.configure(activebackground="#f9f9f9")
+        self.TFIDF_proc_label.configure(activeforeground="black")
+        self.TFIDF_proc_label.configure(background="#d9d9d9")
+        self.TFIDF_proc_label.configure(disabledforeground="#a3a3a3")
+        self.TFIDF_proc_label.configure(foreground="#000000")
+        self.TFIDF_proc_label.configure(highlightbackground="#d9d9d9")
+        self.TFIDF_proc_label.configure(highlightcolor="black")
+        self.TFIDF_proc_label.configure(text='''TF-IDF''')
 
-        self.Checkbutton5 = tk.Checkbutton(self.Labelframe3)
-        self.Checkbutton5.place(relx=0.009, rely=0.349, relheight=0.079
-                , relwidth=0.247, bordermode='ignore')
-        self.Checkbutton5.configure(activebackground="#ececec")
-        self.Checkbutton5.configure(activeforeground="#000000")
-        self.Checkbutton5.configure(background="#d9d9d9")
-        self.Checkbutton5.configure(disabledforeground="#a3a3a3")
-        self.Checkbutton5.configure(foreground="#000000")
-        self.Checkbutton5.configure(highlightbackground="#d9d9d9")
-        self.Checkbutton5.configure(highlightcolor="black")
-        self.Checkbutton5.configure(justify='left')
-        self.Checkbutton5.configure(state='disabled')
-        self.Checkbutton5.configure(text='''Create Chunks''')
-        self.Checkbutton5.configure(variable=main_support.che119)
+        self.v_img_filtering = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_filtering_label = tk.Label(self.Processing_Labelframe, image=self.v_img_filtering, background="#d9d9d9")
 
-        self.TProgressbar1 = ttk.Progressbar(self.Labelframe3)
+        self.x_img_filtering = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_filtering_label = tk.Label(self.Processing_Labelframe, image=self.x_img_filtering, background="#d9d9d9")
+
+        self.Filtering_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Filtering_proc_label.place(relx=0.06, rely=0.22)
+        self.Filtering_proc_label.configure(activebackground="#f9f9f9")
+        self.Filtering_proc_label.configure(activeforeground="black")
+        self.Filtering_proc_label.configure(background="#d9d9d9")
+        self.Filtering_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Filtering_proc_label.configure(foreground="#000000")
+        self.Filtering_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Filtering_proc_label.configure(highlightcolor="black")
+        self.Filtering_proc_label.configure(text='''Filtering Text''')
+
+        self.v_img_matric = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_metric_label = tk.Label(self.Processing_Labelframe, image=self.v_img_matric, background="#d9d9d9")
+
+        self.x_img_matric = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_metric_label = tk.Label(self.Processing_Labelframe, image=self.x_img_matric, background="#d9d9d9")
+
+        self.Metric_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Metric_proc_label.place(relx=0.06, rely=0.33)
+        self.Metric_proc_label.configure(activebackground="#f9f9f9")
+        self.Metric_proc_label.configure(activeforeground="black")
+        self.Metric_proc_label.configure(background="#d9d9d9")
+        self.Metric_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Metric_proc_label.configure(foreground="#000000")
+        self.Metric_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Metric_proc_label.configure(highlightcolor="black")
+        self.Metric_proc_label.configure(text='''Create Square Matrix''')
+
+        self.v_img_pam = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_pam_label = tk.Label(self.Processing_Labelframe, image=self.v_img_pam, background="#d9d9d9")
+
+        self.x_img_pam = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_pam_label = tk.Label(self.Processing_Labelframe, image=self.x_img_pam, background="#d9d9d9")
+
+        self.PAM_proc_label = tk.Label(self.Processing_Labelframe)
+        self.PAM_proc_label.place(relx=0.06, rely=0.44)
+        self.PAM_proc_label.configure(activebackground="#f9f9f9")
+        self.PAM_proc_label.configure(activeforeground="black")
+        self.PAM_proc_label.configure(background="#d9d9d9")
+        self.PAM_proc_label.configure(disabledforeground="#a3a3a3")
+        self.PAM_proc_label.configure(foreground="#000000")
+        self.PAM_proc_label.configure(highlightbackground="#d9d9d9")
+        self.PAM_proc_label.configure(highlightcolor="black")
+        self.PAM_proc_label.configure(text='''PAM''')
+
+        self.v_img_silhouette = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_silhouette_label = tk.Label(self.Processing_Labelframe, image=self.v_img_silhouette, background="#d9d9d9")
+
+        self.x_img_silhouette = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_silhouette_label = tk.Label(self.Processing_Labelframe, image=self.x_img_silhouette, background="#d9d9d9")
+
+        self.Silhouette_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Silhouette_proc_label.place(relx=0.06, rely=0.55)
+        self.Silhouette_proc_label.configure(activebackground="#f9f9f9")
+        self.Silhouette_proc_label.configure(activeforeground="black")
+        self.Silhouette_proc_label.configure(background="#d9d9d9")
+        self.Silhouette_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Silhouette_proc_label.configure(foreground="#000000")
+        self.Silhouette_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Silhouette_proc_label.configure(highlightcolor="black")
+        self.Silhouette_proc_label.configure(text='''Silhouette''')
+
+        self.v_img_chunks = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_chunks_label = tk.Label(self.Processing_Labelframe, image=self.v_img_chunks, background="#d9d9d9")
+
+        self.x_img_chunks = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_chunks_label = tk.Label(self.Processing_Labelframe, image=self.x_img_chunks, background="#d9d9d9")
+
+        self.Chunks_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Chunks_proc_label.place(relx=0.06, rely=0.66)
+        self.Chunks_proc_label.configure(activebackground="#f9f9f9")
+        self.Chunks_proc_label.configure(activeforeground="black")
+        self.Chunks_proc_label.configure(background="#d9d9d9")
+        self.Chunks_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Chunks_proc_label.configure(foreground="#000000")
+        self.Chunks_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Chunks_proc_label.configure(highlightcolor="black")
+        self.Chunks_proc_label.configure(text='''Create Chunks''')
+
+
+        self.TProgressbar1 = ttk.Progressbar(self.Processing_Labelframe)
         self.TProgressbar1.place(relx=0.057, rely=0.857, relwidth=0.868
                 , relheight=0.0, height=22, bordermode='ignore')
         self.TProgressbar1.configure(mode="indeterminate")
@@ -863,6 +888,15 @@ class Toplevel1:
         self.Label1.configure(highlightcolor="black")
         self.Label1.configure(text='''Copyright© RK''')
 
+        self.STAGES = {1: self.set_x_word2vec,
+                       2: self.set_x_tfidf,
+                       3: self.set_x_filtering,
+                       4: self.set_x_metric,
+                       5: self.set_x_pam,
+                       6: self.set_x_silhouette,
+                       7: self.set_x_chunks}
+
+
     def add_word_embedding_checkbox(self, event=None):
         set = self.add_word_emedding_Cbutton_var.get()
         if (set):
@@ -916,7 +950,59 @@ class Toplevel1:
             self.Skip_Gram_Radiobutton.configure(state="disable")
             self.Delimiter_window.configure(state="disable")
 
+    def set_x_stage(self, stage, event=None):
+        self.STAGES[stage]()
 
+    def set_v_word2vec(self, event=None):
+        self.v_word2vec_label.place(relx=0.018, rely=0.01)
+
+    def set_x_word2vec(self, event=None):
+        self.x_word2vec_label.place(relx=0.018, rely=0.01)
+
+    def set_v_tfidf(self, event=None):
+        self.v_tfidf_label.place(relx=0.018, rely=0.12)
+
+    def set_x_tfidf(self, event=None):
+        self.x_tfidf_label.place(relx=0.018, rely=0.12)
+
+    def set_v_filtering(self, event=None):
+        self.v_filtering_label.place(relx=0.018, rely=0.23)
+
+    def set_x_filtering(self, event=None):
+        self.x_filtering_label.place(relx=0.018, rely=0.23)
+
+    def set_v_metric(self, event=None):
+        self.v_metric_label.place(relx=0.018, rely=0.34)
+
+    def set_x_metric(self, event=None):
+        self.x_metric_label.place(relx=0.018, rely=0.34)
+
+    def set_v_pam(self, event=None):
+        self.v_pam_label.place(relx=0.018, rely=0.45)
+
+    def set_x_pam(self, event=None):
+        self.x_pam_label.place(relx=0.018, rely=0.45)
+
+    def set_v_silhouette(self, event=None):
+        self.v_silhouette_label.place(relx=0.018, rely=0.56)
+
+    def set_x_silhouette(self, event=None):
+        self.x_silhouette_label.place(relx=0.018, rely=0.56)
+
+    def set_v_chunks(self, event=None):
+        self.v_chunks_label.place(relx=0.018, rely=0.67)
+
+    def set_x_chunks(self, event=None):
+        self.x_chunks_label.place(relx=0.018, rely=0.67)
+
+    def clean_all_steps(self, event=None):
+        self.v_word2vec_label.place_forget()
+        self.x_tfidf_label.place_forget()
+        self.x_filtering_label.place_forget()
+        self.x_metric_label.place_forget()
+        self.x_pam_label.place_forget()
+        self.x_silhouette_label.place_forget()
+        self.x_chunks_label.place_forget()
 
     @staticmethod
     def popup1(event, *args, **kwargs):
