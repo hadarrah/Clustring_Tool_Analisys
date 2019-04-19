@@ -20,32 +20,32 @@ class main(object):
         self.log.info("NEW REGRESSION IS STARTING!")
 
         # Step 1
-        top.set_v_word2vec()
+        top.set_v_stage(self.stage)
 
         # Step 2
         self.stage += 1
-        top.set_v_tfidf()
+        top.set_v_stage(self.stage)
 
         # Step 3
         self.stage += 1
-        top.set_v_filtering()
+        top.set_v_stage(self.stage)
 
         # Step 4
         self.stage += 1
-        raise Exception("fail in stage 4")  # example for raising exception
-        top.set_v_metric()
+        #raise Exception("fail in stage 4")  # example for raising exception
+        top.set_v_stage(self.stage)
 
         # Step 5
         self.stage += 1
-        top.set_v_pam()
+        top.set_v_stage(self.stage)
 
         # Step 6
         self.stage += 1
-        top.set_v_silhouette()
+        top.set_v_stage(self.stage)
 
         # Step 7
         self.stage += 1
-        top.set_v_chunks()
+        top.set_v_stage(self.stage)
 
     def get_stage(self):
         return self.stage

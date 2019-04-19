@@ -62,9 +62,13 @@ def start_regression(top, texts_input, vec_input, enable_advanced, number_of_wor
     main = main_regression(config, doc_paths, vec_path)
     try:
         main.run(top)
+        messagebox.showinfo("Regression Success", "The process ended successfully!")
     except Exception as e:
         log.error(str(e))
         top.set_x_stage(main.get_stage())
+        messagebox.showerror("Regression Error", "Error: " + str(e))
+
+
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
@@ -739,10 +743,11 @@ class Toplevel1:
         self.Chunks_proc_label.configure(text='''Create Chunks''')
 
 
-        self.TProgressbar1 = ttk.Progressbar(self.Processing_Labelframe)
-        self.TProgressbar1.place(relx=0.057, rely=0.857, relwidth=0.868
+        self.Processing_TProgressbar = ttk.Progressbar(self.Processing_Labelframe)
+        self.Processing_TProgressbar.place(relx=0.057, rely=0.857, relwidth=0.868
                 , relheight=0.0, height=22, bordermode='ignore')
-        self.TProgressbar1.configure(mode="indeterminate")
+        self.Processing_TProgressbar.configure(mode="determinate")
+        self.Processing_TProgressbar['value'] = 0
 
         self.TCombobox1 = ttk.Combobox(self.TNotebook1_t3)
         self.TCombobox1.place(relx=0.237, rely=0.098, relheight=0.051
@@ -888,7 +893,15 @@ class Toplevel1:
         self.Label1.configure(highlightcolor="black")
         self.Label1.configure(text='''Copyright© RK''')
 
-        self.STAGES = {1: self.set_x_word2vec,
+        self.V_STAGES = {1: self.set_v_word2vec,
+                         2: self.set_v_tfidf,
+                         3: self.set_v_filtering,
+                         4: self.set_v_metric,
+                         5: self.set_v_pam,
+                         6: self.set_v_silhouette,
+                         7: self.set_v_chunks}
+
+        self.X_STAGES = {1: self.set_x_word2vec,
                        2: self.set_x_tfidf,
                        3: self.set_x_filtering,
                        4: self.set_x_metric,
@@ -950,47 +963,57 @@ class Toplevel1:
             self.Skip_Gram_Radiobutton.configure(state="disable")
             self.Delimiter_window.configure(state="disable")
 
+    def set_v_stage(self, stage, event=None):
+        self.V_STAGES[stage]()
+
     def set_x_stage(self, stage, event=None):
-        self.STAGES[stage]()
+        self.X_STAGES[stage]()
 
     def set_v_word2vec(self, event=None):
         self.v_word2vec_label.place(relx=0.018, rely=0.01)
+        self.Processing_TProgressbar['value'] = 16
 
     def set_x_word2vec(self, event=None):
         self.x_word2vec_label.place(relx=0.018, rely=0.01)
 
     def set_v_tfidf(self, event=None):
         self.v_tfidf_label.place(relx=0.018, rely=0.12)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_tfidf(self, event=None):
         self.x_tfidf_label.place(relx=0.018, rely=0.12)
 
     def set_v_filtering(self, event=None):
         self.v_filtering_label.place(relx=0.018, rely=0.23)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_filtering(self, event=None):
         self.x_filtering_label.place(relx=0.018, rely=0.23)
 
     def set_v_metric(self, event=None):
         self.v_metric_label.place(relx=0.018, rely=0.34)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_metric(self, event=None):
         self.x_metric_label.place(relx=0.018, rely=0.34)
 
     def set_v_pam(self, event=None):
         self.v_pam_label.place(relx=0.018, rely=0.45)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_pam(self, event=None):
         self.x_pam_label.place(relx=0.018, rely=0.45)
 
     def set_v_silhouette(self, event=None):
         self.v_silhouette_label.place(relx=0.018, rely=0.56)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_silhouette(self, event=None):
         self.x_silhouette_label.place(relx=0.018, rely=0.56)
 
     def set_v_chunks(self, event=None):
         self.v_chunks_label.place(relx=0.018, rely=0.67)
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_chunks(self, event=None):
         self.x_chunks_label.place(relx=0.018, rely=0.67)
@@ -1003,6 +1026,7 @@ class Toplevel1:
         self.x_pam_label.place_forget()
         self.x_silhouette_label.place_forget()
         self.x_chunks_label.place_forget()
+        self.Processing_TProgressbar['value'] = 0
 
     @staticmethod
     def popup1(event, *args, **kwargs):
