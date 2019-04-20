@@ -32,7 +32,7 @@ class main(object):
 
         # Step 4
         self.stage += 1
-        #raise Exception("fail in stage 4")  # example for raising exception
+        raise Exception("fail in stage 4")  # example for raising exception
         top.set_v_stage(self.stage)
 
         # Step 5
