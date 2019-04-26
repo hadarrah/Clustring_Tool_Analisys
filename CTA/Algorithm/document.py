@@ -1,6 +1,7 @@
 import logging
 from Utils import configuration
 from Utils import logger
+from Algorithm import chunk
 
 
 class Document(object):
@@ -14,6 +15,7 @@ class Document(object):
         self.set_docID()
         self.docPath = filepath
         self.docText = self.getText(self.docPath)
+        self.chunks = []
         Document.set_ID(Document.ID)
         Document.set_docCllection(self, self.docID, self.docText)
 
@@ -132,14 +134,12 @@ class Document(object):
 
 
 
-
 if __name__ == "__main__":
     config = configuration.config().setup()
     docCollection = {}  # all documents in one document as a dictionary
     Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt",
            "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
-           #"C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\c.txt"
-
+        #  "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\c.txt"
 
 
     for d in Doc:  # d = document path
@@ -147,13 +147,6 @@ if __name__ == "__main__":
         docCollection[Doc1.get_docID()] = Doc1.getText(d)[1:]  # build dic of documents
 
    # print(docCollection.items())
-
-    #"an example for tf idf with sklearn"
-   # s1 = "אבירם גר במוצקין"
-  #  s2 = "הדר גר בכרכור"
-    #vector = TfidfVectorizer()
-    #response = vector.fit_transform([s1,s2])
-    #print(response)
 
     #model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
 
@@ -166,6 +159,7 @@ if __name__ == "__main__":
         #    print(str(model.get_vector(word)))
     h = 1
     t = Document.compute_tfidf(docCollection)
-    print(t[h])
+    #for y in t.items():
+        #print(y)
 
 

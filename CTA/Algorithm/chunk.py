@@ -3,29 +3,43 @@ from Utils import configuration
 from Utils import Word2VecWrapper
 from numpy import array
 import logging
+from Algorithm import document
 
 
 class Chunk(object):
 
     ID = 0
 
-    def __init__(self, config, ):
+    def __init__(self, config, text = {}):
         self.chunk_size = config.get("CHUNKS", "size")
         self.delay = config.get("CHUNKS", "delay")
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
         self.chunkID = None
-        self.chunkVec =
+        self.chunkVec = None
         self.set_chunkID()
-        Chunk.set_ID(Chunk.ID)
+        self.Doc = text
+        Chunk.createChunk(self)
+        Chunk.set_ID(self)
         #self.log = logger.add_log_file(self.log, config)
+
+    def createChunk(self):
+        """
+        build one chunk for a given text
+        :return:
+        """
+        for t in self.Doc:
+            print(t)
+            vec = model.get_vector(t)
+            print(vec)
+
 
     def set_chunkID(self):
         """
         Set the chunk ID
         :return:
         """
-        self.chunkID = Chunk.ID + 1
+        self.chunkID = Chunk.get_ID(self)+1
 
     def get_chunkID(self):
         """
@@ -76,10 +90,14 @@ if __name__ == "__main__":
 
     model.build_model()
 
-    word = "אהבה"
-    if (model.exist_in_vocab(word)):
-        print(str(model.get_vector(word)))
+    #word = "אהבה"
+    #if (model.exist_in_vocab(word)):
+    #    print(str(model.get_vector(word)))
 
-    word = "אֶ֖לֶף"
-    if (model.exist_in_vocab(word)):
-        print(str(model.get_vector(word)))
+    #word = "אֶ֖לֶף"
+    #if (model.exist_in_vocab(word)):
+    #    print(str(model.get_vector(word)))
+
+    text = ['אבירם','בבית','גר']
+    c1 = Chunk(config, text)
+    print(c1.chunk_size)
