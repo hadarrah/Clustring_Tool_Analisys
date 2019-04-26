@@ -60,13 +60,12 @@ class Model(object):
         """
         self.log.info("Set Sentences")
         for doc in documents:
-            with open(doc, mode='r', encoding='utf-8', errors='ignore') as file_handler:
-                text = file_handler.read()
-                text = re.sub(r'[,:;.]', '', text)                              # remove special chars
-                text = re.sub(r'\s.?\s', '', text)                              # remove words with length 1
-                sen_list = re.split(self.delimiter, text)                       # get sentences by delimiter
-                word_sen_list = [lst.strip().split(' ') for lst in sen_list]    # separate words in sentences
-                self.sentences.extend(sen for sen in word_sen_list)
+            text = doc.get_text()   # from Aviram
+            text = re.sub(r'[,:;.]', '', text)                              # remove special chars
+            text = re.sub(r'\s.?\s', '', text)                              # remove words with length 1
+            sen_list = re.split(self.delimiter, text)                       # get sentences by delimiter
+            word_sen_list = [lst.strip().split(' ') for lst in sen_list]    # separate words in sentences
+            self.sentences.extend(sen for sen in word_sen_list)
 
 
     def get_vector(self, word):

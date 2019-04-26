@@ -624,6 +624,23 @@ class Toplevel1:
         self.Processing_Labelframe.configure(highlightcolor="black")
         self.Processing_Labelframe.configure(width=530)
 
+        self.v_img_get_texts = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_get_texts_label = tk.Label(self.Processing_Labelframe, image=self.v_img_get_texts, background="#d9d9d9")
+
+        self.x_img_get_texts = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_get_texts_label = tk.Label(self.Processing_Labelframe, image=self.x_img_get_texts, background="#d9d9d9")
+
+        self.Get_Texts_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Get_Texts_proc_label.place(relx=0.06, rely=0.0)
+        self.Get_Texts_proc_label.configure(activebackground="#f9f9f9")
+        self.Get_Texts_proc_label.configure(activeforeground="black")
+        self.Get_Texts_proc_label.configure(background="#d9d9d9")
+        self.Get_Texts_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Get_Texts_proc_label.configure(foreground="#000000")
+        self.Get_Texts_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Get_Texts_proc_label.configure(highlightcolor="black")
+        self.Get_Texts_proc_label.configure(text='''Get Texts''')
+
         self.v_img_word2vec = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
         self.v_word2vec_label = tk.Label(self.Processing_Labelframe, image=self.v_img_word2vec, background="#d9d9d9")
 
@@ -631,7 +648,7 @@ class Toplevel1:
         self.x_word2vec_label = tk.Label(self.Processing_Labelframe, image=self.x_img_word2vec, background="#d9d9d9")
 
         self.Word2Vec_proc_label = tk.Label(self.Processing_Labelframe)
-        self.Word2Vec_proc_label.place(relx=0.06, rely=0.0)
+        self.Word2Vec_proc_label.place(relx=0.06, rely=0.11)
         self.Word2Vec_proc_label.configure(activebackground="#f9f9f9")
         self.Word2Vec_proc_label.configure(activeforeground="black")
         self.Word2Vec_proc_label.configure(background="#d9d9d9")
@@ -641,45 +658,28 @@ class Toplevel1:
         self.Word2Vec_proc_label.configure(highlightcolor="black")
         self.Word2Vec_proc_label.configure(text='''Word2Vec''')
 
-        self.v_img_tfidf = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.v_tfidf_label = tk.Label(self.Processing_Labelframe, image=self.v_img_tfidf, background="#d9d9d9")
+        self.v_img_building_chunks = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_building_chunks_label = tk.Label(self.Processing_Labelframe, image=self.v_img_building_chunks, background="#d9d9d9")
 
-        self.x_img_tfidf = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.x_tfidf_label = tk.Label(self.Processing_Labelframe, image=self.x_img_tfidf, background="#d9d9d9")
+        self.x_img_building_chunks = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_building_chunks_label = tk.Label(self.Processing_Labelframe, image=self.x_img_building_chunks, background="#d9d9d9")
 
-        self.TFIDF_proc_label = tk.Label(self.Processing_Labelframe)
-        self.TFIDF_proc_label.place(relx=0.06, rely=0.11)
-        self.TFIDF_proc_label.configure(activebackground="#f9f9f9")
-        self.TFIDF_proc_label.configure(activeforeground="black")
-        self.TFIDF_proc_label.configure(background="#d9d9d9")
-        self.TFIDF_proc_label.configure(disabledforeground="#a3a3a3")
-        self.TFIDF_proc_label.configure(foreground="#000000")
-        self.TFIDF_proc_label.configure(highlightbackground="#d9d9d9")
-        self.TFIDF_proc_label.configure(highlightcolor="black")
-        self.TFIDF_proc_label.configure(text='''TF-IDF''')
+        self.Building_Chunks_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Building_Chunks_proc_label.place(relx=0.06, rely=0.22)
+        self.Building_Chunks_proc_label.configure(activebackground="#f9f9f9")
+        self.Building_Chunks_proc_label.configure(activeforeground="black")
+        self.Building_Chunks_proc_label.configure(background="#d9d9d9")
+        self.Building_Chunks_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Building_Chunks_proc_label.configure(foreground="#000000")
+        self.Building_Chunks_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Building_Chunks_proc_label.configure(highlightcolor="black")
+        self.Building_Chunks_proc_label.configure(text='''Building Chunks''')
 
-        self.v_img_filtering = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.v_filtering_label = tk.Label(self.Processing_Labelframe, image=self.v_img_filtering, background="#d9d9d9")
+        self.v_img_metric = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_metric_label = tk.Label(self.Processing_Labelframe, image=self.v_img_metric, background="#d9d9d9")
 
-        self.x_img_filtering = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.x_filtering_label = tk.Label(self.Processing_Labelframe, image=self.x_img_filtering, background="#d9d9d9")
-
-        self.Filtering_proc_label = tk.Label(self.Processing_Labelframe)
-        self.Filtering_proc_label.place(relx=0.06, rely=0.22)
-        self.Filtering_proc_label.configure(activebackground="#f9f9f9")
-        self.Filtering_proc_label.configure(activeforeground="black")
-        self.Filtering_proc_label.configure(background="#d9d9d9")
-        self.Filtering_proc_label.configure(disabledforeground="#a3a3a3")
-        self.Filtering_proc_label.configure(foreground="#000000")
-        self.Filtering_proc_label.configure(highlightbackground="#d9d9d9")
-        self.Filtering_proc_label.configure(highlightcolor="black")
-        self.Filtering_proc_label.configure(text='''Filtering Text''')
-
-        self.v_img_matric = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.v_metric_label = tk.Label(self.Processing_Labelframe, image=self.v_img_matric, background="#d9d9d9")
-
-        self.x_img_matric = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.x_metric_label = tk.Label(self.Processing_Labelframe, image=self.x_img_matric, background="#d9d9d9")
+        self.x_img_metric = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_metric_label = tk.Label(self.Processing_Labelframe, image=self.x_img_metric, background="#d9d9d9")
 
         self.Metric_proc_label = tk.Label(self.Processing_Labelframe)
         self.Metric_proc_label.place(relx=0.06, rely=0.33)
@@ -690,7 +690,7 @@ class Toplevel1:
         self.Metric_proc_label.configure(foreground="#000000")
         self.Metric_proc_label.configure(highlightbackground="#d9d9d9")
         self.Metric_proc_label.configure(highlightcolor="black")
-        self.Metric_proc_label.configure(text='''Create Square Matrix''')
+        self.Metric_proc_label.configure(text='''Create Distance Matrix''')
 
         self.v_img_pam = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
         self.v_pam_label = tk.Label(self.Processing_Labelframe, image=self.v_img_pam, background="#d9d9d9")
@@ -725,23 +725,6 @@ class Toplevel1:
         self.Silhouette_proc_label.configure(highlightbackground="#d9d9d9")
         self.Silhouette_proc_label.configure(highlightcolor="black")
         self.Silhouette_proc_label.configure(text='''Silhouette''')
-
-        self.v_img_chunks = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.v_chunks_label = tk.Label(self.Processing_Labelframe, image=self.v_img_chunks, background="#d9d9d9")
-
-        self.x_img_chunks = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
-        self.x_chunks_label = tk.Label(self.Processing_Labelframe, image=self.x_img_chunks, background="#d9d9d9")
-
-        self.Chunks_proc_label = tk.Label(self.Processing_Labelframe)
-        self.Chunks_proc_label.place(relx=0.06, rely=0.66)
-        self.Chunks_proc_label.configure(activebackground="#f9f9f9")
-        self.Chunks_proc_label.configure(activeforeground="black")
-        self.Chunks_proc_label.configure(background="#d9d9d9")
-        self.Chunks_proc_label.configure(disabledforeground="#a3a3a3")
-        self.Chunks_proc_label.configure(foreground="#000000")
-        self.Chunks_proc_label.configure(highlightbackground="#d9d9d9")
-        self.Chunks_proc_label.configure(highlightcolor="black")
-        self.Chunks_proc_label.configure(text='''Create Chunks''')
 
 
         self.Processing_TProgressbar = ttk.Progressbar(self.Processing_Labelframe)
@@ -894,21 +877,19 @@ class Toplevel1:
         self.CopyRight_Label.configure(highlightcolor="black")
         self.CopyRight_Label.configure(text='''Copyright© RK''')
 
-        self.V_STAGES = {1: self.set_v_word2vec,
-                         2: self.set_v_tfidf,
-                         3: self.set_v_filtering,
+        self.V_STAGES = {1: self.set_v_get_texts,
+                         2: self.set_v_word2vec,
+                         3: self.set_v_building_chunks,
                          4: self.set_v_metric,
                          5: self.set_v_pam,
-                         6: self.set_v_silhouette,
-                         7: self.set_v_chunks}
+                         6: self.set_v_silhouette}
 
-        self.X_STAGES = {1: self.set_x_word2vec,
-                       2: self.set_x_tfidf,
-                       3: self.set_x_filtering,
+        self.X_STAGES = {1: self.set_x_get_texts,
+                       2: self.set_x_word2vec,
+                       3: self.set_x_building_chunks,
                        4: self.set_x_metric,
                        5: self.set_x_pam,
-                       6: self.set_x_silhouette,
-                       7: self.set_x_chunks}
+                       6: self.set_x_silhouette}
 
 
     def add_word_embedding_checkbox(self, event=None):
@@ -980,63 +961,62 @@ class Toplevel1:
     def set_x_stage(self, stage, event=None):
         self.X_STAGES[stage]()
 
-    def set_v_word2vec(self, event=None):
-        self.v_word2vec_label.place(relx=0.018, rely=0.01)
+    def set_v_get_texts(self, event=None):
+        self.v_get_texts_label.place(relx=0.018, rely=0.01)
         self.Processing_TProgressbar['value'] = 16
 
+    def set_x_get_texts(self, event=None):
+        self.x_get_texts_label.place(relx=0.018, rely=0.01)
+
+    def set_v_word2vec(self, event=None):
+        self.v_word2vec_label.place(relx=0.018, rely=0.12)
+        self.Processing_TProgressbar['value'] += 20
+
     def set_x_word2vec(self, event=None):
-        self.x_word2vec_label.place(relx=0.018, rely=0.01)
+        self.x_word2vec_label.place(relx=0.018, rely=0.12)
 
-    def set_v_tfidf(self, event=None):
-        self.v_tfidf_label.place(relx=0.018, rely=0.12)
-        self.Processing_TProgressbar['value'] += 14
+    def set_v_building_chunks(self, event=None):
+        self.v_building_chunks_label.place(relx=0.018, rely=0.23)
+        self.Processing_TProgressbar['value'] += 16
 
-    def set_x_tfidf(self, event=None):
-        self.x_tfidf_label.place(relx=0.018, rely=0.12)
-
-    def set_v_filtering(self, event=None):
-        self.v_filtering_label.place(relx=0.018, rely=0.23)
-        self.Processing_TProgressbar['value'] += 14
-
-    def set_x_filtering(self, event=None):
-        self.x_filtering_label.place(relx=0.018, rely=0.23)
+    def set_x_building_chunks(self, event=None):
+        self.x_building_chunks_label.place(relx=0.018, rely=0.23)
 
     def set_v_metric(self, event=None):
         self.v_metric_label.place(relx=0.018, rely=0.34)
-        self.Processing_TProgressbar['value'] += 14
+        self.Processing_TProgressbar['value'] += 16
 
     def set_x_metric(self, event=None):
         self.x_metric_label.place(relx=0.018, rely=0.34)
 
     def set_v_pam(self, event=None):
         self.v_pam_label.place(relx=0.018, rely=0.45)
-        self.Processing_TProgressbar['value'] += 14
+        self.Processing_TProgressbar['value'] += 16
 
     def set_x_pam(self, event=None):
         self.x_pam_label.place(relx=0.018, rely=0.45)
 
     def set_v_silhouette(self, event=None):
         self.v_silhouette_label.place(relx=0.018, rely=0.56)
-        self.Processing_TProgressbar['value'] += 14
+        self.Processing_TProgressbar['value'] += 16
 
     def set_x_silhouette(self, event=None):
         self.x_silhouette_label.place(relx=0.018, rely=0.56)
 
-    def set_v_chunks(self, event=None):
-        self.v_chunks_label.place(relx=0.018, rely=0.67)
-        self.Processing_TProgressbar['value'] += 14
-
-    def set_x_chunks(self, event=None):
-        self.x_chunks_label.place(relx=0.018, rely=0.67)
 
     def clean_all_steps(self, event=None):
+        self.v_get_texts_label.place_forget()
         self.v_word2vec_label.place_forget()
-        self.x_tfidf_label.place_forget()
-        self.x_filtering_label.place_forget()
+        self.v_building_chunks_label.place_forget()
+        self.v_metric_label.place_forget()
+        self.v_pam_label.place_forget()
+        self.v_silhouette_label.place_forget()
+        self.x_get_texts_label.place_forget()
+        self.x_word2vec_label.place_forget()
+        self.x_building_chunks_label.place_forget()
         self.x_metric_label.place_forget()
         self.x_pam_label.place_forget()
         self.x_silhouette_label.place_forget()
-        self.x_chunks_label.place_forget()
         self.Processing_TProgressbar['value'] = 0
 
     @staticmethod
