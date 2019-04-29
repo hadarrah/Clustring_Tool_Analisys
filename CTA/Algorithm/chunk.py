@@ -1,66 +1,56 @@
 from Utils import logger
 from Utils import configuration
 from Utils import Word2VecWrapper
-from numpy import array
+import numpy as np
 import logging
 from Algorithm import document
 
 
 class Chunk(object):
 
-    ID = 0
-
-    def __init__(self, config, text = {}):
+    def __init__(self, config, text, docID, chunkID, model):
         self.chunk_size = config.get("CHUNKS", "size")
         self.delay = config.get("CHUNKS", "delay")
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        self.chunkID = None
+        self.chunkID = chunkID
         self.chunkVec = None
-        self.set_chunkID()
         self.Doc = text
-        Chunk.createChunk(self)
-        Chunk.set_ID(self)
+        self.docID = docID
+        self.model= model
+        Chunk.createVec(self)
         #self.log = logger.add_log_file(self.log, config)
 
-    def createChunk(self):
-        """
-        build one chunk for a given text
-        :return:
-        """
-        for t in self.Doc:
-            print(t)
-            vec = model.get_vector(t)
-            print(vec)
+    def getchunkVec(self):
+        return self.chunkVec
 
 
-    def set_chunkID(self):
+    def getdocID(self):
         """
-        Set the chunk ID
+        docId's chunk getter
         :return:
         """
-        self.chunkID = Chunk.get_ID(self)+1
+        return self.docID
 
-    def get_chunkID(self):
+    def getChunkID(self):
         """
-        Get the number of document
+        ChunkId getter
         :return:
-         """
+        """
         return self.chunkID
 
-    def set_ID(self):
+    def createVec(self):
         """
-        Set the global ID
-        :return:
+        build distances chunk by using cosin similarity
+        :return: dictances vector
         """
-        Chunk.ID = Chunk.ID + 1
-
-    def get_ID(self):
-        """
-        Get the global ID
-        :return:
-         """
-        return Chunk.ID
+        cosResult = set()      #using set in order to avoid duplications
+        for d1 in self.Doc:
+            for d2 in self.Doc:
+                if (d1 != d2):
+                   cos = np.dot(self.model.get_vector(d1),self.model.get_vector(d2))/(np.linalg.norm(self.model.get_vector(d1))*np.linalg.norm(self.model.get_vector(d2)))
+                   cosResult.add(cos)
+        self.chunkVec = np.array(list(cosResult))       #casting set->vector
 
     def print_delay(self):
         self.log.info("Delay: " + self.delay)
@@ -72,11 +62,12 @@ class Chunk(object):
 if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
-    chunk2 = Chunk(config)
+    #chunk2 = Chunk(config)
     # functions
 
     # option 1: external word embedding
-    model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
+    model = Word2VecWrapper.Model(config,
+                                  filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
 
     # option 2: create word embedding based on the documents collection
     #documents = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\Bamidbar_chapter_B.txt",
@@ -99,5 +90,6 @@ if __name__ == "__main__":
     #    print(str(model.get_vector(word)))
 
     text = ['אבירם','בבית','גר']
-    c1 = Chunk(config, text)
-    print(c1.chunk_size)
+    c1 = Chunk(config, text, 10, 0, model)
+    print("c1 ID:"  + str(c1.chunkID)+ " " + "c1 doc ID:" + str(c1.docID))
+

@@ -1,28 +1,77 @@
 import logging
-from Utils import configuration
+from Utils import configuration, Word2VecWrapper
 from Utils import logger
 from Algorithm import chunk
+from Utils import logger
+from Utils import configuration
+from Utils import Word2VecWrapper
+import numpy as np
+import logging
 
 
 class Document(object):
     ID = 0
 
-    def __init__(self, filepath=None):
+    def __init__(self, filepath):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        # self.log = logger.add_log_file(self.log, config)
+        self.log = logger.add_log_file(self.log, config)
         self.docID = None
         self.set_docID()
         self.docPath = filepath
         self.docText = self.getText(self.docPath)
         self.chunks = []
+        self.chunkSize = int(config.get("CHUNKS", "size"))
+        self.DelayPar = int(config.get("CHUNKS", "delay"))
         Document.set_ID(Document.ID)
-        Document.set_docCllection(self, self.docID, self.docText)
+        Document.set_docCollection(self, self.docID, self.docText)
 
-    def get_docCllection(self):
+    def createChunks(self):
+        """
+        create chunks for each document in the collection
+        :param docList:
+        :return:
+        """
+        chunkID = 1
+        words = self.docText.split(" ")  # split text to words
+        index = 0
+        wordsCount = 0
+        chunkList = []
+        chunkCount = 0
+        print(words)
+        for w in words[index:]:
+            if model.exist_in_vocab(w):
+                chunkList.append(w)
+                wordsCount += 1
+                if wordsCount == self.chunkSize:
+                    ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model)
+                    print(chunkList)
+                    self.chunks.append(ch.chunkVec)
+                    chunkCount += 1
+                    chunkList = []
+                    wordsCount = 0
+                    chunkID += 1
+            else:
+                index += 1
+        print(self.chunks)
+        if chunkCount < self.DelayPar:
+            print("Number of chunks incorrect")
+
+
+
+
+
+
+
+
+
+
+
+
+    def get_docCollection(self):
         return Document.docCollection
 
-    def set_docCllection(self, docID, docText):
+    def set_docCollection(self, docID, docText):
         """
         Insert each new document into docs collection (dictionary)
         :param docID:
@@ -37,7 +86,7 @@ class Document(object):
         :param filepath:
         :return:
         """
-        with open(filepath, mode='r', encoding='utf-8', errors='ignore') as file_handler:
+        with open(filepath, mode='r', encoding='utf-8-sig', errors='ignore') as file_handler:
             return file_handler.read()
 
     def set_docID(self):
@@ -68,7 +117,7 @@ class Document(object):
          """
         return Document.ID
 
-    def compute_tfidf(self):
+    def compute_tfidf(self, docCollection):
         """
         Compute tf idf score fol all words in the documents
         :return:
@@ -136,30 +185,22 @@ class Document(object):
 
 if __name__ == "__main__":
     config = configuration.config().setup()
+    model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
+    model.build_model()
     docCollection = {}  # all documents in one document as a dictionary
-    Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt",
-           "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
+    docList = []        #list of Document objects
+    Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt"]
+        #   "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
         #  "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\c.txt"
-
 
     for d in Doc:  # d = document path
         Doc1 = Document(d)
-        docCollection[Doc1.get_docID()] = Doc1.getText(d)[1:]  # build dic of documents
+        docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents
+        docList.append(Doc1)                                   #build list of document objects
+    for l in docList:
+        l.createChunks()
 
-   # print(docCollection.items())
 
-    #model = Word2VecWrapper.Model(config, filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
 
-    #model.build_model()
-    #set1 = s1.split(" ")
-    #for word in set1:
-     #   if(model.exist_in_vocab(word)):
-      #      print(word)
-       #     print("-----")
-        #    print(str(model.get_vector(word)))
-    h = 1
-    t = Document.compute_tfidf(docCollection)
-    #for y in t.items():
-        #print(y)
 
 
