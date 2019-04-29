@@ -5,7 +5,6 @@ from Algorithm import chunk
 from Utils import logger
 from Utils import configuration
 from Utils import Word2VecWrapper
-import numpy as np
 import logging
 
 
@@ -29,13 +28,7 @@ class Document(object):
         Document.set_ID(self)
        # Document.set_docCollection(self, self.docID, self.docText)
 
-    def get_precursors_chunks(self, chunk):
-        """
-        return the precursors chunks of a given chunk
-        in order to compare them
-        :return:
-        """
-        return self.chunks[chunk.getChunkID()-self.DelayPar-1:chunk.getChunkID()-1]
+
 
     def get_comparable_chunks(self):
         """
@@ -57,13 +50,16 @@ class Document(object):
         wordsCount = 0
         chunkList = []
         chunkCount = 0
+        preChunks = []
         print(words)
         for w in words[index:]:
             if model.exist_in_vocab(w):
                 chunkList.append(w)
                 wordsCount += 1
                 if wordsCount == self.chunkSize:
-                    ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model)
+                    if(chunkID > self.DelayPar):
+                        preChunks = self.chunks[chunkID-self.DelayPar-1:chunkID-1]
+                    ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model, preChunks)
                     self.chunksVec.append(ch.chunkVec)
                     self.chunks.append(ch)
                     chunkCount += 1
@@ -211,9 +207,8 @@ if __name__ == "__main__":
         r = Doc1.get_comparable_chunks()
         print("\nComp Chunks:")
     for e in r:
-        y = Doc1.get_precursors_chunks(e)
-        print(y)
-
+        e.get_precursors_chunks()
+        print("\nComp Chunks:")
 
 
 

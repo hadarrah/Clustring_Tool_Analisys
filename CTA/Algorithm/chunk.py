@@ -3,12 +3,12 @@ from Utils import configuration
 from Utils import Word2VecWrapper
 import numpy as np
 import logging
-from Algorithm import document
+
 
 
 class Chunk(object):
 
-    def __init__(self, config, text, docID, chunkID, model):
+    def __init__(self, config, text, docID, chunkID, model, preChunks = []):
         self.chunk_size = config.get("CHUNKS", "size")
         self.delay = config.get("CHUNKS", "delay")
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
@@ -19,8 +19,17 @@ class Chunk(object):
         self.docID = docID
         self.model= model
         self.cluster = None
+        self.preChunks = preChunks
         Chunk.createVec(self)
         #self.log = logger.add_log_file(self.log, config)
+
+    def get_precursors_chunks(self):
+        """
+        return the precursors chunks of a given chunk
+        in order to compare them
+        :return:
+        """
+        return self.preChunks
 
     def getchunkVec(self):
         return self.chunkVec
