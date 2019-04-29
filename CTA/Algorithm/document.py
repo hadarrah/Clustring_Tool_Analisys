@@ -58,16 +58,6 @@ class Document(object):
             print("Number of chunks incorrect")
 
 
-
-
-
-
-
-
-
-
-
-
     def get_docCollection(self):
         return Document.docCollection
 
