@@ -20,11 +20,30 @@ class Document(object):
         self.set_docID()
         self.docPath = filepath
         self.docText = self.getText(self.docPath)
+        self.chunksVec = []   #the distances vector
         self.chunks = []
         self.chunkSize = int(config.get("CHUNKS", "size"))
         self.DelayPar = int(config.get("CHUNKS", "delay"))
-        Document.set_ID(Document.ID)
-        Document.set_docCollection(self, self.docID, self.docText)
+        self.cluster = None
+        self.s = int(config.get("TF-IDF", "num_of_words_per_doc"))
+        Document.set_ID(self)
+       # Document.set_docCollection(self, self.docID, self.docText)
+
+    def get_precursors_chunks(self, chunk):
+        """
+        return the precursors chunks of a given chunk
+        in order to compare them
+        :return:
+        """
+        return self.chunks[chunk.getChunkID()-self.DelayPar-1:chunk.getChunkID()-1]
+
+    def get_comparable_chunks(self):
+        """
+        return the comparable document's chunks
+        according to delay parameter
+        :return:
+        """
+        return self.chunks[self.DelayPar:]
 
     def createChunks(self):
         """
@@ -45,15 +64,15 @@ class Document(object):
                 wordsCount += 1
                 if wordsCount == self.chunkSize:
                     ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model)
-                    print(chunkList)
-                    self.chunks.append(ch.chunkVec)
+                    self.chunksVec.append(ch.chunkVec)
+                    self.chunks.append(ch)
                     chunkCount += 1
                     chunkList = []
                     wordsCount = 0
                     chunkID += 1
             else:
                 index += 1
-        print(self.chunks)
+        print(self.chunksVec)
         if chunkCount < self.DelayPar:
             print("Number of chunks incorrect")
 
@@ -189,6 +208,11 @@ if __name__ == "__main__":
         docList.append(Doc1)                                   #build list of document objects
     for l in docList:
         l.createChunks()
+        r = Doc1.get_comparable_chunks()
+        print("\nComp Chunks:")
+    for e in r:
+        y = Doc1.get_precursors_chunks(e)
+        print(y)
 
 
 

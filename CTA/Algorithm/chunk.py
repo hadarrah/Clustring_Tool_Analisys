@@ -18,6 +18,7 @@ class Chunk(object):
         self.Doc = text
         self.docID = docID
         self.model= model
+        self.cluster = None
         Chunk.createVec(self)
         #self.log = logger.add_log_file(self.log, config)
 
