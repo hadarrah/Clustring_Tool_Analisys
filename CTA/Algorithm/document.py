@@ -11,7 +11,7 @@ import logging
 class Document(object):
     ID = 0
 
-    def __init__(self, filepath):
+    def __init__(self, filepath, config):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
         self.log = logger.add_log_file(self.log, config)
@@ -160,7 +160,7 @@ class Document(object):
                 tfidf[word] = val*idfs[word]  #val= Tf value, idfs[word]= idf value
             tfidfVal[i] = tfidf
             i = i+1
-        return tfidfVal
+        return tfidfVal                       #return dic: key=word, value= tf idf value
 
     def computeTf(self, wordDict, len):
         """
@@ -201,21 +201,23 @@ if __name__ == "__main__":
     model.build_model()
     docCollection = {}  # all documents in one document as a dictionary
     docList = []        #list of Document objects
-    Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt"]
-        #   "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
+    Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt",
+           "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
         #  "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\c.txt"
 
     for d in Doc:  # d = document path
-        Doc1 = Document(d)
+        Doc1 = Document(d,config)
         docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents
         docList.append(Doc1)                                   #build list of document objects
-    for l in docList:
-        l.createChunks()
-        r = Doc1.get_comparable_chunks()
-        print("\nComp Chunks:")
-    for e in r:
-        e.get_precursors_chunks()
-        print("\nComp Chunks:")
+    e = Document.compute_tfidf("",docCollection)
+    print(e)
+   # for l in docList:
+      #  l.createChunks()
+      #  r = Doc1.get_comparable_chunks()
+      #  print("\nComp Chunks:")
+  #  for e in r:
+      #  e.get_precursors_chunks()
+       # print("\nComp Chunks:")
 
 
 

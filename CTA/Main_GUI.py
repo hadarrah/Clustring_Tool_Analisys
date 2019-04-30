@@ -42,7 +42,6 @@ def start_regression(top, texts_input, vec_input, enable_advanced, number_of_wor
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
         doc_paths = texts_input.split()
-        print(doc_paths)
 
     else:
         messagebox.showerror("Input Error", "You must insert a texts")

@@ -1,10 +1,10 @@
 import logging
-
 from Algorithm.document import Document
 from Utils import logger
 from Algorithm.chunk import Chunk
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
+
 
 class main(object):
 
@@ -23,16 +23,20 @@ class main(object):
         ################## Step 1 ##################
         self.log.info("Step 1: Get Texts")
         top.set_v_stage(self.stage)
-       # print(self.documents)
         docCollection = {}  # all documents in one document as a dictionary
         docList = []  # list of Document objects
-        #for d in self.documents:
-           # print(d)
 
-           #Doc1 = Document(d)
-           # print(Doc1)
-           # docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents
-           # docList.append(Doc1)  # build list of document objects
+        #--Creating the Documents collections--#
+        for d in self.documents:
+            Doc1 = Document(d, self.config)
+            docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents to TF-IDF
+            docList.append(Doc1)  # build list of document objects to Word2Vec
+
+        #--Creating the Tf-Idf dictionary--#
+        TfIdfDic = Document.compute_tfidf("" ,docCollection)
+        print(TfIdfDic)
+
+
 
 
 
@@ -82,4 +86,4 @@ if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
     main = main(config, "blabla", None)
-    main.run()
+
