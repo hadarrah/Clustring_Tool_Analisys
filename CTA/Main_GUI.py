@@ -30,7 +30,7 @@ from PIL import ImageTk, Image
 config = configuration.config().setup()
 log = logger.setup()
 #log = logger.add_log_file(log, config)
-doc_paths = None
+doc_paths = list()
 vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
@@ -41,7 +41,9 @@ X_PATH = ".\\images\\red_x.png"
 def start_regression(top, texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
-        doc_paths = texts_input
+        doc_paths = texts_input.split()
+        print(doc_paths)
+
     else:
         messagebox.showerror("Input Error", "You must insert a texts")
         return

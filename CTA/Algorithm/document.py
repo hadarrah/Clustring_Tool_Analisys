@@ -122,6 +122,13 @@ class Document(object):
          """
         return Document.ID
 
+    def get_docText(self):
+        """
+        return the text as a string
+        :return:
+        """
+        return self.docText
+
     def compute_tfidf(self, docCollection):
         """
         Compute tf idf score fol all words in the documents

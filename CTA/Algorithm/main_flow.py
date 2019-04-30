@@ -1,4 +1,6 @@
 import logging
+
+from Algorithm.document import Document
 from Utils import logger
 from Algorithm.chunk import Chunk
 from Utils import configuration
@@ -8,10 +10,9 @@ class main(object):
 
     def __init__(self, config, documents, external_vec):
         self.config = config
-        self.documents = documents.split()
+        self.documents = (documents)
         self.external_vec = external_vec
         self.stage = 1
-
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
         #self.log = logger.add_log_file(self.log, config)
@@ -22,6 +23,17 @@ class main(object):
         ################## Step 1 ##################
         self.log.info("Step 1: Get Texts")
         top.set_v_stage(self.stage)
+       # print(self.documents)
+        docCollection = {}  # all documents in one document as a dictionary
+        docList = []  # list of Document objects
+        #for d in self.documents:
+           # print(d)
+
+           #Doc1 = Document(d)
+           # print(Doc1)
+           # docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents
+           # docList.append(Doc1)  # build list of document objects
+
 
 
         ################## Step 2 ##################
