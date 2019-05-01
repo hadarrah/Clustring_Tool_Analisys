@@ -74,8 +74,7 @@ class main(object):
             words = []
             print(text)
             docList[key].createChunks(text,model,self.config)       # create chunks for each document
-        for r in docList:
-            print(r.get_chunksVec())
+
 
 
 
