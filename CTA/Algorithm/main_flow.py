@@ -4,6 +4,7 @@ from Utils import logger
 from Algorithm.chunk import Chunk
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
+import operator
 
 
 class main(object):
@@ -11,6 +12,7 @@ class main(object):
     def __init__(self, config, documents, external_vec):
         self.config = config
         self.documents = (documents)
+        self.num_of_words_per_doc = int(config.get("TF-IDF", "num_of_words_per_doc"))
         self.external_vec = external_vec
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
@@ -33,12 +35,7 @@ class main(object):
             docList.append(Doc1)  # build list of document objects to Word2Vec
 
         #--Creating the Tf-Idf dictionary--#
-        TfIdfDic = Document.compute_tfidf("" ,docCollection)
-        print(TfIdfDic)
-
-
-
-
+        tfidfDic = Document.compute_tfidf("" ,docCollection)
 
         ################## Step 2 ##################
         self.log.info("Step 2: Word2Vec")
@@ -54,9 +51,32 @@ class main(object):
 
 
         ################## Step 3 ##################
-        self.log.info("Step 2: Build Chunks")
+        self.log.info("Step 3: Build Chunks")
         self.stage += 1
         top.set_v_stage(self.stage)
+        words = []  # list of good words
+        wordsCount = 0
+        for key in tfidfDic.keys():
+            print(key)
+            text = docList[key].get_docText().split()  # getting the doc text by key(=id)
+            for value in tfidfDic.values():  # each dictionary in Tf-Idf dictionary
+                sorted_value = sorted(value.items(),key=operator.itemgetter(1))  # sorted dictionary by value(=Tf-Idf value)
+                sorted_value.reverse()  # inversed sorted dictionary -> max dictionary
+                for k, val in sorted_value:
+                    if wordsCount < self.num_of_words_per_doc:  # while we don't get the s(=num of words) count
+                        if val != 0:  # ignore the words with value 0
+                            if model.exist_in_vocab(k):
+                                words.append(k)  # build list of s highest tf-idf value that in the vocab
+                            wordsCount += 1
+                wordsCount = 0
+            text = ' '.join(i for i in text if i in words).split()  # delete from the original text the unnecessary words
+            text = text[:self.num_of_words_per_doc]                 # resize the list into the correct size
+            words = []
+            print(text)
+            docList[key].createChunks(text,model,self.config)       # create chunks for each document
+        for r in docList:
+            print(r.get_chunksVec())
+
 
 
         ################## Step 4 ##################

@@ -102,4 +102,5 @@ if __name__ == "__main__":
     text = ['אבירם','בבית','גר']
     c1 = Chunk(config, text, 10, 0, model)
     print("c1 ID:"  + str(c1.chunkID)+ " " + "c1 doc ID:" + str(c1.docID))
+    print(c1.getchunkVec())
 
