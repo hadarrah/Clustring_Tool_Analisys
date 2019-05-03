@@ -61,7 +61,7 @@ class Model(object):
         self.log.info("Set Sentences")
         for doc in documents:
             text = doc.get_docText()
-            text = re.sub(r'[,:;.]', '', text)                              # remove special chars
+            text = re.sub(r'[,:;]', '', text)                              # remove special chars
             text = re.sub(r'\s.?\s', '', text)                              # remove words with length 1
             sen_list = re.split(self.delimiter, text)                       # get sentences by delimiter
             word_sen_list = [lst.strip().split(' ') for lst in sen_list]    # separate words in sentences

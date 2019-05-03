@@ -34,14 +34,14 @@ doc_paths = list()
 vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
-DELIMITERS = [r'\n', r'.', r'[.*?]']
+DELIMITERS = [r'\n', r'\.', r'[.*?]']
 V_PATH = ".\\images\\green_v.png"
 X_PATH = ".\\images\\red_x.png"
 
 def start_regression(top, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
-        doc_paths = texts_input.split()
+        doc_paths = list(texts_input)
 
     else:
         messagebox.showerror("Input Error", "You must insert a texts")
@@ -610,7 +610,7 @@ class Toplevel1:
         self.run_button.configure(highlightcolor="black")
         self.run_button.configure(pady="0")
         self.run_button.configure(text='''RUN!''')
-        self.run_button.configure(command=lambda : start_regression(self, self.texts_entry.get(), self.vec_entry.get(),
+        self.run_button.configure(command=lambda : start_regression(self, self.doc_paths, self.vec_entry.get(),
                                                                     self.from_var.get(),
                                                                     self.to_var.get(),
                                                                     self.Enable_Cbutton_var.get(),
@@ -914,12 +914,12 @@ class Toplevel1:
             self.vec_entry.configure(state="disable")
 
     def load_text_button_dialog(self, event=None):
-        doc_paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
-        self.num_of_files = root.tk.splitlist(doc_paths)  # Possible workaround
+        self.doc_paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        self.num_of_files = root.tk.splitlist(self.doc_paths)  # Possible workaround
         if (len(self.num_of_files) < 3):
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
-        self.texts_entry.insert(0, doc_paths)
+        self.texts_entry.insert(0, self.doc_paths)
         self.to_var.set(len(self.num_of_files)-1) # set maximum possible value
         self.from_var.set(2)
         self.from_spinbox.configure(state="normal")

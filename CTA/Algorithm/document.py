@@ -7,6 +7,7 @@ from Utils import configuration
 from Utils import Word2VecWrapper
 import logging
 import operator
+import os
 import re
 
 
@@ -20,6 +21,7 @@ class Document(object):
         self.docID = None
         self.set_docID()
         self.docPath = filepath
+        self.basename = os.path.basename(filepath)
         self.docText = self.getText(self.docPath)
         self.chunksVec = []  # the distances vector
         self.chunks = []
@@ -210,8 +212,12 @@ class Document(object):
     def get_cluster(self):
         return self.cluster
 
+    def get_basename(self):
+        return self.basename
+
     def __str__(self):
         to_print = ""
+        to_print += "\nDocument name: " + str(self.get_basename())
         to_print += "\nDocument ID: " + str(self.get_docID())
         to_print += "\nDocument total chunks: " + str(len(self.get_chunks()))
         to_print += "\nDocument total comparable chunks: " + str(len(self.get_comparable_chunks()))
