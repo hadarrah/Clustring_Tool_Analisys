@@ -38,7 +38,7 @@ DELIMITERS = [r'\n', r'.', r'[.*?]']
 V_PATH = ".\\images\\green_v.png"
 X_PATH = ".\\images\\red_x.png"
 
-def start_regression(top, texts_input, vec_input, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
+def start_regression(top, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
     # we should check if all the files are exist before running the algorithm
     if (texts_input):
         doc_paths = texts_input.split()
@@ -48,6 +48,9 @@ def start_regression(top, texts_input, vec_input, enable_advanced, number_of_wor
         return
 
     vec_path = vec_input if (vec_input) else None
+
+    config.set("CLUSTER", "from", from_range)
+    config.set("CLUSTER", "to", to_range)
 
     if (enable_advanced):
         config.set("TF-IDF", "num_of_words_per_doc", number_of_words)
@@ -508,6 +511,7 @@ class Toplevel1:
         self.Chunk_Size_var = tk.StringVar(root)
         self.Chunk_Size_var.set(config.get("CHUNKS", "size"))
         self.Chunk_Size_Spinbox.configure(textvariable=self.Chunk_Size_var)
+        self.Chunk_Size_Spinbox.configure(command=self.set_chunk_size_val)
 
         self.Delay_Spinbox = tk.Spinbox(self.Chunks_Labelframe, from_=1.0, to=100.0)
         self.Delay_Spinbox.place(relx=0.396, rely=0.56, relheight=0.200, relwidth=0.16
@@ -526,6 +530,7 @@ class Toplevel1:
         self.Delay_var = tk.StringVar(root)
         self.Delay_var.set(config.get("CHUNKS", "delay"))
         self.Delay_Spinbox.configure(textvariable=self.Delay_var)
+        self.Delay_Spinbox.configure(command=self.set_delay_val)
 
         self.Chunk_Size_Label = tk.Label(self.Chunks_Labelframe)
         self.Chunk_Size_Label.place(relx=0.225, rely=0.24, height=21, width=67
@@ -591,6 +596,8 @@ class Toplevel1:
         self.Number_Of_Words_var = tk.StringVar(root)
         self.Number_Of_Words_var.set(config.get("TF-IDF", "num_of_words_per_doc"))
         self.Number_Of_Words_Spinbox.configure(textvariable=self.Number_Of_Words_var)
+        self.Number_Of_Words_Spinbox.configure(command=self.set_number_of_words_val)
+
 
         self.run_button = tk.Button(self.Running_TNotebook)
         self.run_button.place(relx=0.458, rely=0.073, height=24, width=38)
@@ -604,6 +611,8 @@ class Toplevel1:
         self.run_button.configure(pady="0")
         self.run_button.configure(text='''RUN!''')
         self.run_button.configure(command=lambda : start_regression(self, self.texts_entry.get(), self.vec_entry.get(),
+                                                                    self.from_var.get(),
+                                                                    self.to_var.get(),
                                                                     self.Enable_Cbutton_var.get(),
                                                                     self.Number_Of_Words_var.get(),
                                                                     self.Chunk_Size_var.get(),
@@ -911,7 +920,7 @@ class Toplevel1:
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
         self.texts_entry.insert(0, doc_paths)
-        self.to_var.set(len(self.num_of_files)) # set maximum possible value
+        self.to_var.set(len(self.num_of_files)-1) # set maximum possible value
         self.from_var.set(2)
         self.from_spinbox.configure(state="normal")
         self.to_spinbox.configure(state="normal")
@@ -924,14 +933,26 @@ class Toplevel1:
     def set_from_val(self, event=None):
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.from_spinbox.invoke("buttondown")
-        config.set("CLUSTER", "from", str(self.from_spinbox.get()))
 
     def set_to_val(self, event=None):
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.to_spinbox.invoke("buttonup")
-        if (int(self.to_spinbox.get()) > int(len(self.num_of_files))):
+        if (int(self.to_spinbox.get()) > int(len(self.num_of_files))-1):
             self.to_spinbox.invoke("buttondown")
-        config.set("CLUSTER", "to", str(self.to_spinbox.get()))
+
+    def set_number_of_words_val(self, event=None):
+        if(int(self.Number_Of_Words_Spinbox.get()) < 2*int(self.Chunk_Size_Spinbox.get())):
+            self.Number_Of_Words_Spinbox.invoke("buttonup")
+
+    def set_chunk_size_val(self, event=None):
+        if (int(self.Number_Of_Words_Spinbox.get()) < 2 * int(self.Chunk_Size_Spinbox.get())):
+            self.Chunk_Size_Spinbox.invoke("buttondown")
+        if (int(self.Delay_Spinbox.get()) == int(self.Chunk_Size_Spinbox.get())):
+            self.Chunk_Size_Spinbox.invoke("buttonup")
+
+    def set_delay_val(self, event=None):
+        if (int(self.Delay_Spinbox.get()) == int(self.Chunk_Size_Spinbox.get())):
+            self.Delay_Spinbox.invoke("buttondown")
 
     def enable_button_handler(self, event=None):
         set = self.Enable_Cbutton_var.get()

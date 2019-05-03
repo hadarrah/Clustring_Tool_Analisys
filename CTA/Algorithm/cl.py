@@ -1,7 +1,8 @@
 from Utils import logger
 from Utils import configuration
-from pyclustering.cluster import kmedoids
+from pyclustering.cluster.kmedoids import kmedoids
 from sklearn.metrics import silhouette_score
+import numpy as np
 import logging
 
 
@@ -25,8 +26,9 @@ class CL(object):
         Call to PAM algorithm for each k value in the range.
         :return:
         """
-        for k in range(self.config.get("CLUSTER", "from"), self.config.get("CLUSTER", "to")):
-            kmedoids_instance = kmedoids(self.distance_metric, k, data_type='distance_matrix')
+        for k in range(int(self.config.get("CLUSTER", "from")), int(self.config.get("CLUSTER", "to"))+1):
+            intial_mediods_index = [index for index in range(0, k)]
+            kmedoids_instance = kmedoids(self.distance_metric, intial_mediods_index, data_type='distance_matrix')
             kmedoids_instance.process()
             self.clustring_results.append(kmedoids_instance)
 
@@ -37,8 +39,15 @@ class CL(object):
         :return:   silhouette avg score
         """
         clusters = cl.get_clusters()
-        silhouette_width = silhouette_score(self.distance_metric, clusters, metric="precomputed")
-        return silhouette_width
+        cluster_indicator = [0] * len(self.distance_metric)
+        i = 0
+        for cluster in clusters:
+            for chunk_index in cluster:
+                cluster_indicator[chunk_index] = i
+            i += 1
+
+        silhouette_width = silhouette_score(self.distance_metric, cluster_indicator, metric="precomputed")
+        return silhouette_width, cluster_indicator
 
     def get_best_clustering_result(self):
         """
@@ -47,13 +56,15 @@ class CL(object):
         """
         max_silhouette = -1
         cl_max = None
+        indicator_max = None
         for cl_result in self.clustring_results:
-            current = self.get_silhouette(cl_result)
+            current, cluster_indicator = self.get_silhouette(cl_result)
             if (current > max_silhouette):
                 max_silhouette = current
                 cl_max = cl_result
+                indicator_max = cluster_indicator
 
-        return cl_max
+        return cl_max, indicator_max
 
 
 if __name__ == "__main__":

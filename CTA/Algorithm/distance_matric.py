@@ -32,9 +32,10 @@ class Distance_Matric(object):
         """
         # get all the comparable chunks
         for doc in self.documents:
-            self.comparable_chunks.append(doc.get_comparable_chunks())    # <- from Aviram
+            self.comparable_chunks.extend(doc.get_comparable_chunks())    # <- from Aviram
 
         # iterate all over the comparable chunks and build their row in the metric
+        i = 0
         for chunk in self.comparable_chunks:
             chunk_metric_row = []
 
@@ -45,7 +46,9 @@ class Distance_Matric(object):
 
             self.distance_metric.append(chunk_metric_row)
             # save the chunk's index in the  metric in order to be able to recognize them after PAM
-            self.chunks_index[1] = chunk
+            self.chunks_index[i] = chunk
+            i += 1
+        self.distance_metric = np.matrix(self.distance_metric)
 
 
     def compute_dzv(self, chunk1, chunk2):
@@ -70,12 +73,12 @@ class Distance_Matric(object):
         :return: similarity value between the chunks
         """
         sum = 0
-        chunk_vec = chunk.get_vector()  # <- from Aviram
+        chunk_vec = chunk.getchunkVec()  # <- from Aviram
         for pre_chunk in precursors_chunks:
-            corr, p_value = spearmanr(chunk_vec, pre_chunk.get_vector())
+            corr, p_value = spearmanr(chunk_vec, pre_chunk.getchunkVec())
             sum += corr
 
-        return sum/self.config.get("CHUNKS", "delay")
+        return sum/int(self.config.get("CHUNKS", "delay"))
 
     def get_distance_metric(self):
         return self.distance_metric

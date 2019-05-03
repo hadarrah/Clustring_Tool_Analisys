@@ -60,7 +60,7 @@ class Model(object):
         """
         self.log.info("Set Sentences")
         for doc in documents:
-            text = doc.get_text()   # from Aviram
+            text = doc.get_docText()
             text = re.sub(r'[,:;.]', '', text)                              # remove special chars
             text = re.sub(r'\s.?\s', '', text)                              # remove words with length 1
             sen_list = re.split(self.delimiter, text)                       # get sentences by delimiter
@@ -74,7 +74,7 @@ class Model(object):
         :param word: word string
         :return: if exist -> word vector, otherwise -1
         """
-        self.log.info("Get Vector: " + word)
+        #self.log.info("Get Vector: " + str(word))
         try:
             vec = self.word_vectors[word]
         except Exception as e:

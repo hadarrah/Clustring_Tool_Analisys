@@ -49,18 +49,30 @@ class Chunk(object):
         """
         return self.chunkID
 
+    def set_cluster(self, cluster):
+        self.cluster = cluster
+
+    def get_cluster(self):
+        return self.cluster
+
     def createVec(self):
         """
         build distances chunk by using cosin similarity
         :return: dictances vector
         """
-        cosResult = set()      #using set in order to avoid duplications
+        #cosResult = set()      #using set in order to avoid duplications
+        cosResult = list()
+        i = 1
         for d1 in self.Doc:
+            j = 0
             for d2 in self.Doc:
-                if (d1 != d2):
-                   cos = np.dot(self.model.get_vector(d1),self.model.get_vector(d2))/(np.linalg.norm(self.model.get_vector(d1))*np.linalg.norm(self.model.get_vector(d2)))
-                   cosResult.add(cos)
-        self.chunkVec = np.array(list(cosResult))       #casting set->vector
+                if (j < i):
+                    j += 1
+                    continue
+                cos = np.dot(self.model.get_vector(d1),self.model.get_vector(d2))/(np.linalg.norm(self.model.get_vector(d1))*np.linalg.norm(self.model.get_vector(d2)))
+                cosResult.append(cos)
+            i += 1
+        self.chunkVec = np.array(cosResult)
 
     def print_delay(self):
         self.log.info("Delay: " + self.delay)

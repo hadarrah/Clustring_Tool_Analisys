@@ -64,8 +64,8 @@ class Document(object):
                 chunkList.append(w)
                 wordsCount += 1
                 if wordsCount == self.chunkSize:
-                    if (chunkID > self.DelayPar):
-                        preChunks = self.chunks[chunkID - self.DelayPar - 1:chunkID - 1]
+                    if ((chunkID + 1)> self.DelayPar):
+                        preChunks = self.chunks[chunkID - self.DelayPar:chunkID]
                     ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model, preChunks)
                     self.chunksVec.append(ch.chunkVec)
                     self.chunks.append(ch)
@@ -198,6 +198,31 @@ class Document(object):
         for word, val in idfDict.items():
             idfDict[word] = math.log10(N / float(val))
         return idfDict
+
+    def compute_cluster(self, number_of_clusters):
+        chunks_vote = [0] * number_of_clusters
+        for chunk in self.get_comparable_chunks():
+            chunks_vote[chunk.get_cluster()] += 1
+
+        index, value = max(enumerate(chunks_vote), key=operator.itemgetter(1))
+        self.cluster = index
+
+    def get_cluster(self):
+        return self.cluster
+
+    def __str__(self):
+        to_print = ""
+        to_print += "\nDocument ID: " + str(self.get_docID())
+        to_print += "\nDocument total chunks: " + str(len(self.get_chunks()))
+        to_print += "\nDocument total comparable chunks: " + str(len(self.get_comparable_chunks()))
+        to_print += "\nDocument cluster: " + str(self.get_cluster())
+        to_print += "\n\tDocument chunks summary:"
+        for chunk in self.get_chunks():
+            cluster = chunk.get_cluster()
+            cluster = str(cluster) if (cluster is not None) else "None"
+            to_print += "\n\tChunk ID: " + str(chunk.getChunkID()) + "  Chunk Cluster: " + cluster
+        return to_print
+
 
 
 if __name__ == "__main__":
