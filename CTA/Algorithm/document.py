@@ -252,10 +252,10 @@ class Document(object):
         to_print += "\n{:>34} {}".format("Document ID: ", str(self.get_docID()))
         to_print += "\n{:>34} {}".format("Document total chunks: ", str(len(self.get_chunks())))
         to_print += "\n{:>34} {}".format("Document total comparable chunks: ", str(len(self.get_comparable_chunks())))
-        to_print += "\n{:>34} {}".format("Document cluster: ", str(self.get_cluster()))
+        to_print += "\n{:>34} {}".format("Document cluster: ", str(self.get_cluster() + 1))
         for chunk in self.get_chunks():
             cluster = chunk.get_cluster()
-            cluster = str(cluster) if (cluster is not None) else "None"
+            cluster = str(cluster + 1) if (cluster is not None) else "None"
             to_print += "\n{:>34} {} <-> {} {}".format("Chunk ID: ", str(chunk.getChunkID()), "Chunk Cluster:", cluster)
         return to_print
 

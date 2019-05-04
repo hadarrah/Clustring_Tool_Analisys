@@ -26,6 +26,11 @@ from Algorithm.main_flow import main as main_regression
 from tkinter.filedialog import askopenfilenames, askopenfilename
 from tkinter import messagebox
 from PIL import ImageTk, Image
+import matplotlib
+matplotlib.use('TkAgg') # choose backend
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.pyplot import Figure
+import pandas as pd
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -79,6 +84,7 @@ class Toplevel1:
         _ana1color = '#d9d9d9' # X11 color: 'gray85'
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
         self.num_of_files = 0
+        self.data = None
         self.style = ttk.Style()
         if sys.platform == "win32":
             self.style.theme_use('winnative')
@@ -711,13 +717,17 @@ class Toplevel1:
         self.Processing_TProgressbar.configure(mode="determinate")
         self.Processing_TProgressbar['value'] = 0
 
-        self.TCombobox1 = ttk.Combobox(self.Statistic_TNotebook)
-        self.TCombobox1.place(relx=0.237, rely=0.098, relheight=0.051
+        self.Graph_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
+        self.Graph_TCombobox.place(relx=0.237, rely=0.098, relheight=0.051
                 , relwidth=0.242)
-        self.value_list = ["Documents Clustring", "Clustrs Map", "Interior Clustring",]
-        self.TCombobox1.configure(values=self.value_list)
-        self.TCombobox1.configure(textvariable=main_support.combobox)
-        self.TCombobox1.configure(foreground="#000000")
+        self.value_list = ["Documents Distribution"]#, "Clustrs Map", "Interior Clustring",]
+        self.Graph_var = tk.StringVar(root)
+        self.Graph_var.set("Documents Distribution")
+        self.Graph_TCombobox.configure(values=self.value_list)
+        self.Graph_TCombobox.configure(textvariable=self.Graph_var)
+        self.Graph_TCombobox.configure(foreground="#000000")
+        self.Graph_TCombobox.configure(state="readonly")
+        self.Graph_TCombobox.bind("<<ComboboxSelected>>", self.set_graph)
 
         self.Select_Graph_Label = tk.Label(self.Statistic_TNotebook)
         self.Select_Graph_Label.place(relx=0.076, rely=0.098, height=21, width=75)
@@ -742,6 +752,12 @@ class Toplevel1:
         self.Graph_Canvas.configure(selectbackground="#c4c4c4")
         self.Graph_Canvas.configure(selectforeground="black")
         self.Graph_Canvas.configure(width=523)
+
+        self.fig = matplotlib.pyplot.Figure()
+        self.Canvas = FigureCanvasTkAgg(self.fig, self.Graph_Canvas)
+        self.Canvas.get_tk_widget().pack()
+        self.Canvas._tkcanvas.pack()
+
 
         self.TCombobox2 = ttk.Combobox(self.Statistic_TNotebook)
         self.TCombobox2.place(relx=0.237, rely=0.171, relheight=0.051
@@ -797,7 +813,7 @@ class Toplevel1:
         self.Max_Docs_In_Style_Label.configure(text='''Max Docs In Style:''')
 
         self.Min_Docs_In_Style_Label = tk.Label(self.Result_Labelframe)
-        self.Min_Docs_In_Style_Label.place(relx=0.063, rely=0.632, height=21, width=102
+        self.Min_Docs_In_Style_Label.place(relx=0.021, rely=0.632, height=21, width=112
                 , bordermode='ignore')
         self.Min_Docs_In_Style_Label.configure(activebackground="#f9f9f9")
         self.Min_Docs_In_Style_Label.configure(activeforeground="black")
@@ -1009,6 +1025,32 @@ class Toplevel1:
         self.x_silhouette_label.place_forget()
         self.Processing_TProgressbar['value'] = 0
 
+    def set_statistical_result(self, event=None):
+        self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
+        self.Max_Docs_In_Style_Result_Label.configure(text=self.data.get_max_docs_in_style())
+        self.Min_Docs_In_Style_Result_Label.configure(text=self.data.get_min_docs_in_style())
+
+
+    def set_graph(self, event=None):
+        case = self.Graph_var.get()
+        if (case == "Documents Distribution"):
+            data_dict = self.data.get_documents_clustring_data()
+            df = pd.DataFrame(data_dict)
+
+            x = 'Documents'
+            y = 'Styles'
+
+            new_df = df[[x, y]].groupby(x).sum()
+
+            # create first place for plot
+
+            ax = self.fig.add_subplot(111)
+
+            ax.set_xticklabels(data_dict["Documents"], fontsize=5)
+
+            # draw on this plot
+            new_df.plot(kind='bar', legend=False, rot=0, ax=ax)
+
     @staticmethod
     def popup1(event, *args, **kwargs):
         Popupmenu1 = tk.Menu(root, tearoff=0)
@@ -1051,6 +1093,9 @@ class Toplevel1:
         main = main_regression(config, doc_paths, vec_path)
         try:
             main.run(self)
+            self.data = main.get_data()
+            self.set_statistical_result()
+            self.set_graph()
             messagebox.showinfo("Regression Success", "The process ended successfully!")
         except Exception as e:
             log.error(str(e))

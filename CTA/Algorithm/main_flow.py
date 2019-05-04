@@ -2,6 +2,7 @@ import logging
 from Algorithm.document import Document
 from Algorithm.distance_matric import Distance_Matric
 from Algorithm.cl import CL
+from Algorithm.statistical_data import Statistical_Data
 from Utils import logger
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
@@ -64,6 +65,9 @@ class main(object):
 
     def get_stage(self):
         return self.stage
+
+    def get_data(self):
+        return self.data
 
     def Step1(self):
         """
@@ -152,6 +156,10 @@ class main(object):
             chunks_index[i].set_cluster(self.clusters_indicator[i])
         for doc in self.docList:
             doc.compute_cluster(len(self.best_cl.get_clusters()))
+
+        self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()))
+        self.data.analyze_data()
+
 
     def print_result_to_log(self):
         self.log.info("*********REGRESSION SUMMARY*********")
