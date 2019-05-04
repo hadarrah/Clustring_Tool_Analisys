@@ -1,0 +1,30 @@
+import pandas as pd
+
+
+def export_document_distribution(xlsx_path, df_toExport, data):
+    writer = pd.ExcelWriter(xlsx_path, engine='xlsxwriter')
+    df_toExport.to_excel(writer, sheet_name="document_distribution")
+    workbook = writer.book
+    worksheet = writer.sheets["document_distribution"]
+    chart = workbook.add_chart({'type': 'column'})
+    # [sheetname, first_row, first_col, last_row, last_col].
+    number_of_docs = len(data.get_documents_distribution_data()['Documents'])
+    chart.add_series({
+        'categories': ['document_distribution', 1, 1, number_of_docs, 1],
+        'values': ['document_distribution', 1, 2, number_of_docs, 2],
+        'gap': 2,
+    })
+    chart.set_title({'name': 'Document Distribution'})
+    # Configure the chart axes.
+    chart.set_y_axis({'major_gridlines': {'visible': False}})
+    chart.set_y_axis({'name': 'Styles'})
+    chart.set_x_axis({'name': 'Documents'})
+
+    # Turn off chart legend. It is on by default in Excel.
+    chart.set_legend({'position': 'none'})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('D2', chart)
+
+    # Close the Pandas Excel writer and output the Excel file.
+    writer.save()

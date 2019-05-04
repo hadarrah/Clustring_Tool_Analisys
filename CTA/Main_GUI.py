@@ -32,6 +32,7 @@ matplotlib.use('TkAgg') # choose backend
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.pyplot import Figure
 import pandas as pd
+from Utils import csv_generator
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -1108,40 +1109,10 @@ class Toplevel1:
             self.xlsx_path += r'.xlsx'
         try:
             if (case == "Documents Distribution"):
-                self.export_document_distribution()
+                csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
             messagebox.showinfo("Export Data", "Export data successful!")
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
-
-
-
-    def export_document_distribution(self):
-        writer = pd.ExcelWriter(self.xlsx_path, engine='xlsxwriter')
-        self.df_toExport.to_excel(writer, sheet_name="document_distribution")
-        workbook = writer.book
-        worksheet = writer.sheets["document_distribution"]
-        chart = workbook.add_chart({'type': 'column'})
-        # [sheetname, first_row, first_col, last_row, last_col].
-        number_of_docs = len(self.data.get_documents_distribution_data()['Documents'])
-        chart.add_series({
-            'categories': ['document_distribution', 1, 1, number_of_docs, 1],
-            'values': ['document_distribution', 1, 2, number_of_docs, 2],
-            'gap': 2,
-        })
-        chart.set_title({'name': 'Document Distribution'})
-        # Configure the chart axes.
-        chart.set_y_axis({'major_gridlines': {'visible': False}})
-        chart.set_y_axis({'name': 'Styles'})
-        chart.set_x_axis({'name': 'Documents'})
-
-        # Turn off chart legend. It is on by default in Excel.
-        chart.set_legend({'position': 'none'})
-
-        # Insert the chart into the worksheet.
-        worksheet.insert_chart('D2', chart)
-
-        # Close the Pandas Excel writer and output the Excel file.
-        writer.save()
 
 
     @staticmethod
