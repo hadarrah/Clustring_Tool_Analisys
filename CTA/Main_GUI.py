@@ -38,39 +38,7 @@ DELIMITERS = [r'\n', r'\.', r'[.*?]']
 V_PATH = ".\\images\\green_v.png"
 X_PATH = ".\\images\\red_x.png"
 
-def start_regression(top, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words, chunk_size, delay, arch, training, context_window, delimiter):
-    # we should check if all the files are exist before running the algorithm
-    if (texts_input):
-        doc_paths = list(texts_input)
 
-    else:
-        messagebox.showerror("Input Error", "You must insert a texts")
-        return
-
-    vec_path = vec_input if (vec_input) else None
-
-    config.set("CLUSTER", "from", from_range)
-    config.set("CLUSTER", "to", to_range)
-
-    if (enable_advanced):
-        config.set("TF-IDF", "num_of_words_per_doc", number_of_words)
-        config.set("CHUNKS", "size", chunk_size)
-        config.set("CHUNKS", "delay", delay)
-        config.set("Word2Vec", "arch", arch)
-        config.set("Word2Vec", "training_model", training)
-        config.set("Word2Vec", "context_window", context_window)
-        config.set("Word2Vec", "text_delimiter", delimiter)
-
-    top.clean_all_steps()
-
-    main = main_regression(config, doc_paths, vec_path)
-    try:
-        main.run(top)
-        messagebox.showinfo("Regression Success", "The process ended successfully!")
-    except Exception as e:
-        log.error(str(e))
-        top.set_x_stage(main.get_stage())
-        messagebox.showerror("Regression Error", "Error: " + str(e))
 
 
 
@@ -610,7 +578,7 @@ class Toplevel1:
         self.run_button.configure(highlightcolor="black")
         self.run_button.configure(pady="0")
         self.run_button.configure(text='''RUN!''')
-        self.run_button.configure(command=lambda : start_regression(self, self.doc_paths, self.vec_entry.get(),
+        self.run_button.configure(command=lambda : self.start_regression(self.doc_paths, self.vec_entry.get(),
                                                                     self.from_var.get(),
                                                                     self.to_var.get(),
                                                                     self.Enable_Cbutton_var.get(),
@@ -1053,6 +1021,41 @@ class Toplevel1:
         Popupmenu1.configure(font="{Segoe UI} 9")
         Popupmenu1.configure(foreground="black")
         Popupmenu1.post(event.x_root, event.y_root)
+
+    def start_regression(self, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words,
+                         chunk_size, delay, arch, training, context_window, delimiter):
+        # we should check if all the files are exist before running the algorithm
+        if (texts_input):
+            doc_paths = list(texts_input)
+
+        else:
+            messagebox.showerror("Input Error", "You must insert a texts")
+            return
+
+        vec_path = vec_input if (vec_input) else None
+
+        config.set("CLUSTER", "from", from_range)
+        config.set("CLUSTER", "to", to_range)
+
+        if (enable_advanced):
+            config.set("TF-IDF", "num_of_words_per_doc", number_of_words)
+            config.set("CHUNKS", "size", chunk_size)
+            config.set("CHUNKS", "delay", delay)
+            config.set("Word2Vec", "arch", arch)
+            config.set("Word2Vec", "training_model", training)
+            config.set("Word2Vec", "context_window", context_window)
+            config.set("Word2Vec", "text_delimiter", delimiter)
+
+        self.clean_all_steps()
+
+        main = main_regression(config, doc_paths, vec_path)
+        try:
+            main.run(self)
+            messagebox.showinfo("Regression Success", "The process ended successfully!")
+        except Exception as e:
+            log.error(str(e))
+            self.set_x_stage(main.get_stage())
+            messagebox.showerror("Regression Error", "Error: " + str(e))
 
 if __name__ == '__main__':
     vp_start_gui()
