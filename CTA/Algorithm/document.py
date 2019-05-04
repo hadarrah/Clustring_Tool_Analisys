@@ -248,16 +248,15 @@ class Document(object):
         :return:
         """
         to_print = ""
-        to_print += "\nDocument name: " + str(self.get_basename())
-        to_print += "\nDocument ID: " + str(self.get_docID())
-        to_print += "\nDocument total chunks: " + str(len(self.get_chunks()))
-        to_print += "\nDocument total comparable chunks: " + str(len(self.get_comparable_chunks()))
-        to_print += "\nDocument cluster: " + str(self.get_cluster())
-        to_print += "\n\tDocument chunks summary:"
+        to_print += "\n{:>34} {}".format("Document name: ", str(self.get_basename()))
+        to_print += "\n{:>34} {}".format("Document ID: ", str(self.get_docID()))
+        to_print += "\n{:>34} {}".format("Document total chunks: ", str(len(self.get_chunks())))
+        to_print += "\n{:>34} {}".format("Document total comparable chunks: ", str(len(self.get_comparable_chunks())))
+        to_print += "\n{:>34} {}".format("Document cluster: ", str(self.get_cluster()))
         for chunk in self.get_chunks():
             cluster = chunk.get_cluster()
             cluster = str(cluster) if (cluster is not None) else "None"
-            to_print += "\n\tChunk ID: " + str(chunk.getChunkID()) + "  Chunk Cluster: " + cluster
+            to_print += "\n{:>34} {} <-> {} {}".format("Chunk ID: ", str(chunk.getChunkID()), "Chunk Cluster:", cluster)
         return to_print
 
 
