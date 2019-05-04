@@ -774,6 +774,7 @@ class Toplevel1:
         self.Graph_Canvas.configure(width=523)
 
         self.fig = matplotlib.pyplot.Figure()
+        self.ax = self.fig.add_subplot(111)
         self.Canvas = FigureCanvasTkAgg(self.fig, self.Graph_Canvas)
         self.Canvas.get_tk_widget().pack()
         self.Canvas._tkcanvas.pack()
@@ -1085,12 +1086,13 @@ class Toplevel1:
 
             # create first place for plot
 
-            ax = self.fig.add_subplot(111)
+            self.ax.clear()
 
-            ax.set_xticklabels(data_dict["Documents"], fontsize=5)
+            self.ax.set_xticklabels(data_dict["Documents"], fontsize=5)
 
             # draw on this plot
-            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=ax)
+            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
+            self.Canvas.draw()
 
     def export_button_dialog(self, event=None):
         case = self.Graph_var.get()
