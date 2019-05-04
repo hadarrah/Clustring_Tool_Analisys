@@ -159,7 +159,7 @@ class main(object):
         self.log.info("Number of clusters: " + str(len(self.best_cl.get_clusters())))
         self.log.info("*********Documents and Chunks*********")
         for doc in self.docList:
-            print (doc)
+            self.log.info(doc)
 
 
 if __name__ == "__main__":

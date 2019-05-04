@@ -29,7 +29,7 @@ from PIL import ImageTk, Image
 
 config = configuration.config().setup()
 log = logger.setup()
-#log = logger.add_log_file(log, config)
+log = logger.add_log_file(log, config)
 doc_paths = list()
 vec_path = None
 

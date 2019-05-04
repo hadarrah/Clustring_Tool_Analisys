@@ -13,7 +13,7 @@ class Document(object):
     def __init__(self, filepath, config):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        self.log = logger.add_log_file(self.log, config)
+        #self.log = logger.add_log_file(self.log, config)
         self.docID = None
         self.set_docID()
         self.docPath = filepath

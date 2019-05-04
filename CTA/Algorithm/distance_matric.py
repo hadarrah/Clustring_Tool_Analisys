@@ -46,6 +46,9 @@ class Distance_Matric(object):
             self.chunks_index[i] = chunk
             i += 1
         self.distance_metric = np.matrix(self.distance_metric)
+        np.set_printoptions(precision=3)
+        for row in self.distance_metric:
+            self.log.info(row)
 
 
     def compute_dzv(self, chunk1, chunk2):

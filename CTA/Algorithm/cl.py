@@ -41,6 +41,7 @@ class CL(object):
         # where the indexes inside represents the chunk's row from distance metric
         clusters = cl.get_clusters()
 
+
         # initialize array with size of the comparable chunks
         # each index in the array represent the chunk'a row from distance metric while the value is the cluster's id
         cluster_indicator = [0] * len(self.distance_metric)
@@ -52,6 +53,12 @@ class CL(object):
             i += 1
 
         silhouette_width = silhouette_score(self.distance_metric, cluster_indicator, metric="precomputed")
+        #self.log.info("\nK={num_clusters}\n{result}\nSilhouette width={sil}".format(num_clusters=str(len(clusters)),
+        #                                                                            result=str(clusters),
+        #                                                                            sil=str(silhouette_width)))
+        self.log.info("K={num_clusters}".format(num_clusters=str(len(clusters))))
+        self.log.info("{result}".format(result=str(clusters)))
+        self.log.info("Silhouette width={sil}".format(sil=str(silhouette_width)))
         return silhouette_width, cluster_indicator
 
     def get_best_clustering_result(self):
