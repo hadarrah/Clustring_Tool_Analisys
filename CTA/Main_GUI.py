@@ -729,7 +729,7 @@ class Toplevel1:
         self.Statistical_data_proc_label.configure(foreground="#000000")
         self.Statistical_data_proc_label.configure(highlightbackground="#d9d9d9")
         self.Statistical_data_proc_label.configure(highlightcolor="black")
-        self.Statistical_data_proc_label.configure(text='''Statistical_Data''')
+        self.Statistical_data_proc_label.configure(text='''Statistical Data''')
 
         self.Processing_TProgressbar = ttk.Progressbar(self.Processing_Labelframe)
         self.Processing_TProgressbar.place(relx=0.057, rely=0.857, relwidth=0.868
