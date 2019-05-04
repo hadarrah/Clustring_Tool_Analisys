@@ -66,7 +66,7 @@ class Statistical_Data(object):
         Get the data structure for Documents Distribution graph.
         :return:
         """
-        documents = [doc.get_basename() for doc in self.documents]
+        documents = [doc.get_basename().split(".")[0] for doc in self.documents]
         styles = []
         for doc in self.documents:
             styles.append(doc.get_cluster()+1)

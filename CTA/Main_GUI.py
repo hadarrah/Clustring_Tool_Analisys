@@ -20,10 +20,11 @@ except ImportError:
     py3 = True
 
 import main_support
+
 from Utils import logger
 from Utils import configuration
 from Algorithm.main_flow import main as main_regression
-from tkinter.filedialog import askopenfilenames, askopenfilename
+from tkinter.filedialog import askopenfilenames, askopenfilename, asksaveasfilename
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import matplotlib
@@ -85,6 +86,7 @@ class Toplevel1:
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
         self.num_of_files = 0
         self.data = None
+        self.df_toExport = None
         self.style = ttk.Style()
         if sys.platform == "win32":
             self.style.theme_use('winnative')
@@ -777,11 +779,11 @@ class Toplevel1:
         self.Canvas._tkcanvas.pack()
 
 
-        self.TCombobox2 = ttk.Combobox(self.Statistic_TNotebook)
-        self.TCombobox2.place(relx=0.237, rely=0.171, relheight=0.051
+        self.Document_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
+        self.Document_TCombobox.place(relx=0.237, rely=0.171, relheight=0.051
                 , relwidth=0.242)
-        self.TCombobox2.configure(textvariable=main_support.combobox)
-        self.TCombobox2.configure(takefocus="")
+        self.Document_TCombobox.configure(textvariable=main_support.combobox)
+        self.Document_TCombobox.configure(takefocus="")
 
         self.Select_Doc_Label = tk.Label(self.Statistic_TNotebook)
         self.Select_Doc_Label.place(relx=0.034, rely=0.171, height=21, width=105)
@@ -877,6 +879,19 @@ class Toplevel1:
         self.Min_Docs_In_Style_Result_Label.configure(highlightbackground="#d9d9d9")
         self.Min_Docs_In_Style_Result_Label.configure(highlightcolor="black")
         self.Min_Docs_In_Style_Result_Label.configure(text='''2''')
+
+        self.export_button = tk.Button(self.Statistic_TNotebook)
+        self.export_button.place(relx=0.237, rely=0.230, height=24, width=68)
+        self.export_button.configure(activebackground="#ececec")
+        self.export_button.configure(activeforeground="#000000")
+        self.export_button.configure(background="#d9d9d9")
+        self.export_button.configure(disabledforeground="#a3a3a3")
+        self.export_button.configure(foreground="#000000")
+        self.export_button.configure(highlightbackground="#d9d9d9")
+        self.export_button.configure(highlightcolor="black")
+        self.export_button.configure(pady="0")
+        self.export_button.configure(text='''Export Data''')
+        self.export_button.configure(command=self.export_button_dialog)
 
         self.CopyRight_Label = tk.Label(top)
         self.CopyRight_Label.place(relx=0.422, rely=0.938, height=21, width=87)
@@ -1061,12 +1076,12 @@ class Toplevel1:
         case = self.Graph_var.get()
         if (case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
-            df = pd.DataFrame(data_dict)
+            self.df_toExport = pd.DataFrame(data_dict)
 
             x = 'Documents'
             y = 'Styles'
 
-            new_df = df[[x, y]].groupby(x).sum()
+            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
 
             # create first place for plot
 
@@ -1075,7 +1090,57 @@ class Toplevel1:
             ax.set_xticklabels(data_dict["Documents"], fontsize=5)
 
             # draw on this plot
-            new_df.plot(kind='bar', legend=False, rot=0, ax=ax)
+            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=ax)
+
+    def export_button_dialog(self, event=None):
+        case = self.Graph_var.get()
+
+        if (self.df_toExport is None):
+            messagebox.showerror("Regression Error", "There is no data to export, please run a regression before export")
+            return
+        self.xlsx_path = asksaveasfilename(title='Select a csv file', filetypes=[("XLSX Files", ".xlsx")])
+        if self.xlsx_path is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+            return
+
+        if (not self.xlsx_path.endswith(r'.xlsx')):
+            self.xlsx_path += r'.xlsx'
+        try:
+            if (case == "Documents Distribution"):
+                self.export_document_distribution()
+            messagebox.showinfo("Export Data", "Export data successful!")
+        except Exception as e:
+            messagebox.showerror("Export Data", "Export data failed: " + str(e))
+
+
+
+    def export_document_distribution(self):
+        writer = pd.ExcelWriter(self.xlsx_path, engine='xlsxwriter')
+        self.df_toExport.to_excel(writer, sheet_name="document_distribution")
+        workbook = writer.book
+        worksheet = writer.sheets["document_distribution"]
+        chart = workbook.add_chart({'type': 'column'})
+        # [sheetname, first_row, first_col, last_row, last_col].
+        number_of_docs = len(self.data.get_documents_distribution_data()['Documents'])
+        chart.add_series({
+            'categories': ['document_distribution', 1, 1, number_of_docs, 1],
+            'values': ['document_distribution', 1, 2, number_of_docs, 2],
+            'gap': 2,
+        })
+        chart.set_title({'name': 'Document Distribution'})
+        # Configure the chart axes.
+        chart.set_y_axis({'major_gridlines': {'visible': False}})
+        chart.set_y_axis({'name': 'Styles'})
+        chart.set_x_axis({'name': 'Documents'})
+
+        # Turn off chart legend. It is on by default in Excel.
+        chart.set_legend({'position': 'none'})
+
+        # Insert the chart into the worksheet.
+        worksheet.insert_chart('D2', chart)
+
+        # Close the Pandas Excel writer and output the Excel file.
+        writer.save()
+
 
     @staticmethod
     def popup1(event, *args, **kwargs):
