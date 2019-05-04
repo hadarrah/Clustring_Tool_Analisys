@@ -59,6 +59,12 @@ class main(object):
         self.Step6()
         top.set_v_stage(self.stage)
 
+        ################## Step 7 ##################
+        self.log.info("Step 7: Statistical Data")
+        self.stage += 1
+        self.Step7()
+        top.set_v_stage(self.stage)
+
         # for debug
         self.print_result_to_log()
 
@@ -143,7 +149,7 @@ class main(object):
 
     def Step6(self):
         """
-        Get and set the best clustring result base on silhouette algorithm and then assign the chunks and
+        Get and set the best clustering result base on silhouette algorithm and then assign the chunks and
         document according to the best result
         :return:
         """
@@ -157,9 +163,13 @@ class main(object):
         for doc in self.docList:
             doc.compute_cluster(len(self.best_cl.get_clusters()))
 
+    def Step7(self):
+        """
+        Analyze the statistical data from last regression.
+        :return:
+        """
         self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()))
         self.data.analyze_data()
-
 
     def print_result_to_log(self):
         self.log.info("*********REGRESSION SUMMARY*********")

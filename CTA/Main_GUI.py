@@ -710,6 +710,24 @@ class Toplevel1:
         self.Silhouette_proc_label.configure(highlightcolor="black")
         self.Silhouette_proc_label.configure(text='''Silhouette''')
 
+        self.v_img_statistical_data = ImageTk.PhotoImage(Image.open(V_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.v_statistical_data_label = tk.Label(self.Processing_Labelframe, image=self.v_img_statistical_data,
+                                           background="#d9d9d9")
+
+        self.x_img_statistical_data = ImageTk.PhotoImage(Image.open(X_PATH).resize((10, 10), Image.ANTIALIAS))
+        self.x_statistical_data_label = tk.Label(self.Processing_Labelframe, image=self.x_img_statistical_data,
+                                           background="#d9d9d9")
+
+        self.Statistical_data_proc_label = tk.Label(self.Processing_Labelframe)
+        self.Statistical_data_proc_label.place(relx=0.06, rely=0.66)
+        self.Statistical_data_proc_label.configure(activebackground="#f9f9f9")
+        self.Statistical_data_proc_label.configure(activeforeground="black")
+        self.Statistical_data_proc_label.configure(background="#d9d9d9")
+        self.Statistical_data_proc_label.configure(disabledforeground="#a3a3a3")
+        self.Statistical_data_proc_label.configure(foreground="#000000")
+        self.Statistical_data_proc_label.configure(highlightbackground="#d9d9d9")
+        self.Statistical_data_proc_label.configure(highlightcolor="black")
+        self.Statistical_data_proc_label.configure(text='''Statistical_Data''')
 
         self.Processing_TProgressbar = ttk.Progressbar(self.Processing_Labelframe)
         self.Processing_TProgressbar.place(relx=0.057, rely=0.857, relwidth=0.868
@@ -876,14 +894,16 @@ class Toplevel1:
                          3: self.set_v_building_chunks,
                          4: self.set_v_metric,
                          5: self.set_v_pam,
-                         6: self.set_v_silhouette}
+                         6: self.set_v_silhouette,
+                         7: self.set_v_statistical_data}
 
         self.X_STAGES = {1: self.set_x_get_texts,
-                       2: self.set_x_word2vec,
-                       3: self.set_x_building_chunks,
-                       4: self.set_x_metric,
-                       5: self.set_x_pam,
-                       6: self.set_x_silhouette}
+                         2: self.set_x_word2vec,
+                         3: self.set_x_building_chunks,
+                         4: self.set_x_metric,
+                         5: self.set_x_pam,
+                         6: self.set_x_silhouette,
+                         7: self.set_x_statistical_data}
 
 
     def add_word_embedding_checkbox(self, event=None):
@@ -969,46 +989,52 @@ class Toplevel1:
 
     def set_v_get_texts(self, event=None):
         self.v_get_texts_label.place(relx=0.018, rely=0.01)
-        self.Processing_TProgressbar['value'] = 16
+        self.Processing_TProgressbar['value'] = 14
 
     def set_x_get_texts(self, event=None):
         self.x_get_texts_label.place(relx=0.018, rely=0.01)
 
     def set_v_word2vec(self, event=None):
         self.v_word2vec_label.place(relx=0.018, rely=0.12)
-        self.Processing_TProgressbar['value'] += 20
+        self.Processing_TProgressbar['value'] += 16
 
     def set_x_word2vec(self, event=None):
         self.x_word2vec_label.place(relx=0.018, rely=0.12)
 
     def set_v_building_chunks(self, event=None):
         self.v_building_chunks_label.place(relx=0.018, rely=0.23)
-        self.Processing_TProgressbar['value'] += 16
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_building_chunks(self, event=None):
         self.x_building_chunks_label.place(relx=0.018, rely=0.23)
 
     def set_v_metric(self, event=None):
         self.v_metric_label.place(relx=0.018, rely=0.34)
-        self.Processing_TProgressbar['value'] += 16
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_metric(self, event=None):
         self.x_metric_label.place(relx=0.018, rely=0.34)
 
     def set_v_pam(self, event=None):
         self.v_pam_label.place(relx=0.018, rely=0.45)
-        self.Processing_TProgressbar['value'] += 16
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_pam(self, event=None):
         self.x_pam_label.place(relx=0.018, rely=0.45)
 
     def set_v_silhouette(self, event=None):
         self.v_silhouette_label.place(relx=0.018, rely=0.56)
-        self.Processing_TProgressbar['value'] += 16
+        self.Processing_TProgressbar['value'] += 14
 
     def set_x_silhouette(self, event=None):
         self.x_silhouette_label.place(relx=0.018, rely=0.56)
 
+    def set_v_statistical_data(self, event=None):
+        self.v_statistical_data_label.place(relx=0.018, rely=0.67)
+        self.Processing_TProgressbar['value'] += 14
+
+    def set_x_statistical_data(self, event=None):
+        self.x_statistical_data_label.place(relx=0.018, rely=0.67)
 
     def clean_all_steps(self, event=None):
         self.v_get_texts_label.place_forget()
@@ -1034,7 +1060,7 @@ class Toplevel1:
     def set_graph(self, event=None):
         case = self.Graph_var.get()
         if (case == "Documents Distribution"):
-            data_dict = self.data.get_documents_clustring_data()
+            data_dict = self.data.get_documents_distribution_data()
             df = pd.DataFrame(data_dict)
 
             x = 'Documents'
