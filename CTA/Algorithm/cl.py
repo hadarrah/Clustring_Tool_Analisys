@@ -2,7 +2,6 @@ from Utils import logger
 from Utils import configuration
 from pyclustering.cluster.kmedoids import kmedoids
 from sklearn.metrics import silhouette_score
-import numpy as np
 import logging
 
 
@@ -27,7 +26,7 @@ class CL(object):
         :return:
         """
         for k in range(int(self.config.get("CLUSTER", "from")), int(self.config.get("CLUSTER", "to"))+1):
-            intial_mediods_index = [index for index in range(0, k)]
+            intial_mediods_index = [index for index in range(0, k)] # randomize initial mediods start from 0 till k
             kmedoids_instance = kmedoids(self.distance_metric, intial_mediods_index, data_type='distance_matrix')
             kmedoids_instance.process()
             self.clustring_results.append(kmedoids_instance)
@@ -38,8 +37,14 @@ class CL(object):
         :param cl: clustering result
         :return:   silhouette avg score
         """
+        # get the clusters result with the following example format: [[0,4][1,2,3]] -> 2 clusters
+        # where the indexes inside represents the chunk's row from distance metric
         clusters = cl.get_clusters()
+
+        # initialize array with size of the comparable chunks
+        # each index in the array represent the chunk'a row from distance metric while the value is the cluster's id
         cluster_indicator = [0] * len(self.distance_metric)
+
         i = 0
         for cluster in clusters:
             for chunk_index in cluster:

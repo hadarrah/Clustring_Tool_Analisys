@@ -1,9 +1,6 @@
 from Utils import logger
 from Utils import configuration
-from Algorithm import document
 import numpy as np
-from Algorithm import chunk
-from Algorithm import cl
 from scipy.stats import spearmanr
 
 import logging
@@ -81,12 +78,18 @@ class Distance_Matric(object):
         return sum/int(self.config.get("CHUNKS", "delay"))
 
     def get_distance_metric(self):
+        """
+        Get the distance metric
+        :return: distance metric
+        """
         return self.distance_metric
 
     def get_chunks_index(self):
+        """
+        Get the chunks index dictionary
+        :return: dictionary where key is chunk's row from distance metric and value is the chunk object
+        """
         return self.chunks_index
-
-
 
 
 if __name__ == "__main__":

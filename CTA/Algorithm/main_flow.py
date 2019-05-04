@@ -3,7 +3,6 @@ from Algorithm.document import Document
 from Algorithm.distance_matric import Distance_Matric
 from Algorithm.cl import CL
 from Utils import logger
-from Algorithm.chunk import Chunk
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
 import operator
@@ -67,6 +66,10 @@ class main(object):
         return self.stage
 
     def Step1(self):
+        """
+        Get and insert texts files into document object.
+        :return:
+        """
         self.docCollection = {}  # all documents in one document as a dictionary
         self.docList = []  # list of Document objects
 
@@ -80,6 +83,10 @@ class main(object):
         self.tfidfDic = Document.compute_tfidf("", self.docCollection)
 
     def Step2(self):
+        """
+        Create the word2vec model.
+        :return:
+        """
         if (self.external_vec):
             self.model = Model(self.config, filepath=self.external_vec)
         else:
@@ -87,6 +94,10 @@ class main(object):
         self.model.build_model()
 
     def Step3(self):
+        """
+        Build and create chunks based on TF-IDF score.
+        :return:
+        """
         words = []  # list of good words
         wordsCount = 0
         for key in self.tfidfDic.keys():
@@ -111,14 +122,27 @@ class main(object):
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
 
     def Step4(self):
+        """
+        Build the distance metric.
+        :return:
+        """
         self.matric = Distance_Matric(self.config, self.docList)
         self.matric.build_metric()
 
     def Step5(self):
+        """
+        Generate the clustring results in range[from, to]
+        :return:
+        """
         self.clustring_results = CL(self.config, self.matric.get_distance_metric())
         self.clustring_results.generate_clusters()
 
     def Step6(self):
+        """
+        Get and set the best clustring result base on silhouette algorithm and then assign the chunks and
+        document according to the best result
+        :return:
+        """
         self.best_cl, self.clusters_indicator = self.clustring_results.get_best_clustering_result()
         # for each comparable chunk we calculate his cluster and then based on majority votes
         # assign the documents into a specific cluster

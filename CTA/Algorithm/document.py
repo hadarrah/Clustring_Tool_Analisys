@@ -1,6 +1,3 @@
-import logging
-from Utils import configuration, Word2VecWrapper
-from Utils import logger
 from Algorithm import chunk
 from Utils import logger
 from Utils import configuration
@@ -8,7 +5,6 @@ from Utils import Word2VecWrapper
 import logging
 import operator
 import os
-import re
 
 
 class Document(object):
@@ -32,11 +28,18 @@ class Document(object):
         self.confog = config
         Document.set_ID(self)
 
-    # Document.set_docCollection(self, self.docID, self.docText)
     def get_chunksVec(self):
+        """
+        Get the chunk's vector
+        :return:
+        """
         return self.chunksVec
 
     def get_chunks(self):
+        """
+        Get the chunks for this document
+        :return:
+        """
         return self.chunks
 
     def get_comparable_chunks(self):
@@ -82,6 +85,10 @@ class Document(object):
             print("Number of chunks incorrect")
 
     def get_docCollection(self):
+        """
+        Get the document collection
+        :return:
+        """
         return Document.docCollection
 
     def set_docCollection(self, docID, docText):
@@ -202,20 +209,44 @@ class Document(object):
         return idfDict
 
     def compute_cluster(self, number_of_clusters):
+        """
+        Compute and set the cluster for this document base on majority chunks vote
+        :param number_of_clusters: final number of clusters after silhouette
+        :return:
+        """
+        # initialize array with zero to indicate the chunks votes,
+        # each index in the array represents the cluster and the value the sum of vote
         chunks_vote = [0] * number_of_clusters
+
+        # calculate the votes
         for chunk in self.get_comparable_chunks():
             chunks_vote[chunk.get_cluster()] += 1
 
+        # get the maximum cluster's votes
         index, value = max(enumerate(chunks_vote), key=operator.itemgetter(1))
+
+        # set the cluster
         self.cluster = index
 
     def get_cluster(self):
+        """
+        Get the cluster's id
+        :return:
+        """
         return self.cluster
 
     def get_basename(self):
+        """
+        Get the basename of document file
+        :return:
+        """
         return self.basename
 
     def __str__(self):
+        """
+        toString method
+        :return:
+        """
         to_print = ""
         to_print += "\nDocument name: " + str(self.get_basename())
         to_print += "\nDocument ID: " + str(self.get_docID())

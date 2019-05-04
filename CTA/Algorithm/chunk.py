@@ -50,23 +50,31 @@ class Chunk(object):
         return self.chunkID
 
     def set_cluster(self, cluster):
+        """
+        Set the cluster for this chunk
+        :param cluster: cluster's id
+        :return:
+        """
         self.cluster = cluster
 
     def get_cluster(self):
+        """
+        Get the cluster's id for this chunk
+        :return: cluster's id
+        """
         return self.cluster
 
     def createVec(self):
         """
-        build distances chunk by using cosin similarity
-        :return: dictances vector
+        build distances chunk by using cosine similarity
+        :return: distances vector
         """
-        #cosResult = set()      #using set in order to avoid duplications
         cosResult = list()
         i = 1
         for d1 in self.Doc:
             j = 0
             for d2 in self.Doc:
-                if (j < i):
+                if (j < i): # skip all the precursors words include this one
                     j += 1
                     continue
                 cos = np.dot(self.model.get_vector(d1),self.model.get_vector(d2))/(np.linalg.norm(self.model.get_vector(d1))*np.linalg.norm(self.model.get_vector(d2)))
@@ -74,11 +82,6 @@ class Chunk(object):
             i += 1
         self.chunkVec = np.array(cosResult)
 
-    def print_delay(self):
-        self.log.info("Delay: " + self.delay)
-
-    def print_chunk_size(self):
-        self.log.info("Size: " + self.chunk_size)
 
 
 if __name__ == "__main__":
