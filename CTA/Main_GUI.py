@@ -41,7 +41,7 @@ doc_paths = list()
 vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
-DELIMITERS = [r'\n', r'\.', r'[.*?]']
+DELIMITERS = [r'\n', r'\.', r'\[.*?\]']
 V_PATH = ".\\images\\green_v.png"
 X_PATH = ".\\images\\red_x.png"
 
