@@ -58,14 +58,15 @@ class Distance_Matric(object):
         :param chunk2: second Chunk in the comparison
         :return: distance value between the chunks
         """
-        zv_homogeneous_1 = self.compute_zv(chunk1, chunk1.get_precursors_chunks())      # <- from Aviram
-        zv_heterogeneous_1 = self.compute_zv(chunk1, chunk2.get_precursors_chunks())    # <- from Aviram
-        zv_homogeneous_2 = self.compute_zv(chunk2, chunk2.get_precursors_chunks())      # <- from Aviram
-        zv_heterogeneous_2 = self.compute_zv(chunk2, chunk1.get_precursors_chunks())    # <- from Aviram
+        zv_homogeneous_1 = Distance_Matric.compute_zv(chunk1, chunk1.get_precursors_chunks())
+        zv_heterogeneous_1 = Distance_Matric.compute_zv(chunk1, chunk2.get_precursors_chunks())
+        zv_homogeneous_2 = Distance_Matric.compute_zv(chunk2, chunk2.get_precursors_chunks())
+        zv_heterogeneous_2 = Distance_Matric.compute_zv(chunk2, chunk1.get_precursors_chunks())
 
         return abs(zv_homogeneous_1 + zv_homogeneous_2 - zv_heterogeneous_1 - zv_heterogeneous_2)
 
-    def compute_zv(self, chunk, precursors_chunks):
+    @staticmethod
+    def compute_zv(chunk, precursors_chunks):
         """
         ZV function from PTHG algorithm.
         :param chunk: Chunk to compare with
@@ -73,12 +74,12 @@ class Distance_Matric(object):
         :return: similarity value between the chunks
         """
         sum = 0
-        chunk_vec = chunk.getchunkVec()  # <- from Aviram
+        chunk_vec = chunk.getchunkVec()
         for pre_chunk in precursors_chunks:
             corr, p_value = spearmanr(chunk_vec, pre_chunk.getchunkVec())
             sum += corr
 
-        return sum/int(self.config.get("CHUNKS", "delay"))
+        return sum/int(len(precursors_chunks))
 
     def get_distance_metric(self):
         """
