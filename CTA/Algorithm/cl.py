@@ -25,7 +25,8 @@ class CL(object):
         Call to PAM algorithm for each k value in the range.
         :return:
         """
-        for k in range(int(self.config.get("CLUSTER", "from")), int(self.config.get("CLUSTER", "to"))+1):
+        to = min(int(self.config.get("CLUSTER", "to"))+1, len(self.distance_metric))
+        for k in range(int(self.config.get("CLUSTER", "from")), to):
             intial_mediods_index = [index for index in range(0, k)] # randomize initial mediods start from 0 till k
             kmedoids_instance = kmedoids(self.distance_metric, intial_mediods_index, data_type='distance_matrix')
             kmedoids_instance.process()

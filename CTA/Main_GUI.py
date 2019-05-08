@@ -958,8 +958,8 @@ class Toplevel1:
     def set_to_val(self, event=None):
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.to_spinbox.invoke("buttonup")
-        if (int(self.to_spinbox.get()) > int(len(self.num_of_files))-1):
-            self.to_spinbox.invoke("buttondown")
+        #if (int(self.to_spinbox.get()) > int(len(self.num_of_files))-1):
+        #    self.to_spinbox.invoke("buttondown")
 
     def set_number_of_words_val(self, event=None):
         if(int(self.Number_Of_Words_Spinbox.get()) < 2*int(self.Chunk_Size_Spinbox.get())):
@@ -972,7 +972,7 @@ class Toplevel1:
             self.Chunk_Size_Spinbox.invoke("buttonup")
 
     def set_delay_val(self, event=None):
-        if (int(self.Delay_Spinbox.get()) == int(self.Chunk_Size_Spinbox.get())):
+        if (int(self.Delay_Spinbox.get()) == round((int(self.Number_Of_Words_Spinbox.get())/int(self.Chunk_Size_Spinbox.get()))-0.5)):
             self.Delay_Spinbox.invoke("buttondown")
 
     def enable_button_handler(self, event=None):

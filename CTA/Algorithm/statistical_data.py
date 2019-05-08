@@ -36,7 +36,7 @@ class Statistical_Data(object):
         index, self.max_docs_in_style = max(enumerate(clusters_vote), key=operator.itemgetter(1))
         index, self.min_docs_in_style = min(enumerate(clusters_vote), key=operator.itemgetter(1))
 
-        self.log.info("Number of styles: " + str(self.number_of_styles))
+        self.log.info("Number of total styles: " + str(self.number_of_styles))
         self.log.info("Max documents in style: " + str(self.max_docs_in_style))
         self.log.info("Min documents in style: " + str(self.min_docs_in_style))
 
