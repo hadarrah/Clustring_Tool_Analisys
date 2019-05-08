@@ -61,6 +61,13 @@ class Statistical_Data(object):
         """
         return str(self.min_docs_in_style)
 
+    def get_documents(self):
+        """
+        Get the documents list.
+        :return:
+        """
+        return self.documents
+
     def get_documents_distribution_data(self):
         """
         Get the data structure for Documents Distribution graph.
@@ -72,5 +79,21 @@ class Statistical_Data(object):
             styles.append(doc.get_cluster()+1)
 
         data = {'Documents' : documents, 'Styles' : styles}
+        return data
+
+    def get_chunks_distribution_data(self, doc):
+        """
+        Get the data structure for Chunks Distribution graph.
+        :return:
+        """
+        chunks = []
+        styles = []
+        i = 1
+        for chunk in doc.get_comparable_chunks():
+            chunks.append("ch-{}".format(str(i)))
+            styles.append(chunk.get_cluster()+1)
+            i += 1
+
+        data = {'Chunks' : chunks, 'Styles' : styles}
         return data
 

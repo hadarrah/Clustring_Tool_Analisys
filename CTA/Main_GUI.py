@@ -741,10 +741,10 @@ class Toplevel1:
         self.Graph_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
         self.Graph_TCombobox.place(relx=0.237, rely=0.098, relheight=0.051
                 , relwidth=0.242)
-        self.value_list = ["Documents Distribution"]#, "Clustrs Map", "Interior Clustring",]
+        self.value_list_graph = ["Documents Distribution", "Chunks Distribution"]#, "Clustrs Map", "Interior Clustring",]
         self.Graph_var = tk.StringVar(root)
         self.Graph_var.set("Documents Distribution")
-        self.Graph_TCombobox.configure(values=self.value_list)
+        self.Graph_TCombobox.configure(values=self.value_list_graph)
         self.Graph_TCombobox.configure(textvariable=self.Graph_var)
         self.Graph_TCombobox.configure(foreground="#000000")
         self.Graph_TCombobox.configure(state="readonly")
@@ -784,7 +784,10 @@ class Toplevel1:
         self.Document_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
         self.Document_TCombobox.place(relx=0.237, rely=0.171, relheight=0.051
                 , relwidth=0.242)
-        self.Document_TCombobox.configure(textvariable=main_support.combobox)
+        self.Document_var = tk.StringVar(root)
+        self.Document_TCombobox.configure(foreground="#000000")
+        self.Document_TCombobox.configure(state="readonly")
+        self.Document_TCombobox.bind("<<ComboboxSelected>>", self.set_graph)
         self.Document_TCombobox.configure(takefocus="")
 
         self.Select_Doc_Label = tk.Label(self.Statistic_TNotebook)
@@ -1076,6 +1079,7 @@ class Toplevel1:
 
     def set_graph(self, event=None):
         case = self.Graph_var.get()
+        self.Document_TCombobox.configure(state="disable")
         if (case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
             self.df_toExport = pd.DataFrame(data_dict)
@@ -1090,6 +1094,26 @@ class Toplevel1:
             self.ax.clear()
 
             self.ax.set_xticklabels(data_dict["Documents"], fontsize=5)
+
+            # draw on this plot
+            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
+            self.Canvas.draw()
+        elif (case == "Chunks Distribution"):
+            self.Document_TCombobox.configure(state="normal")
+            doc = self.index_dict_document[self.Document_TCombobox.get()]
+            data_dict = self.data.get_chunks_distribution_data(doc)
+            self.df_toExport = pd.DataFrame(data_dict)
+
+            x = 'Chunks'
+            y = 'Styles'
+
+            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
+
+            # create first place for plot
+
+            self.ax.clear()
+
+            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
 
             # draw on this plot
             self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
@@ -1110,10 +1134,22 @@ class Toplevel1:
         try:
             if (case == "Documents Distribution"):
                 csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
+            elif (case == "Chunks Distribution"):
+                csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
             messagebox.showinfo("Export Data", "Export data successful!")
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
 
+    def set_documents_combobox(self):
+        self.value_list_document = []
+        self.index_dict_document = {}
+        for doc in self.data.get_documents():
+            self.value_list_document.append(doc.get_basename())
+            self.index_dict_document[doc.get_basename()] = doc
+        self.Document_var.set(self.value_list_document[0])
+        self.Document_TCombobox.configure(values=self.value_list_document)
+        self.Document_TCombobox.configure(textvariable=self.Document_var)
+        self.Document_TCombobox.configure(state="disable")
 
     @staticmethod
     def popup1(event, *args, **kwargs):
@@ -1160,6 +1196,7 @@ class Toplevel1:
             self.data = main.get_data()
             self.set_statistical_result()
             self.set_graph()
+            self.set_documents_combobox()
             messagebox.showinfo("Regression Success", "The process ended successfully!")
         except Exception as e:
             log.error(str(e))
