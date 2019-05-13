@@ -6,7 +6,7 @@
 #    Apr 01, 2019 04:34:00 PM +0300  platform: Windows NT
 
 import sys
-
+import os
 try:
     import Tkinter as tk
 except ImportError:
@@ -86,6 +86,7 @@ class Toplevel1:
         _ana1color = '#d9d9d9' # X11 color: 'gray85'
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
         self.num_of_files = 0
+        self.doc_paths = []
         self.data = None
         self.df_toExport = None
         self.style = ttk.Style()
@@ -158,17 +159,23 @@ class Toplevel1:
         self.load_text_button.configure(text='''Load Texts''')
         self.load_text_button.configure(command=self.load_text_button_dialog)
 
-        self.texts_entry = tk.Entry(self.General_TNotebook)
-        self.texts_entry.place(relx=0.339, rely=0.171,height=20, relwidth=0.278)
-        self.texts_entry.configure(background="white")
-        self.texts_entry.configure(disabledforeground="#a3a3a3")
-        self.texts_entry.configure(font="TkFixedFont")
-        self.texts_entry.configure(foreground="#000000")
-        self.texts_entry.configure(highlightbackground="#d9d9d9")
-        self.texts_entry.configure(highlightcolor="black")
-        self.texts_entry.configure(insertbackground="black")
-        self.texts_entry.configure(selectbackground="#c4c4c4")
-        self.texts_entry.configure(selectforeground="black")
+        self.texts_list = tk.Listbox(self.General_TNotebook)
+        self.texts_list.place(relx=0.339, rely=0.171, height=60, relwidth=0.4)
+        self.texts_list.configure(background="white")
+        self.texts_list.configure(disabledforeground="#a3a3a3")
+        self.texts_list.configure(font="TkFixedFont")
+        self.texts_list.configure(foreground="#000000")
+        self.texts_list.configure(highlightbackground="#d9d9d9")
+        self.texts_list.configure(highlightcolor="black")
+        self.texts_list.configure(selectbackground="#c4c4c4")
+        self.texts_list.configure(selectforeground="black")
+        self.texts_list.bind("<Delete>", self.delete_text_from_list)
+
+        self.scrollbar = tk.Scrollbar(self.texts_list, orient="vertical")
+        self.scrollbar.config(command=self.texts_list.yview)
+        self.scrollbar.pack(side="right", fill="y")
+
+        self.texts_list.config(yscrollcommand=self.scrollbar.set)
 
         self.from_spinbox = tk.Spinbox(self.General_TNotebook, from_=5.0, to=100.0)
         self.from_spinbox.place(relx=0.356, rely=0.341, relheight=0.046
@@ -859,7 +866,7 @@ class Toplevel1:
         self.Number_Of_Style_Result_Label.configure(foreground="#000000")
         self.Number_Of_Style_Result_Label.configure(highlightbackground="#d9d9d9")
         self.Number_Of_Style_Result_Label.configure(highlightcolor="black")
-        self.Number_Of_Style_Result_Label.configure(text='''5''')
+        self.Number_Of_Style_Result_Label.configure(text='''0''')
 
         self.Max_Docs_In_Style_Result_Label = tk.Label(self.Result_Labelframe)
         self.Max_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.421, height=21, width=54
@@ -871,7 +878,7 @@ class Toplevel1:
         self.Max_Docs_In_Style_Result_Label.configure(foreground="#000000")
         self.Max_Docs_In_Style_Result_Label.configure(highlightbackground="#d9d9d9")
         self.Max_Docs_In_Style_Result_Label.configure(highlightcolor="black")
-        self.Max_Docs_In_Style_Result_Label.configure(text='''7''')
+        self.Max_Docs_In_Style_Result_Label.configure(text='''0''')
 
         self.Min_Docs_In_Style_Result_Label = tk.Label(self.Result_Labelframe)
         self.Min_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.632, height=21, width=54
@@ -883,7 +890,7 @@ class Toplevel1:
         self.Min_Docs_In_Style_Result_Label.configure(foreground="#000000")
         self.Min_Docs_In_Style_Result_Label.configure(highlightbackground="#d9d9d9")
         self.Min_Docs_In_Style_Result_Label.configure(highlightcolor="black")
-        self.Min_Docs_In_Style_Result_Label.configure(text='''2''')
+        self.Min_Docs_In_Style_Result_Label.configure(text='''0''')
 
         self.export_button = tk.Button(self.Statistic_TNotebook)
         self.export_button.place(relx=0.237, rely=0.230, height=24, width=68)
@@ -938,17 +945,33 @@ class Toplevel1:
             self.vec_entry.configure(state="disable")
 
     def load_text_button_dialog(self, event=None):
-        self.doc_paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        for path in paths:
+            if (path not in self.doc_paths):
+                self.doc_paths.append(path)
         self.num_of_files = root.tk.splitlist(self.doc_paths)  # Possible workaround
         if (len(self.num_of_files) < 3):
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
-        self.texts_entry.insert(0, self.doc_paths)
+        self.texts_list.delete(0, 'end')
+        for doc in self.num_of_files:
+            self.texts_list.insert(0, os.path.basename(doc))
         self.to_var.set(len(self.num_of_files)-1) # set maximum possible value
         self.from_var.set(2)
         self.from_spinbox.configure(state="normal")
         self.to_spinbox.configure(state="normal")
 
+    def delete_text_from_list(self, event=None):
+        if (len(self.doc_paths) == 3):
+            messagebox.showerror("Error deleted files", "You must select at least 3 files, therefore you must add another text before delete")
+            return
+        entry_to_delete = self.texts_list.selection_get()
+        selection = self.texts_list.curselection()
+        self.texts_list.delete(selection[0])
+        for doc in self.doc_paths:
+            if (entry_to_delete in doc):
+                self.doc_paths.remove(doc)
+                break
 
     def load_vec_button_dialog(self, event=None):
         vec_path = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
