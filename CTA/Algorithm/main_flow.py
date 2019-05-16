@@ -7,6 +7,7 @@ from Utils import logger
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
 import operator
+from Utils import tfidf
 
 
 class main(object):
@@ -90,7 +91,7 @@ class main(object):
             self.docList.append(Doc1)  # build list of document objects to Word2Vec
 
         # --Creating the Tf-Idf dictionary--#
-        self.tfidfDic = Document.compute_tfidf("", self.docCollection)
+        self.tfidfDic = tfidf.compute_tfidf("", self.docCollection)
 
     def Step2(self):
         """
@@ -124,8 +125,7 @@ class main(object):
                                 words.append(k)  # build list of s highest tf-idf value that in the vocab
                             wordsCount += 1
                 wordsCount = 0
-            text = ' '.join(
-                i for i in text if i in words).split()  # delete from the original text the unnecessary words
+            text = ' '.join(i for i in text if i in words).split()  # delete from the original text the unnecessary words
             text = text[:self.num_of_words_per_doc]  # resize the list into the correct size
             words = []
             print(text)
