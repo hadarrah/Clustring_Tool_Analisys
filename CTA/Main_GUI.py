@@ -769,24 +769,13 @@ class Toplevel1:
         self.Select_Graph_Label.configure(highlightcolor="black")
         self.Select_Graph_Label.configure(text='''Select Graph:''')
 
-        self.Graph_Canvas = tk.Canvas(self.Statistic_TNotebook)
-        self.Graph_Canvas.place(relx=0.068, rely=0.317, relheight=0.641
-                , relwidth=0.886)
-        self.Graph_Canvas.configure(background="#d9d9d9")
-        self.Graph_Canvas.configure(borderwidth="2")
-        self.Graph_Canvas.configure(highlightbackground="#d9d9d9")
-        self.Graph_Canvas.configure(highlightcolor="black")
-        self.Graph_Canvas.configure(insertbackground="black")
-        self.Graph_Canvas.configure(relief='ridge')
-        self.Graph_Canvas.configure(selectbackground="#c4c4c4")
-        self.Graph_Canvas.configure(selectforeground="black")
-        self.Graph_Canvas.configure(width=523)
 
         self.fig = matplotlib.pyplot.Figure()
         self.ax = self.fig.add_subplot(111)
-        self.Canvas = FigureCanvasTkAgg(self.fig, self.Graph_Canvas)
-        self.Canvas.get_tk_widget().pack()
-        self.Canvas._tkcanvas.pack()
+        self.Canvas = FigureCanvasTkAgg(self.fig, self.Statistic_TNotebook)
+        #self.Canvas.get_tk_widget().pack()
+        self.Canvas._tkcanvas.place(relx=0.068, rely=0.317, relheight=0.641
+                , relwidth=0.886)
 
 
         self.Document_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
@@ -1123,7 +1112,7 @@ class Toplevel1:
         self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
         self.Max_Docs_In_Style_Result_Label.configure(text=self.data.get_max_docs_in_style())
         self.Min_Docs_In_Style_Result_Label.configure(text=self.data.get_min_docs_in_style())
-
+        self.Graph_var.set("Documents Distribution")
 
     def set_graph(self, event=None):
         self.case = self.Graph_var.get()
