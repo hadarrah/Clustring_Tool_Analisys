@@ -2,6 +2,7 @@ from Utils import logger
 from Utils import configuration
 import logging
 from Algorithm.document import Document
+from Algorithm.distance_matric import Distance_Matric
 import operator
 
 class Statistical_Data(object):
@@ -89,11 +90,43 @@ class Statistical_Data(object):
         chunks = []
         styles = []
         i = 1
-        for chunk in doc.get_comparable_chunks():
-            chunks.append("ch-{}".format(str(i)))
-            styles.append(chunk.get_cluster()+1)
-            i += 1
+        if (isinstance(doc, str) and doc == "All Documents"):
+            for document in self.documents:
+                i = 1
+                for chunk in document.get_comparable_chunks():
+                    chunks.append("doc-{}-ch-{}".format(document.get_basename(), str(i)))
+                    styles.append(chunk.get_cluster() + 1)
+                    i += 1
+        else:
+            for chunk in doc.get_comparable_chunks():
+                chunks.append("ch-{}".format(str(i)))
+                styles.append(chunk.get_cluster()+1)
+                i += 1
 
         data = {'Chunks' : chunks, 'Styles' : styles}
+        return data
+
+    def get_zv_dependencies_data(self, doc):
+        """
+        Get the data structure for ZV dependencies graph.
+        :return:
+        """
+        chunks = []
+        zv = []
+        i = 1
+        if (isinstance(doc, str) and doc == "All Documents"):
+            for document in self.documents:
+                i = 1
+                for chunk in document.get_comparable_chunks():
+                    chunks.append("doc-{}-ch-{}".format(document.get_basename(), str(i)))
+                    zv.append(Distance_Matric.compute_zv(chunk, chunk.get_precursors_chunks()))
+                    i += 1
+        else:
+            for chunk in doc.get_comparable_chunks():
+                chunks.append("ch-{}".format(str(i)))
+                zv.append(Distance_Matric.compute_zv(chunk, chunk.get_precursors_chunks()))
+                i += 1
+
+        data = {'Chunks' : chunks, 'ZV' : zv}
         return data
 

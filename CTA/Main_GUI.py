@@ -89,6 +89,7 @@ class Toplevel1:
         self.doc_paths = []
         self.data = None
         self.df_toExport = None
+        self.case = ""
         self.style = ttk.Style()
         if sys.platform == "win32":
             self.style.theme_use('winnative')
@@ -748,7 +749,7 @@ class Toplevel1:
         self.Graph_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
         self.Graph_TCombobox.place(relx=0.237, rely=0.098, relheight=0.051
                 , relwidth=0.242)
-        self.value_list_graph = ["Documents Distribution", "Chunks Distribution"]#, "Clustrs Map", "Interior Clustring",]
+        self.value_list_graph = ["Documents Distribution", "Chunks Distribution", "ZV dependencies"]
         self.Graph_var = tk.StringVar(root)
         self.Graph_var.set("Documents Distribution")
         self.Graph_TCombobox.configure(values=self.value_list_graph)
@@ -1101,9 +1102,9 @@ class Toplevel1:
 
 
     def set_graph(self, event=None):
-        case = self.Graph_var.get()
+        self.case = self.Graph_var.get()
         self.Document_TCombobox.configure(state="disable")
-        if (case == "Documents Distribution"):
+        if (self.case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
             self.df_toExport = pd.DataFrame(data_dict)
 
@@ -1121,7 +1122,7 @@ class Toplevel1:
             # draw on this plot
             self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
             self.Canvas.draw()
-        elif (case == "Chunks Distribution"):
+        elif (self.case == "Chunks Distribution"):
             self.Document_TCombobox.configure(state="normal")
             doc = self.index_dict_document[self.Document_TCombobox.get()]
             data_dict = self.data.get_chunks_distribution_data(doc)
@@ -1141,6 +1142,27 @@ class Toplevel1:
             # draw on this plot
             self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
             self.Canvas.draw()
+        elif (self.case == "ZV dependencies"):
+            self.Document_TCombobox.configure(state="normal")
+            doc = self.index_dict_document[self.Document_TCombobox.get()]
+            data_dict = self.data.get_zv_dependencies_data(doc)
+
+            self.df_toExport = pd.DataFrame(data_dict)
+
+            x = 'Chunks'
+            y = 'ZV'
+
+            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
+
+            # create first place for plot
+
+            self.ax.clear()
+
+            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
+
+            # draw on this plot
+            self.df_toDisplay.plot(kind='line', legend=False, rot=45, ax=self.ax)
+            self.Canvas.draw()
 
     def export_button_dialog(self, event=None):
         case = self.Graph_var.get()
@@ -1158,7 +1180,11 @@ class Toplevel1:
             if (case == "Documents Distribution"):
                 csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
             elif (case == "Chunks Distribution"):
-                csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
+                doc = self.index_dict_document[self.Document_TCombobox.get()]
+                csv_generator.export_chunks_distribution(self.xlsx_path, self.df_toExport, self.data, doc)
+            elif (case == "ZV dependencies"):
+                doc = self.index_dict_document[self.Document_TCombobox.get()]
+                csv_generator.export_zv_dependencies(self.xlsx_path, self.df_toExport, self.data, doc)
             messagebox.showinfo("Export Data", "Export data successful!")
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
@@ -1166,6 +1192,8 @@ class Toplevel1:
     def set_documents_combobox(self):
         self.value_list_document = []
         self.index_dict_document = {}
+        self.value_list_document.append("All Documents")
+        self.index_dict_document["All Documents"] = "All Documents"
         for doc in self.data.get_documents():
             self.value_list_document.append(doc.get_basename())
             self.index_dict_document[doc.get_basename()] = doc
