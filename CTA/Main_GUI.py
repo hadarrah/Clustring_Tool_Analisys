@@ -747,8 +747,8 @@ class Toplevel1:
         self.Processing_TProgressbar['value'] = 0
 
         self.Graph_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
-        self.Graph_TCombobox.place(relx=0.237, rely=0.098, relheight=0.051
-                , relwidth=0.242)
+        self.Graph_TCombobox.place(relx=0.22, rely=0.098, relheight=0.051
+                , relwidth=0.3)
         self.value_list_graph = ["Documents Distribution", "Chunks Distribution", "ZV dependencies"]
         self.Graph_var = tk.StringVar(root)
         self.Graph_var.set("Documents Distribution")
@@ -790,8 +790,8 @@ class Toplevel1:
 
 
         self.Document_TCombobox = ttk.Combobox(self.Statistic_TNotebook)
-        self.Document_TCombobox.place(relx=0.237, rely=0.171, relheight=0.051
-                , relwidth=0.242)
+        self.Document_TCombobox.place(relx=0.22, rely=0.171, relheight=0.051
+                , relwidth=0.3)
         self.Document_var = tk.StringVar(root)
         self.Document_TCombobox.configure(foreground="#000000")
         self.Document_TCombobox.configure(state="readonly")
@@ -905,6 +905,22 @@ class Toplevel1:
         self.export_button.configure(pady="0")
         self.export_button.configure(text='''Export Data''')
         self.export_button.configure(command=self.export_button_dialog)
+
+        self.About_Label = tk.Label(self.About_TNotebook)
+        self.About_Label.pack(fill=tk.BOTH, expand=1)
+        self.About_Label.configure(activebackground="#f9f9f9")
+        self.About_Label.configure(activeforeground="black")
+        self.About_Label.configure(background="#d9d9d9")
+        self.About_Label.configure(disabledforeground="#a3a3a3")
+        self.About_Label.configure(foreground="#000000")
+        self.About_Label.configure(highlightbackground="#d9d9d9")
+        self.About_Label.configure(highlightcolor="black")
+        self.About_Label.configure(wraplength=370)
+        self.About_Label.configure(justify="center")
+        self.About_Label.configure(text="This application involving a several ranked and comparison methods in order to "
+                                        "analyze texts based on style recognition.\nThe algorithm flow works according "
+                                        "to PTHG algorithm which described in Prof. Zeev (Vladimir) Volkovich's article - "
+                                        "\n\"Patterning of writing style evolution by means of dynamic similarity\"\n\nThe application was written by\nHadar Rahamim and Aviram Kunio")
 
         self.CopyRight_Label = tk.Label(top)
         self.CopyRight_Label.place(relx=0.422, rely=0.938, height=21, width=87)
@@ -1026,10 +1042,14 @@ class Toplevel1:
             self.Delimiter_window.configure(state="disable")
 
     def set_v_stage(self, stage, event=None):
+        global root
         self.V_STAGES[stage]()
+        root.update()
 
     def set_x_stage(self, stage, event=None):
+        global root
         self.X_STAGES[stage]()
+        root.update()
 
     def set_v_get_texts(self, event=None):
         self.v_get_texts_label.place(relx=0.018, rely=0.01)
@@ -1081,19 +1101,23 @@ class Toplevel1:
         self.x_statistical_data_label.place(relx=0.018, rely=0.67)
 
     def clean_all_steps(self, event=None):
+        global root
         self.v_get_texts_label.place_forget()
         self.v_word2vec_label.place_forget()
         self.v_building_chunks_label.place_forget()
         self.v_metric_label.place_forget()
         self.v_pam_label.place_forget()
         self.v_silhouette_label.place_forget()
+        self.v_statistical_data_label.place_forget()
         self.x_get_texts_label.place_forget()
         self.x_word2vec_label.place_forget()
         self.x_building_chunks_label.place_forget()
         self.x_metric_label.place_forget()
         self.x_pam_label.place_forget()
         self.x_silhouette_label.place_forget()
+        self.x_statistical_data_label.place_forget()
         self.Processing_TProgressbar['value'] = 0
+        root.update()
 
     def set_statistical_result(self, event=None):
         self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
@@ -1218,6 +1242,7 @@ class Toplevel1:
     def start_regression(self, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words,
                          chunk_size, delay, arch, training, context_window, delimiter):
         # we should check if all the files are exist before running the algorithm
+        global root
         if (texts_input):
             doc_paths = list(texts_input)
 
@@ -1243,6 +1268,8 @@ class Toplevel1:
 
         main = main_regression(config, doc_paths, vec_path)
         try:
+            root.config(cursor="wait")
+            root.update()
             main.run(self)
             self.data = main.get_data()
             self.set_statistical_result()
@@ -1253,6 +1280,7 @@ class Toplevel1:
             log.error(str(e))
             self.set_x_stage(main.get_stage())
             messagebox.showerror("Regression Error", "Error: " + str(e))
+        root.config(cursor="")
 
 if __name__ == '__main__':
     vp_start_gui()
