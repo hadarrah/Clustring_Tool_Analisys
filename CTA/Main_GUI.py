@@ -33,6 +33,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.pyplot import Figure
 import pandas as pd
 from Utils import csv_generator
+import copy
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -770,8 +771,10 @@ class Toplevel1:
         self.Select_Graph_Label.configure(text='''Select Graph:''')
 
 
-        self.fig = matplotlib.pyplot.Figure()
+        self.fig = matplotlib.pyplot.Figure(tight_layout=True)
         self.ax = self.fig.add_subplot(111)
+        self.fig_new_window = matplotlib.pyplot.Figure(tight_layout=True)
+        self.ax_new_window = self.fig_new_window.add_subplot(111)
         self.Canvas = FigureCanvasTkAgg(self.fig, self.Statistic_TNotebook)
         #self.Canvas.get_tk_widget().pack()
         self.Canvas._tkcanvas.place(relx=0.068, rely=0.317, relheight=0.641
@@ -894,6 +897,19 @@ class Toplevel1:
         self.export_button.configure(pady="0")
         self.export_button.configure(text='''Export Data''')
         self.export_button.configure(command=self.export_button_dialog)
+
+        self.open_new_window_button = tk.Button(self.Statistic_TNotebook)
+        self.open_new_window_button.place(relx=0.37, rely=0.230, height=24, width=78)
+        self.open_new_window_button.configure(activebackground="#ececec")
+        self.open_new_window_button.configure(activeforeground="#000000")
+        self.open_new_window_button.configure(background="#d9d9d9")
+        self.open_new_window_button.configure(disabledforeground="#a3a3a3")
+        self.open_new_window_button.configure(foreground="#000000")
+        self.open_new_window_button.configure(highlightbackground="#d9d9d9")
+        self.open_new_window_button.configure(highlightcolor="black")
+        self.open_new_window_button.configure(pady="0")
+        self.open_new_window_button.configure(text='''New Window''')
+        self.open_new_window_button.configure(command=self.open_new_window_button_dialog)
 
         self.About_Label = tk.Label(self.About_TNotebook)
         self.About_Label.pack(fill=tk.BOTH, expand=1)
@@ -1119,63 +1135,41 @@ class Toplevel1:
         self.Document_TCombobox.configure(state="disable")
         if (self.case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
-            self.df_toExport = pd.DataFrame(data_dict)
-
-            x = 'Documents'
-            y = 'Styles'
-
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
-
-            # create first place for plot
-
-            self.ax.clear()
-
-            self.ax.set_xticklabels(data_dict["Documents"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+            self.draw_graph(data_dict, "Documents", "Styles", "Documents Distribution", "bar")
         elif (self.case == "Chunks Distribution"):
             self.Document_TCombobox.configure(state="normal")
             doc = self.index_dict_document[self.Document_TCombobox.get()]
             data_dict = self.data.get_chunks_distribution_data(doc)
-            self.df_toExport = pd.DataFrame(data_dict)
-
-            x = 'Chunks'
-            y = 'Styles'
-
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
-
-            # create first place for plot
-
-            self.ax.clear()
-
-            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+            self.draw_graph(data_dict, "Chunks", "Styles", "Chunks Distribution", "bar")
         elif (self.case == "ZV dependencies"):
             self.Document_TCombobox.configure(state="normal")
             doc = self.index_dict_document[self.Document_TCombobox.get()]
             data_dict = self.data.get_zv_dependencies_data(doc)
+            self.draw_graph(data_dict, "Chunks", "ZV", "ZV dependencies", "line")
 
-            self.df_toExport = pd.DataFrame(data_dict)
+    def draw_graph(self, data_dict, x_label, y_label, title, type):
+        self.df_toExport = pd.DataFrame(data_dict)
 
-            x = 'Chunks'
-            y = 'ZV'
+        self.df_toDisplay = self.df_toExport[[x_label, y_label]].groupby(x_label).sum()
 
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
+        # create first place for plot
 
-            # create first place for plot
+        self.ax.clear()
+        self.ax.set_xticklabels(data_dict[x_label], fontsize=5)
+        #self.ax.set_title(title)
+        self.ax.set_xlabel(x_label)
+        self.ax.set_ylabel(y_label)
 
-            self.ax.clear()
+        self.ax_new_window.clear()
+        self.ax_new_window.set_xticklabels(data_dict[x_label], fontsize=10)
+        self.ax_new_window.set_title(title)
+        self.ax_new_window.set_xlabel(x_label)
+        self.ax_new_window.set_ylabel(y_label)
 
-            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='line', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+        # draw on this plot
+        self.df_toDisplay.plot(kind=type, legend=False, rot=90, ax=self.ax)
+        self.df_toDisplay.plot(kind=type, legend=False, rot=90, ax=self.ax_new_window)
+        self.Canvas.draw()
 
     def export_button_dialog(self, event=None):
         case = self.Graph_var.get()
@@ -1201,6 +1195,19 @@ class Toplevel1:
             messagebox.showinfo("Export Data", "Export data successful!")
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
+
+    def open_new_window_button_dialog(self, event=None):
+        window = tk.Toplevel(root)
+        # top frame for canvas and toolbar - which need `pack()` layout manager
+        top = tk.Frame(window)
+        top.pack()
+
+
+        # create matplotlib canvas using `fig` and assign to widget `top`
+        canvas = ResizingCanvas(self.fig_new_window, window)
+
+        # get canvas as tkinter widget and put in widget `top`
+        canvas.get_tk_widget().pack(fill="both", expand=True)
 
     def set_documents_combobox(self):
         self.value_list_document = []
@@ -1270,6 +1277,21 @@ class Toplevel1:
             self.set_x_stage(main.get_stage())
             messagebox.showerror("Regression Error", "Error: " + str(e))
         root.config(cursor="")
+
+# a subclass of Canvas for dealing with resizing of windows
+class ResizingCanvas(FigureCanvasTkAgg):
+    def __init__(self, fig, parent):
+        FigureCanvasTkAgg.__init__(self, fig, parent)
+        self.parent = parent
+        self.parent.bind("<Configure>", self.on_resize)
+        self.parent.height = self.parent.winfo_reqheight()
+        self.parent.width = self.parent.winfo_reqwidth()
+
+    def on_resize(self,event):
+        self.parent.width = event.width
+        self.parent.height = event.height
+        # resize the canvas
+        self.parent.config(width=self.parent.width, height=self.parent.height)
 
 if __name__ == '__main__':
     vp_start_gui()
