@@ -27,6 +27,7 @@ class Distance_Matric(object):
         This function build the distance metric based on PTHG algorithm.
         :return:
         """
+        np.seterr(divide='ignore', invalid='ignore')
         # get all the comparable chunks
         for doc in self.documents:
             self.comparable_chunks.extend(doc.get_comparable_chunks())    # <- from Aviram
