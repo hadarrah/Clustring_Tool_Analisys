@@ -54,6 +54,7 @@ def vp_start_gui():
     '''Starting point when module is the main routine.'''
     global val, w, root
     root = tk.Tk()
+    root.resizable(width=False, height=False)
     main_support.set_Tk_var()
     top = Toplevel1 (root)
     main_support.init(root, top)
