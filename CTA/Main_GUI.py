@@ -981,6 +981,11 @@ class Toplevel1:
 
 
     def add_word_embedding_checkbox(self, event=None):
+        """
+        Handle the checkbox of "add word embedding file".
+        :param event:
+        :return:
+        """
         set = self.add_word_emedding_Cbutton_var.get()
         if (set):
             self.load_vec_button.configure(state="active")
@@ -992,33 +997,61 @@ class Toplevel1:
             self.vec_entry.configure(state="disable")
 
     def load_text_button_dialog(self, event=None):
+        """
+        Handle the "load text" button.
+        :param event:
+        :return:
+        """
         paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        # check if there is existing path in the list and if not it will add it to the files list.
         for path in paths:
             if (path not in self.doc_paths):
                 self.doc_paths.append(path)
-        self.num_of_files = root.tk.splitlist(self.doc_paths)  # Possible workaround
+
+        # save the files path
+        self.num_of_files = root.tk.splitlist(self.doc_paths)
         if (len(self.num_of_files) < 3):
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
         self.texts_list.delete(0, 'end')
         for doc in self.num_of_files:
             self.texts_list.insert(0, os.path.basename(doc))
-        self.to_var.set(len(self.num_of_files)-1) # set maximum possible value
+
+        # set maximum possible value for total styles
+        self.to_var.set(len(self.num_of_files)-1)
         self.from_var.set(2)
+
+        # activate ranges
         self.from_spinbox.configure(state="normal")
         self.to_spinbox.configure(state="normal")
 
     def clear_text_button_dialog(self, event=None):
+        """
+        Handle the "clear text" button.
+        :param event:
+        :return:
+        """
+        # clear all the files
         self.doc_paths.clear()
         self.texts_list.delete(0, "end")
         self.to_var.set(config.get("CLUSTER", "to"))
+
+        # disable ranges
         self.from_spinbox.configure(state="disable")
         self.to_spinbox.configure(state="disable")
 
     def delete_text_from_list(self, event=None):
+        """
+        Handle the case when user choose specific file from list and press "DELETE".
+        :param event:
+        :return:
+        """
+        # check if the deleting will left just 2 files.
         if (len(self.doc_paths) == 3):
             messagebox.showerror("Error deleted files", "You must select at least 3 files, therefore you must add another text before delete")
             return
+
+        # update list
         entry_to_delete = self.texts_list.selection_get()
         selection = self.texts_list.curselection()
         self.texts_list.delete(selection[0])
@@ -1028,34 +1061,67 @@ class Toplevel1:
                 break
 
     def load_vec_button_dialog(self, event=None):
+        """
+        Handle the "load vec" button.
+        :param event:
+        :return:
+        """
         vec_path = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
         self.vec_entry.insert(0, vec_path)
 
     def set_from_val(self, event=None):
+        """
+        Handle the "from" range value.
+        :param event:
+        :return:
+        """
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.from_spinbox.invoke("buttondown")
 
     def set_to_val(self, event=None):
+        """
+        Handle the "to" range value.
+        :param event:
+        :return:
+        """
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.to_spinbox.invoke("buttonup")
-        #if (int(self.to_spinbox.get()) > int(len(self.num_of_files))-1):
-        #    self.to_spinbox.invoke("buttondown")
 
     def set_number_of_words_val(self, event=None):
+        """
+        Handle the "Number of Words" value.
+        :param event:
+        :return:
+        """
         if(int(self.Number_Of_Words_Spinbox.get()) < 2*int(self.Chunk_Size_Spinbox.get())):
             self.Number_Of_Words_Spinbox.invoke("buttonup")
 
     def set_chunk_size_val(self, event=None):
+        """
+        Handle the "Chunk Size" value.
+        :param event:
+        :return:
+        """
         if (int(self.Number_Of_Words_Spinbox.get()) < 2 * int(self.Chunk_Size_Spinbox.get())):
             self.Chunk_Size_Spinbox.invoke("buttondown")
         if (int(self.Delay_Spinbox.get()) == int(self.Chunk_Size_Spinbox.get())):
             self.Chunk_Size_Spinbox.invoke("buttonup")
 
     def set_delay_val(self, event=None):
+        """
+        Handle the "Delay" value.
+        :param event:
+        :return:
+        """
         if (int(self.Delay_Spinbox.get()) == round((int(self.Number_Of_Words_Spinbox.get())/int(self.Chunk_Size_Spinbox.get()))-0.5)):
             self.Delay_Spinbox.invoke("buttondown")
 
     def enable_button_handler(self, event=None):
+        """
+        Handle the "Enable" checkbox in Advanced Options.
+        :param event:
+        :return:
+        """
         set = self.Enable_Cbutton_var.get()
         if (set):
             self.Number_Of_Words_Spinbox.configure(state='normal')
@@ -1079,65 +1145,152 @@ class Toplevel1:
             self.Delimiter_window.configure(state="disable")
 
     def set_v_stage(self, stage, event=None):
+        """
+        General sign step for "V".
+        :param stage:
+        :param event:
+        :return:
+        """
         global root
         self.V_STAGES[stage]()
         root.update()
 
     def set_x_stage(self, stage, event=None):
+        """
+        General sign step for "X".
+        :param stage:
+        :param event:
+        :return:
+        """
         global root
         self.X_STAGES[stage]()
         root.update()
 
     def set_v_get_texts(self, event=None):
+        """
+        Turn on the "V" sign for get text step.
+        :param event:
+        :return:
+        """
         self.v_get_texts_label.place(relx=0.018, rely=0.01)
         self.Processing_TProgressbar['value'] = 14
 
     def set_x_get_texts(self, event=None):
+        """
+        Turn on the "X" sign for get text step.
+        :param event:
+        :return:
+        """
         self.x_get_texts_label.place(relx=0.018, rely=0.01)
 
     def set_v_word2vec(self, event=None):
+        """
+        Turn on the "V" sign for word2vec step.
+        :param event:
+        :return:
+        """
         self.v_word2vec_label.place(relx=0.018, rely=0.12)
         self.Processing_TProgressbar['value'] += 16
 
     def set_x_word2vec(self, event=None):
+        """
+        Turn on the "X" sign for word2vec step.
+        :param event:
+        :return:
+        """
         self.x_word2vec_label.place(relx=0.018, rely=0.12)
 
     def set_v_building_chunks(self, event=None):
+        """
+        Turn on the "V" sign for building chunks step.
+        :param event:
+        :return:
+        """
         self.v_building_chunks_label.place(relx=0.018, rely=0.23)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_building_chunks(self, event=None):
+        """
+        Turn on the "X" sign for building chunks step.
+        :param event:
+        :return:
+        """
         self.x_building_chunks_label.place(relx=0.018, rely=0.23)
 
     def set_v_metric(self, event=None):
+        """
+        Turn on the "V" sign for distance metrics step.
+        :param event:
+        :return:
+        """
         self.v_metric_label.place(relx=0.018, rely=0.34)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_metric(self, event=None):
+        """
+        Turn on the "X" sign for distance metrics step.
+        :param event:
+        :return:
+        """
         self.x_metric_label.place(relx=0.018, rely=0.34)
 
     def set_v_pam(self, event=None):
+        """
+        Turn on the "V" sign for PAM step.
+        :param event:
+        :return:
+        """
         self.v_pam_label.place(relx=0.018, rely=0.45)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_pam(self, event=None):
+        """
+        Turn on the "X" sign for PAM step.
+        :param event:
+        :return:
+        """
         self.x_pam_label.place(relx=0.018, rely=0.45)
 
     def set_v_silhouette(self, event=None):
+        """
+        Turn on the "V" sign for silhouette step.
+        :param event:
+        :return:
+        """
         self.v_silhouette_label.place(relx=0.018, rely=0.56)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_silhouette(self, event=None):
+        """
+        Turn on the "X" sign for silhouette step.
+        :param event:
+        :return:
+        """
         self.x_silhouette_label.place(relx=0.018, rely=0.56)
 
     def set_v_statistical_data(self, event=None):
+        """
+        Turn on the "V" sign for statistical data step.
+        :param event:
+        :return:
+        """
         self.v_statistical_data_label.place(relx=0.018, rely=0.67)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_statistical_data(self, event=None):
+        """
+        Turn on the "X" sign for statistical data step.
+        :param event:
+        :return:
+        """
         self.x_statistical_data_label.place(relx=0.018, rely=0.67)
 
     def clean_all_steps(self, event=None):
+        """
+        Clear all the signs V\X from steps.
+        :param event:
+        :return:
+        """
         global root
         self.v_get_texts_label.place_forget()
         self.v_word2vec_label.place_forget()
@@ -1157,12 +1310,22 @@ class Toplevel1:
         root.update()
 
     def set_statistical_result(self, event=None):
+        """
+        Set the static statistical data.
+        :param event:
+        :return:
+        """
         self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
         self.Max_Docs_In_Style_Result_Label.configure(text=self.data.get_max_docs_in_style())
         self.Min_Docs_In_Style_Result_Label.configure(text=self.data.get_min_docs_in_style())
-        self.Graph_var.set("Documents Distribution")
+        self.Graph_var.set("Documents Distribution")    # set default graph
 
     def set_graph(self, event=None):
+        """
+        Handle which graph should be display.
+        :param event:
+        :return:
+        """
         self.case = self.Graph_var.get()
         self.Document_TCombobox.configure(state="disabled")
         if (self.case == "Documents Distribution"):
@@ -1180,18 +1343,26 @@ class Toplevel1:
             self.draw_graph(data_dict, "Chunks", "ZV", "ZV dependencies", "line")
 
     def draw_graph(self, data_dict, x_label, y_label, title, type):
+        """
+        Prepare and drawing the graph.
+        :param data_dict: dictionary of current data to display according to pd.Datafram input.
+        :param x_label: name of x label
+        :param y_label: name of y label
+        :param title: title of graph
+        :param type: type of graph
+        :return:
+        """
         self.df_toExport = pd.DataFrame(data_dict)
 
         self.df_toDisplay = self.df_toExport[[x_label, y_label]].groupby(x_label).sum()
 
-        # create first place for plot
-
+        # create first place for plot in display screen
         self.ax.clear()
         self.ax.set_xticklabels(data_dict[x_label], fontsize=5)
-        #self.ax.set_title(title)
         self.ax.set_xlabel(x_label)
         self.ax.set_ylabel(y_label)
 
+        # create first place for plot in new window screen
         self.ax_new_window.clear()
         self.ax_new_window.set_xticklabels(data_dict[x_label], fontsize=10)
         self.ax_new_window.set_title(title)
@@ -1204,6 +1375,11 @@ class Toplevel1:
         self.Canvas.draw()
 
     def export_button_dialog(self, event=None):
+        """
+        Handle the "export data" button.
+        :param event:
+        :return:
+        """
         case = self.Graph_var.get()
 
         if (self.df_toExport is None):
@@ -1215,6 +1391,7 @@ class Toplevel1:
 
         if (not self.xlsx_path.endswith(r'.xlsx')):
             self.xlsx_path += r'.xlsx'
+        # call to the relevant xlsx generator function.
         try:
             if (case == "Documents Distribution"):
                 csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
@@ -1229,19 +1406,22 @@ class Toplevel1:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
 
     def open_new_window_button_dialog(self, event=None):
+        """
+        Open the current graph in external window.
+        :param event:
+        :return:
+        """
         window = tk.Toplevel(root)
-        # top frame for canvas and toolbar - which need `pack()` layout manager
         top = tk.Frame(window)
         top.pack()
-
-
-        # create matplotlib canvas using `fig` and assign to widget `top`
         canvas = ResizingCanvas(self.fig_new_window, window)
-
-        # get canvas as tkinter widget and put in widget `top`
         canvas.get_tk_widget().pack(fill="both", expand=True)
 
     def set_documents_combobox(self):
+        """
+        Set the list for Documents combobox according to the documents list.
+        :return:
+        """
         self.value_list_document = []
         self.index_dict_document = {}
         self.value_list_document.append("All Documents")
@@ -1269,6 +1449,22 @@ class Toplevel1:
 
     def start_regression(self, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words,
                          chunk_size, delay, arch, training, context_window, delimiter):
+        """
+        This function run the main flow algorithm based on the input and the parameters.
+        :param texts_input: list of paths to the documents
+        :param vec_input: path for external word embedding file
+        :param from_range: value of "from" range
+        :param to_range: value of "to" range
+        :param enable_advanced: True\False if "Enable" checkbox for advanced option.
+        :param number_of_words: number of word parameter
+        :param chunk_size: chunk size parameter
+        :param delay: delay parameter
+        :param arch: architecture parameter
+        :param training: training parameter
+        :param context_window: context window value
+        :param delimiter: type of delimiter.
+        :return:
+        """
         # we should check if all the files are exist before running the algorithm
         global root
         if (texts_input):
@@ -1280,6 +1476,7 @@ class Toplevel1:
 
         vec_path = vec_input if (vec_input) else None
 
+        # set the config object according to user's request.
         config.set("CLUSTER", "from", from_range)
         config.set("CLUSTER", "to", to_range)
 
