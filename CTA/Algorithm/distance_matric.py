@@ -2,7 +2,7 @@ from Utils import logger
 from Utils import configuration
 import numpy as np
 from scipy.stats import spearmanr
-
+import math
 import logging
 
 
@@ -77,6 +77,8 @@ class Distance_Matric(object):
         chunk_vec = chunk.getchunkVec()
         for pre_chunk in precursors_chunks:
             corr, p_value = spearmanr(chunk_vec, pre_chunk.getchunkVec())
+            if (math.isnan(corr)):
+                corr = 0.0
             sum += corr
 
         return sum/int(len(precursors_chunks))
