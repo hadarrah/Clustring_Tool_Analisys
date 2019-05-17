@@ -94,7 +94,7 @@ class Statistical_Data(object):
             for document in self.documents:
                 i = 1
                 for chunk in document.get_comparable_chunks():
-                    chunks.append("doc-{}-ch-{}".format(document.get_basename(), str(i)))
+                    chunks.append("doc-{}-ch-{}".format(document.get_basename().split(".")[0], str(i)))
                     styles.append(chunk.get_cluster() + 1)
                     i += 1
         else:
@@ -118,7 +118,7 @@ class Statistical_Data(object):
             for document in self.documents:
                 i = 1
                 for chunk in document.get_comparable_chunks():
-                    chunks.append("doc-{}-ch-{}".format(document.get_basename(), str(i)))
+                    chunks.append("doc-{}-ch-{}".format(document.get_basename().split(".")[0], str(i)))
                     zv.append(Distance_Matric.compute_zv(chunk, chunk.get_precursors_chunks()))
                     i += 1
         else:

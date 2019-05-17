@@ -1,5 +1,8 @@
 import pandas as pd
 
+"""
+This module grant a 3 types of xlsx generation according to the data from the regression.
+"""
 
 def export_document_distribution(xlsx_path, df_toExport, data):
     writer = pd.ExcelWriter(xlsx_path, engine='xlsxwriter')

@@ -33,6 +33,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.pyplot import Figure
 import pandas as pd
 from Utils import csv_generator
+import copy
 
 config = configuration.config().setup()
 log = logger.setup()
@@ -53,6 +54,7 @@ def vp_start_gui():
     '''Starting point when module is the main routine.'''
     global val, w, root
     root = tk.Tk()
+    root.resizable(width=False, height=False)
     main_support.set_Tk_var()
     top = Toplevel1 (root)
     main_support.init(root, top)
@@ -160,6 +162,31 @@ class Toplevel1:
         self.load_text_button.configure(text='''Load Texts''')
         self.load_text_button.configure(command=self.load_text_button_dialog)
 
+        self.clear_text_button = tk.Button(self.General_TNotebook)
+        self.clear_text_button.place(relx=0.203, rely=0.25, height=24, width=67)
+        self.clear_text_button.configure(activebackground="#ececec")
+        self.clear_text_button.configure(activeforeground="#000000")
+        self.clear_text_button.configure(background="#d9d9d9")
+        self.clear_text_button.configure(disabledforeground="#a3a3a3")
+        self.clear_text_button.configure(foreground="#000000")
+        self.clear_text_button.configure(highlightbackground="#d9d9d9")
+        self.clear_text_button.configure(highlightcolor="black")
+        self.clear_text_button.configure(pady="0")
+        self.clear_text_button.configure(text='''Clear Texts''')
+        self.clear_text_button.configure(command=self.clear_text_button_dialog)
+
+        self.UTF8_Label = tk.Label(self.General_TNotebook)
+        self.UTF8_Label.place(relx=0.45, rely=0.32, height=21, width=75)
+        self.UTF8_Label.configure(activebackground="#f9f9f9")
+        self.UTF8_Label.configure(activeforeground="black")
+        self.UTF8_Label.configure(background="#d9d9d9")
+        self.UTF8_Label.configure(disabledforeground="#a3a3a3")
+        self.UTF8_Label.configure(foreground="red")
+        self.UTF8_Label.configure(highlightbackground="#d9d9d9")
+        self.UTF8_Label.configure(highlightcolor="red")
+        self.UTF8_Label.configure(text='''(UTF-8 only)''')
+        self.UTF8_Label.configure(font=("TkDefaultFont", 8))
+
         self.texts_list = tk.Listbox(self.General_TNotebook)
         self.texts_list.place(relx=0.339, rely=0.171, height=60, relwidth=0.4)
         self.texts_list.configure(background="white")
@@ -179,7 +206,7 @@ class Toplevel1:
         self.texts_list.config(yscrollcommand=self.scrollbar.set)
 
         self.from_spinbox = tk.Spinbox(self.General_TNotebook, from_=5.0, to=100.0)
-        self.from_spinbox.place(relx=0.356, rely=0.341, relheight=0.046
+        self.from_spinbox.place(relx=0.356, rely=0.4, relheight=0.046
                 , relwidth=0.076)
         self.from_spinbox.configure(activebackground="#f9f9f9")
         self.from_spinbox.configure(background="white")
@@ -199,7 +226,7 @@ class Toplevel1:
         self.from_spinbox.configure(state="disable")
 
         self.to_spinbox = tk.Spinbox(self.General_TNotebook, from_=20.0, to=100.0)
-        self.to_spinbox.place(relx=0.492, rely=0.341, relheight=0.046
+        self.to_spinbox.place(relx=0.492, rely=0.4, relheight=0.046
                 , relwidth=0.076)
         self.to_spinbox.configure(activebackground="#f9f9f9")
         self.to_spinbox.configure(background="white")
@@ -219,7 +246,7 @@ class Toplevel1:
         self.to_spinbox.configure(state="disable")
 
         self.Style_Range_Label = tk.Label(self.General_TNotebook)
-        self.Style_Range_Label.place(relx=0.169, rely=0.341, height=21, width=75)
+        self.Style_Range_Label.place(relx=0.169, rely=0.4, height=21, width=75)
         self.Style_Range_Label.configure(activebackground="#f9f9f9")
         self.Style_Range_Label.configure(activeforeground="black")
         self.Style_Range_Label.configure(background="#d9d9d9")
@@ -230,7 +257,7 @@ class Toplevel1:
         self.Style_Range_Label.configure(text='''Styles Range:''')
 
         self.Style_Separator_Label = tk.Label(self.General_TNotebook)
-        self.Style_Separator_Label.place(relx=0.432, rely=0.317, height=31, width=31)
+        self.Style_Separator_Label.place(relx=0.432, rely=0.376, height=31, width=31)
         self.Style_Separator_Label.configure(activebackground="#f9f9f9")
         self.Style_Separator_Label.configure(activeforeground="black")
         self.Style_Separator_Label.configure(background="#d9d9d9")
@@ -770,10 +797,11 @@ class Toplevel1:
         self.Select_Graph_Label.configure(text='''Select Graph:''')
 
 
-        self.fig = matplotlib.pyplot.Figure()
+        self.fig = matplotlib.pyplot.Figure(tight_layout=True)
         self.ax = self.fig.add_subplot(111)
+        self.fig_new_window = matplotlib.pyplot.Figure(tight_layout=True)
+        self.ax_new_window = self.fig_new_window.add_subplot(111)
         self.Canvas = FigureCanvasTkAgg(self.fig, self.Statistic_TNotebook)
-        #self.Canvas.get_tk_widget().pack()
         self.Canvas._tkcanvas.place(relx=0.068, rely=0.317, relheight=0.641
                 , relwidth=0.886)
 
@@ -783,7 +811,7 @@ class Toplevel1:
                 , relwidth=0.3)
         self.Document_var = tk.StringVar(root)
         self.Document_TCombobox.configure(foreground="#000000")
-        self.Document_TCombobox.configure(state="readonly")
+        self.Document_TCombobox.configure(state="disabled")
         self.Document_TCombobox.bind("<<ComboboxSelected>>", self.set_graph)
         self.Document_TCombobox.configure(takefocus="")
 
@@ -895,6 +923,19 @@ class Toplevel1:
         self.export_button.configure(text='''Export Data''')
         self.export_button.configure(command=self.export_button_dialog)
 
+        self.open_new_window_button = tk.Button(self.Statistic_TNotebook)
+        self.open_new_window_button.place(relx=0.37, rely=0.230, height=24, width=78)
+        self.open_new_window_button.configure(activebackground="#ececec")
+        self.open_new_window_button.configure(activeforeground="#000000")
+        self.open_new_window_button.configure(background="#d9d9d9")
+        self.open_new_window_button.configure(disabledforeground="#a3a3a3")
+        self.open_new_window_button.configure(foreground="#000000")
+        self.open_new_window_button.configure(highlightbackground="#d9d9d9")
+        self.open_new_window_button.configure(highlightcolor="black")
+        self.open_new_window_button.configure(pady="0")
+        self.open_new_window_button.configure(text='''New Window''')
+        self.open_new_window_button.configure(command=self.open_new_window_button_dialog)
+
         self.About_Label = tk.Label(self.About_TNotebook)
         self.About_Label.pack(fill=tk.BOTH, expand=1)
         self.About_Label.configure(activebackground="#f9f9f9")
@@ -940,6 +981,11 @@ class Toplevel1:
 
 
     def add_word_embedding_checkbox(self, event=None):
+        """
+        Handle the checkbox of "add word embedding file".
+        :param event:
+        :return:
+        """
         set = self.add_word_emedding_Cbutton_var.get()
         if (set):
             self.load_vec_button.configure(state="active")
@@ -951,26 +997,61 @@ class Toplevel1:
             self.vec_entry.configure(state="disable")
 
     def load_text_button_dialog(self, event=None):
+        """
+        Handle the "load text" button.
+        :param event:
+        :return:
+        """
         paths = askopenfilenames(title='Choose a text files', filetypes=[("TEXT Files", ".txt")])
+        # check if there is existing path in the list and if not it will add it to the files list.
         for path in paths:
             if (path not in self.doc_paths):
                 self.doc_paths.append(path)
-        self.num_of_files = root.tk.splitlist(self.doc_paths)  # Possible workaround
+
+        # save the files path
+        self.num_of_files = root.tk.splitlist(self.doc_paths)
         if (len(self.num_of_files) < 3):
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
         self.texts_list.delete(0, 'end')
         for doc in self.num_of_files:
             self.texts_list.insert(0, os.path.basename(doc))
-        self.to_var.set(len(self.num_of_files)-1) # set maximum possible value
+
+        # set maximum possible value for total styles
+        self.to_var.set(len(self.num_of_files)-1)
         self.from_var.set(2)
+
+        # activate ranges
         self.from_spinbox.configure(state="normal")
         self.to_spinbox.configure(state="normal")
 
+    def clear_text_button_dialog(self, event=None):
+        """
+        Handle the "clear text" button.
+        :param event:
+        :return:
+        """
+        # clear all the files
+        self.doc_paths.clear()
+        self.texts_list.delete(0, "end")
+        self.to_var.set(config.get("CLUSTER", "to"))
+
+        # disable ranges
+        self.from_spinbox.configure(state="disable")
+        self.to_spinbox.configure(state="disable")
+
     def delete_text_from_list(self, event=None):
+        """
+        Handle the case when user choose specific file from list and press "DELETE".
+        :param event:
+        :return:
+        """
+        # check if the deleting will left just 2 files.
         if (len(self.doc_paths) == 3):
             messagebox.showerror("Error deleted files", "You must select at least 3 files, therefore you must add another text before delete")
             return
+
+        # update list
         entry_to_delete = self.texts_list.selection_get()
         selection = self.texts_list.curselection()
         self.texts_list.delete(selection[0])
@@ -980,34 +1061,67 @@ class Toplevel1:
                 break
 
     def load_vec_button_dialog(self, event=None):
+        """
+        Handle the "load vec" button.
+        :param event:
+        :return:
+        """
         vec_path = askopenfilename(title='Choose a vec file', filetypes=[("VEC Files", ".vec")])
         self.vec_entry.insert(0, vec_path)
 
     def set_from_val(self, event=None):
+        """
+        Handle the "from" range value.
+        :param event:
+        :return:
+        """
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.from_spinbox.invoke("buttondown")
 
     def set_to_val(self, event=None):
+        """
+        Handle the "to" range value.
+        :param event:
+        :return:
+        """
         if(int(self.to_spinbox.get()) < int(self.from_spinbox.get())):
             self.to_spinbox.invoke("buttonup")
-        #if (int(self.to_spinbox.get()) > int(len(self.num_of_files))-1):
-        #    self.to_spinbox.invoke("buttondown")
 
     def set_number_of_words_val(self, event=None):
+        """
+        Handle the "Number of Words" value.
+        :param event:
+        :return:
+        """
         if(int(self.Number_Of_Words_Spinbox.get()) < 2*int(self.Chunk_Size_Spinbox.get())):
             self.Number_Of_Words_Spinbox.invoke("buttonup")
 
     def set_chunk_size_val(self, event=None):
+        """
+        Handle the "Chunk Size" value.
+        :param event:
+        :return:
+        """
         if (int(self.Number_Of_Words_Spinbox.get()) < 2 * int(self.Chunk_Size_Spinbox.get())):
             self.Chunk_Size_Spinbox.invoke("buttondown")
         if (int(self.Delay_Spinbox.get()) == int(self.Chunk_Size_Spinbox.get())):
             self.Chunk_Size_Spinbox.invoke("buttonup")
 
     def set_delay_val(self, event=None):
+        """
+        Handle the "Delay" value.
+        :param event:
+        :return:
+        """
         if (int(self.Delay_Spinbox.get()) == round((int(self.Number_Of_Words_Spinbox.get())/int(self.Chunk_Size_Spinbox.get()))-0.5)):
             self.Delay_Spinbox.invoke("buttondown")
 
     def enable_button_handler(self, event=None):
+        """
+        Handle the "Enable" checkbox in Advanced Options.
+        :param event:
+        :return:
+        """
         set = self.Enable_Cbutton_var.get()
         if (set):
             self.Number_Of_Words_Spinbox.configure(state='normal')
@@ -1031,65 +1145,152 @@ class Toplevel1:
             self.Delimiter_window.configure(state="disable")
 
     def set_v_stage(self, stage, event=None):
+        """
+        General sign step for "V".
+        :param stage:
+        :param event:
+        :return:
+        """
         global root
         self.V_STAGES[stage]()
         root.update()
 
     def set_x_stage(self, stage, event=None):
+        """
+        General sign step for "X".
+        :param stage:
+        :param event:
+        :return:
+        """
         global root
         self.X_STAGES[stage]()
         root.update()
 
     def set_v_get_texts(self, event=None):
+        """
+        Turn on the "V" sign for get text step.
+        :param event:
+        :return:
+        """
         self.v_get_texts_label.place(relx=0.018, rely=0.01)
         self.Processing_TProgressbar['value'] = 14
 
     def set_x_get_texts(self, event=None):
+        """
+        Turn on the "X" sign for get text step.
+        :param event:
+        :return:
+        """
         self.x_get_texts_label.place(relx=0.018, rely=0.01)
 
     def set_v_word2vec(self, event=None):
+        """
+        Turn on the "V" sign for word2vec step.
+        :param event:
+        :return:
+        """
         self.v_word2vec_label.place(relx=0.018, rely=0.12)
         self.Processing_TProgressbar['value'] += 16
 
     def set_x_word2vec(self, event=None):
+        """
+        Turn on the "X" sign for word2vec step.
+        :param event:
+        :return:
+        """
         self.x_word2vec_label.place(relx=0.018, rely=0.12)
 
     def set_v_building_chunks(self, event=None):
+        """
+        Turn on the "V" sign for building chunks step.
+        :param event:
+        :return:
+        """
         self.v_building_chunks_label.place(relx=0.018, rely=0.23)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_building_chunks(self, event=None):
+        """
+        Turn on the "X" sign for building chunks step.
+        :param event:
+        :return:
+        """
         self.x_building_chunks_label.place(relx=0.018, rely=0.23)
 
     def set_v_metric(self, event=None):
+        """
+        Turn on the "V" sign for distance metrics step.
+        :param event:
+        :return:
+        """
         self.v_metric_label.place(relx=0.018, rely=0.34)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_metric(self, event=None):
+        """
+        Turn on the "X" sign for distance metrics step.
+        :param event:
+        :return:
+        """
         self.x_metric_label.place(relx=0.018, rely=0.34)
 
     def set_v_pam(self, event=None):
+        """
+        Turn on the "V" sign for PAM step.
+        :param event:
+        :return:
+        """
         self.v_pam_label.place(relx=0.018, rely=0.45)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_pam(self, event=None):
+        """
+        Turn on the "X" sign for PAM step.
+        :param event:
+        :return:
+        """
         self.x_pam_label.place(relx=0.018, rely=0.45)
 
     def set_v_silhouette(self, event=None):
+        """
+        Turn on the "V" sign for silhouette step.
+        :param event:
+        :return:
+        """
         self.v_silhouette_label.place(relx=0.018, rely=0.56)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_silhouette(self, event=None):
+        """
+        Turn on the "X" sign for silhouette step.
+        :param event:
+        :return:
+        """
         self.x_silhouette_label.place(relx=0.018, rely=0.56)
 
     def set_v_statistical_data(self, event=None):
+        """
+        Turn on the "V" sign for statistical data step.
+        :param event:
+        :return:
+        """
         self.v_statistical_data_label.place(relx=0.018, rely=0.67)
         self.Processing_TProgressbar['value'] += 14
 
     def set_x_statistical_data(self, event=None):
+        """
+        Turn on the "X" sign for statistical data step.
+        :param event:
+        :return:
+        """
         self.x_statistical_data_label.place(relx=0.018, rely=0.67)
 
     def clean_all_steps(self, event=None):
+        """
+        Clear all the signs V\X from steps.
+        :param event:
+        :return:
+        """
         global root
         self.v_get_texts_label.place_forget()
         self.v_word2vec_label.place_forget()
@@ -1109,75 +1310,76 @@ class Toplevel1:
         root.update()
 
     def set_statistical_result(self, event=None):
+        """
+        Set the static statistical data.
+        :param event:
+        :return:
+        """
         self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
         self.Max_Docs_In_Style_Result_Label.configure(text=self.data.get_max_docs_in_style())
         self.Min_Docs_In_Style_Result_Label.configure(text=self.data.get_min_docs_in_style())
-        self.Graph_var.set("Documents Distribution")
+        self.Graph_var.set("Documents Distribution")    # set default graph
 
     def set_graph(self, event=None):
+        """
+        Handle which graph should be display.
+        :param event:
+        :return:
+        """
         self.case = self.Graph_var.get()
-        self.Document_TCombobox.configure(state="disable")
+        self.Document_TCombobox.configure(state="disabled")
         if (self.case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
-            self.df_toExport = pd.DataFrame(data_dict)
-
-            x = 'Documents'
-            y = 'Styles'
-
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
-
-            # create first place for plot
-
-            self.ax.clear()
-
-            self.ax.set_xticklabels(data_dict["Documents"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+            self.draw_graph(data_dict, "Documents", "Styles", "Documents Distribution", "bar")
         elif (self.case == "Chunks Distribution"):
             self.Document_TCombobox.configure(state="normal")
             doc = self.index_dict_document[self.Document_TCombobox.get()]
             data_dict = self.data.get_chunks_distribution_data(doc)
-            self.df_toExport = pd.DataFrame(data_dict)
-
-            x = 'Chunks'
-            y = 'Styles'
-
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
-
-            # create first place for plot
-
-            self.ax.clear()
-
-            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='bar', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+            self.draw_graph(data_dict, "Chunks", "Styles", "Chunks Distribution", "bar")
         elif (self.case == "ZV dependencies"):
             self.Document_TCombobox.configure(state="normal")
             doc = self.index_dict_document[self.Document_TCombobox.get()]
             data_dict = self.data.get_zv_dependencies_data(doc)
+            self.draw_graph(data_dict, "Chunks", "ZV", "ZV dependencies", "line")
 
-            self.df_toExport = pd.DataFrame(data_dict)
+    def draw_graph(self, data_dict, x_label, y_label, title, type):
+        """
+        Prepare and drawing the graph.
+        :param data_dict: dictionary of current data to display according to pd.Datafram input.
+        :param x_label: name of x label
+        :param y_label: name of y label
+        :param title: title of graph
+        :param type: type of graph
+        :return:
+        """
+        self.df_toExport = pd.DataFrame(data_dict)
 
-            x = 'Chunks'
-            y = 'ZV'
+        self.df_toDisplay = self.df_toExport[[x_label, y_label]].groupby(x_label).sum()
 
-            self.df_toDisplay = self.df_toExport[[x, y]].groupby(x).sum()
+        # create first place for plot in display screen
+        self.ax.clear()
+        self.ax.set_xticklabels(data_dict[x_label], fontsize=5)
+        self.ax.set_xlabel(x_label)
+        self.ax.set_ylabel(y_label)
 
-            # create first place for plot
+        # create first place for plot in new window screen
+        self.ax_new_window.clear()
+        self.ax_new_window.set_xticklabels(data_dict[x_label], fontsize=10)
+        self.ax_new_window.set_title(title)
+        self.ax_new_window.set_xlabel(x_label)
+        self.ax_new_window.set_ylabel(y_label)
 
-            self.ax.clear()
-
-            self.ax.set_xticklabels(data_dict["Chunks"], fontsize=5)
-
-            # draw on this plot
-            self.df_toDisplay.plot(kind='line', legend=False, rot=45, ax=self.ax)
-            self.Canvas.draw()
+        # draw on this plot
+        self.df_toDisplay.plot(kind=type, legend=False, rot=90, ax=self.ax)
+        self.df_toDisplay.plot(kind=type, legend=False, rot=90, ax=self.ax_new_window)
+        self.Canvas.draw()
 
     def export_button_dialog(self, event=None):
+        """
+        Handle the "export data" button.
+        :param event:
+        :return:
+        """
         case = self.Graph_var.get()
 
         if (self.df_toExport is None):
@@ -1189,6 +1391,7 @@ class Toplevel1:
 
         if (not self.xlsx_path.endswith(r'.xlsx')):
             self.xlsx_path += r'.xlsx'
+        # call to the relevant xlsx generator function.
         try:
             if (case == "Documents Distribution"):
                 csv_generator.export_document_distribution(self.xlsx_path, self.df_toExport, self.data)
@@ -1202,7 +1405,23 @@ class Toplevel1:
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
 
+    def open_new_window_button_dialog(self, event=None):
+        """
+        Open the current graph in external window.
+        :param event:
+        :return:
+        """
+        window = tk.Toplevel(root)
+        top = tk.Frame(window)
+        top.pack()
+        canvas = ResizingCanvas(self.fig_new_window, window)
+        canvas.get_tk_widget().pack(fill="both", expand=True)
+
     def set_documents_combobox(self):
+        """
+        Set the list for Documents combobox according to the documents list.
+        :return:
+        """
         self.value_list_document = []
         self.index_dict_document = {}
         self.value_list_document.append("All Documents")
@@ -1230,6 +1449,22 @@ class Toplevel1:
 
     def start_regression(self, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words,
                          chunk_size, delay, arch, training, context_window, delimiter):
+        """
+        This function run the main flow algorithm based on the input and the parameters.
+        :param texts_input: list of paths to the documents
+        :param vec_input: path for external word embedding file
+        :param from_range: value of "from" range
+        :param to_range: value of "to" range
+        :param enable_advanced: True\False if "Enable" checkbox for advanced option.
+        :param number_of_words: number of word parameter
+        :param chunk_size: chunk size parameter
+        :param delay: delay parameter
+        :param arch: architecture parameter
+        :param training: training parameter
+        :param context_window: context window value
+        :param delimiter: type of delimiter.
+        :return:
+        """
         # we should check if all the files are exist before running the algorithm
         global root
         if (texts_input):
@@ -1241,6 +1476,7 @@ class Toplevel1:
 
         vec_path = vec_input if (vec_input) else None
 
+        # set the config object according to user's request.
         config.set("CLUSTER", "from", from_range)
         config.set("CLUSTER", "to", to_range)
 
@@ -1270,6 +1506,21 @@ class Toplevel1:
             self.set_x_stage(main.get_stage())
             messagebox.showerror("Regression Error", "Error: " + str(e))
         root.config(cursor="")
+
+# a subclass of Canvas for dealing with resizing of windows
+class ResizingCanvas(FigureCanvasTkAgg):
+    def __init__(self, fig, parent):
+        FigureCanvasTkAgg.__init__(self, fig, parent)
+        self.parent = parent
+        self.parent.bind("<Configure>", self.on_resize)
+        self.parent.height = self.parent.winfo_reqheight()
+        self.parent.width = self.parent.winfo_reqwidth()
+
+    def on_resize(self,event):
+        self.parent.width = event.width
+        self.parent.height = event.height
+        # resize the canvas
+        self.parent.config(width=self.parent.width, height=self.parent.height)
 
 if __name__ == '__main__':
     vp_start_gui()
