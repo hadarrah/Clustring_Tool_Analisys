@@ -162,6 +162,31 @@ class Toplevel1:
         self.load_text_button.configure(text='''Load Texts''')
         self.load_text_button.configure(command=self.load_text_button_dialog)
 
+        self.clear_text_button = tk.Button(self.General_TNotebook)
+        self.clear_text_button.place(relx=0.203, rely=0.25, height=24, width=67)
+        self.clear_text_button.configure(activebackground="#ececec")
+        self.clear_text_button.configure(activeforeground="#000000")
+        self.clear_text_button.configure(background="#d9d9d9")
+        self.clear_text_button.configure(disabledforeground="#a3a3a3")
+        self.clear_text_button.configure(foreground="#000000")
+        self.clear_text_button.configure(highlightbackground="#d9d9d9")
+        self.clear_text_button.configure(highlightcolor="black")
+        self.clear_text_button.configure(pady="0")
+        self.clear_text_button.configure(text='''Clear Texts''')
+        self.clear_text_button.configure(command=self.clear_text_button_dialog)
+
+        self.UTF8_Label = tk.Label(self.General_TNotebook)
+        self.UTF8_Label.place(relx=0.45, rely=0.32, height=21, width=75)
+        self.UTF8_Label.configure(activebackground="#f9f9f9")
+        self.UTF8_Label.configure(activeforeground="black")
+        self.UTF8_Label.configure(background="#d9d9d9")
+        self.UTF8_Label.configure(disabledforeground="#a3a3a3")
+        self.UTF8_Label.configure(foreground="red")
+        self.UTF8_Label.configure(highlightbackground="#d9d9d9")
+        self.UTF8_Label.configure(highlightcolor="red")
+        self.UTF8_Label.configure(text='''(UTF-8 only)''')
+        self.UTF8_Label.configure(font=("TkDefaultFont", 8))
+
         self.texts_list = tk.Listbox(self.General_TNotebook)
         self.texts_list.place(relx=0.339, rely=0.171, height=60, relwidth=0.4)
         self.texts_list.configure(background="white")
@@ -181,7 +206,7 @@ class Toplevel1:
         self.texts_list.config(yscrollcommand=self.scrollbar.set)
 
         self.from_spinbox = tk.Spinbox(self.General_TNotebook, from_=5.0, to=100.0)
-        self.from_spinbox.place(relx=0.356, rely=0.341, relheight=0.046
+        self.from_spinbox.place(relx=0.356, rely=0.4, relheight=0.046
                 , relwidth=0.076)
         self.from_spinbox.configure(activebackground="#f9f9f9")
         self.from_spinbox.configure(background="white")
@@ -201,7 +226,7 @@ class Toplevel1:
         self.from_spinbox.configure(state="disable")
 
         self.to_spinbox = tk.Spinbox(self.General_TNotebook, from_=20.0, to=100.0)
-        self.to_spinbox.place(relx=0.492, rely=0.341, relheight=0.046
+        self.to_spinbox.place(relx=0.492, rely=0.4, relheight=0.046
                 , relwidth=0.076)
         self.to_spinbox.configure(activebackground="#f9f9f9")
         self.to_spinbox.configure(background="white")
@@ -221,7 +246,7 @@ class Toplevel1:
         self.to_spinbox.configure(state="disable")
 
         self.Style_Range_Label = tk.Label(self.General_TNotebook)
-        self.Style_Range_Label.place(relx=0.169, rely=0.341, height=21, width=75)
+        self.Style_Range_Label.place(relx=0.169, rely=0.4, height=21, width=75)
         self.Style_Range_Label.configure(activebackground="#f9f9f9")
         self.Style_Range_Label.configure(activeforeground="black")
         self.Style_Range_Label.configure(background="#d9d9d9")
@@ -232,7 +257,7 @@ class Toplevel1:
         self.Style_Range_Label.configure(text='''Styles Range:''')
 
         self.Style_Separator_Label = tk.Label(self.General_TNotebook)
-        self.Style_Separator_Label.place(relx=0.432, rely=0.317, height=31, width=31)
+        self.Style_Separator_Label.place(relx=0.432, rely=0.376, height=31, width=31)
         self.Style_Separator_Label.configure(activebackground="#f9f9f9")
         self.Style_Separator_Label.configure(activeforeground="black")
         self.Style_Separator_Label.configure(background="#d9d9d9")
@@ -777,7 +802,6 @@ class Toplevel1:
         self.fig_new_window = matplotlib.pyplot.Figure(tight_layout=True)
         self.ax_new_window = self.fig_new_window.add_subplot(111)
         self.Canvas = FigureCanvasTkAgg(self.fig, self.Statistic_TNotebook)
-        #self.Canvas.get_tk_widget().pack()
         self.Canvas._tkcanvas.place(relx=0.068, rely=0.317, relheight=0.641
                 , relwidth=0.886)
 
@@ -787,7 +811,7 @@ class Toplevel1:
                 , relwidth=0.3)
         self.Document_var = tk.StringVar(root)
         self.Document_TCombobox.configure(foreground="#000000")
-        self.Document_TCombobox.configure(state="readonly")
+        self.Document_TCombobox.configure(state="disabled")
         self.Document_TCombobox.bind("<<ComboboxSelected>>", self.set_graph)
         self.Document_TCombobox.configure(takefocus="")
 
@@ -984,6 +1008,13 @@ class Toplevel1:
         self.from_spinbox.configure(state="normal")
         self.to_spinbox.configure(state="normal")
 
+    def clear_text_button_dialog(self, event=None):
+        self.doc_paths.clear()
+        self.texts_list.delete(0, "end")
+        self.to_var.set(config.get("CLUSTER", "to"))
+        self.from_spinbox.configure(state="disable")
+        self.to_spinbox.configure(state="disable")
+
     def delete_text_from_list(self, event=None):
         if (len(self.doc_paths) == 3):
             messagebox.showerror("Error deleted files", "You must select at least 3 files, therefore you must add another text before delete")
@@ -1133,7 +1164,7 @@ class Toplevel1:
 
     def set_graph(self, event=None):
         self.case = self.Graph_var.get()
-        self.Document_TCombobox.configure(state="disable")
+        self.Document_TCombobox.configure(state="disabled")
         if (self.case == "Documents Distribution"):
             data_dict = self.data.get_documents_distribution_data()
             self.draw_graph(data_dict, "Documents", "Styles", "Documents Distribution", "bar")
