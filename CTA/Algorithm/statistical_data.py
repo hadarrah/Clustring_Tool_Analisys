@@ -9,12 +9,14 @@ class Statistical_Data(object):
     """
     This class responsible on analyzing and generating data based on the last regression.
     """
-    def __init__(self, config, documents, number_of_clusters):
+    def __init__(self, config, documents, number_of_clusters, silhouette_width):
         self.config = config
         self.documents = documents
-        self.number_of_styles = number_of_clusters
+        self.number_of_chunks_styles = number_of_clusters
+        self.silhouette_width = round(silhouette_width, 6)
         self.max_docs_in_style = None
         self.min_docs_in_style = None
+        self.number_of_documents_styles = 0
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
 
@@ -27,26 +29,39 @@ class Statistical_Data(object):
 
         # initialize array with zero where each index represents cluster's id
         # and the value is number of documents which belong to cluster
-        clusters_vote = [0]*self.number_of_styles
+        clusters_vote = [0]*self.number_of_chunks_styles
 
         # calculate array
         for doc in self.documents:
             clusters_vote[doc.get_cluster()] += 1
 
+        # calculate the number of styles per documents
+        for cluster_index in clusters_vote:
+            if (cluster_index > 0):
+                self.number_of_documents_styles += 1
+
         # set max and min values
         index, self.max_docs_in_style = max(enumerate(clusters_vote), key=operator.itemgetter(1))
         index, self.min_docs_in_style = min(enumerate(clusters_vote), key=operator.itemgetter(1))
 
-        self.log.info("Number of total styles: " + str(self.number_of_styles))
+        self.log.info("Number of Documents styles: " + str(self.number_of_documents_styles))
+        self.log.info("Number of Chunks styles: " + str(self.number_of_chunks_styles))
         self.log.info("Max documents in style: " + str(self.max_docs_in_style))
         self.log.info("Min documents in style: " + str(self.min_docs_in_style))
 
-    def get_number_of_styles(self):
+    def get_number_of_documents_styles(self):
         """
-        Get the number of styles.
+        Get the number of documents styles.
         :return:
         """
-        return str(self.number_of_styles)
+        return str(self.number_of_documents_styles)
+
+    def get_number_of_chunks_styles(self):
+        """
+        Get the number of chunks styles.
+        :return:
+        """
+        return str(self.number_of_chunks_styles)
 
     def get_max_docs_in_style(self):
         """
@@ -61,6 +76,13 @@ class Statistical_Data(object):
         :return:
         """
         return str(self.min_docs_in_style)
+
+    def get_silhouette(self):
+        """
+        Get the silhouette width for the clustering result
+        :return:
+        """
+        return str(self.silhouette_width)
 
     def get_documents(self):
         """

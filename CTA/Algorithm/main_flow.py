@@ -153,7 +153,7 @@ class main(object):
         document according to the best result
         :return:
         """
-        self.best_cl, self.clusters_indicator = self.clustring_results.get_best_clustering_result()
+        self.best_cl, self.clusters_indicator, self.silhouette_width = self.clustring_results.get_best_clustering_result()
         # for each comparable chunk we calculate his cluster and then based on majority votes
         # assign the documents into a specific cluster
 
@@ -168,7 +168,7 @@ class main(object):
         Analyze the statistical data from last regression.
         :return:
         """
-        self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()))
+        self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()), self.silhouette_width)
         self.data.analyze_data()
 
     def print_result_to_log(self):

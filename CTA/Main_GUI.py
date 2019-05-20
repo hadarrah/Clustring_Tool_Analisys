@@ -827,7 +827,7 @@ class Toplevel1:
         self.Select_Doc_Label.configure(text='''Select Document:''')
 
         self.Result_Labelframe = tk.LabelFrame(self.Statistic_TNotebook)
-        self.Result_Labelframe.place(relx=0.542, rely=0.024, relheight=0.232
+        self.Result_Labelframe.place(relx=0.542, rely=0.024, relheight=0.28
                 , relwidth=0.407)
         self.Result_Labelframe.configure(relief='groove')
         self.Result_Labelframe.configure(foreground="black")
@@ -838,20 +838,32 @@ class Toplevel1:
         self.Result_Labelframe.configure(highlightcolor="black")
         self.Result_Labelframe.configure(width=240)
 
-        self.Number_Of_Style_Label = tk.Label(self.Result_Labelframe)
-        self.Number_Of_Style_Label.place(relx=0.042, rely=0.211, height=21, width=103
+        self.Number_Of_Style_Documents_Label = tk.Label(self.Result_Labelframe)
+        self.Number_Of_Style_Documents_Label.place(relx=0.042, rely=0.111, height=21, width=103
+                                                   , bordermode='ignore')
+        self.Number_Of_Style_Documents_Label.configure(activebackground="#f9f9f9")
+        self.Number_Of_Style_Documents_Label.configure(activeforeground="black")
+        self.Number_Of_Style_Documents_Label.configure(background="#d9d9d9")
+        self.Number_Of_Style_Documents_Label.configure(disabledforeground="#a3a3a3")
+        self.Number_Of_Style_Documents_Label.configure(foreground="#000000")
+        self.Number_Of_Style_Documents_Label.configure(highlightbackground="#d9d9d9")
+        self.Number_Of_Style_Documents_Label.configure(highlightcolor="black")
+        self.Number_Of_Style_Documents_Label.configure(text='''Documents Styles:''')
+
+        self.Number_Of_Style_Chunks_Label = tk.Label(self.Result_Labelframe)
+        self.Number_Of_Style_Chunks_Label.place(relx=0.09, rely=0.27, height=21, width=103
                 , bordermode='ignore')
-        self.Number_Of_Style_Label.configure(activebackground="#f9f9f9")
-        self.Number_Of_Style_Label.configure(activeforeground="black")
-        self.Number_Of_Style_Label.configure(background="#d9d9d9")
-        self.Number_Of_Style_Label.configure(disabledforeground="#a3a3a3")
-        self.Number_Of_Style_Label.configure(foreground="#000000")
-        self.Number_Of_Style_Label.configure(highlightbackground="#d9d9d9")
-        self.Number_Of_Style_Label.configure(highlightcolor="black")
-        self.Number_Of_Style_Label.configure(text='''Number of Styles:''')
+        self.Number_Of_Style_Chunks_Label.configure(activebackground="#f9f9f9")
+        self.Number_Of_Style_Chunks_Label.configure(activeforeground="black")
+        self.Number_Of_Style_Chunks_Label.configure(background="#d9d9d9")
+        self.Number_Of_Style_Chunks_Label.configure(disabledforeground="#a3a3a3")
+        self.Number_Of_Style_Chunks_Label.configure(foreground="#000000")
+        self.Number_Of_Style_Chunks_Label.configure(highlightbackground="#d9d9d9")
+        self.Number_Of_Style_Chunks_Label.configure(highlightcolor="black")
+        self.Number_Of_Style_Chunks_Label.configure(text='''Chunks Styles:''')
 
         self.Max_Docs_In_Style_Label = tk.Label(self.Result_Labelframe)
-        self.Max_Docs_In_Style_Label.place(relx=0.021, rely=0.421, height=21, width=112
+        self.Max_Docs_In_Style_Label.place(relx=0.032, rely=0.429, height=21, width=112
                 , bordermode='ignore')
         self.Max_Docs_In_Style_Label.configure(activebackground="#f9f9f9")
         self.Max_Docs_In_Style_Label.configure(activeforeground="black")
@@ -863,7 +875,7 @@ class Toplevel1:
         self.Max_Docs_In_Style_Label.configure(text='''Max Docs In Style:''')
 
         self.Min_Docs_In_Style_Label = tk.Label(self.Result_Labelframe)
-        self.Min_Docs_In_Style_Label.place(relx=0.021, rely=0.632, height=21, width=112
+        self.Min_Docs_In_Style_Label.place(relx=0.035, rely=0.588, height=21, width=112
                 , bordermode='ignore')
         self.Min_Docs_In_Style_Label.configure(activebackground="#f9f9f9")
         self.Min_Docs_In_Style_Label.configure(activeforeground="black")
@@ -874,20 +886,44 @@ class Toplevel1:
         self.Min_Docs_In_Style_Label.configure(highlightcolor="black")
         self.Min_Docs_In_Style_Label.configure(text='''Min Docs In Style:''')
 
-        self.Number_Of_Style_Result_Label = tk.Label(self.Result_Labelframe)
-        self.Number_Of_Style_Result_Label.place(relx=0.542, rely=0.211, height=21, width=54
+        self.Silhouette_Label = tk.Label(self.Result_Labelframe)
+        self.Silhouette_Label.place(relx=0.045, rely=0.747, height=21, width=112
+                                           , bordermode='ignore')
+        self.Silhouette_Label.configure(activebackground="#f9f9f9")
+        self.Silhouette_Label.configure(activeforeground="black")
+        self.Silhouette_Label.configure(background="#d9d9d9")
+        self.Silhouette_Label.configure(disabledforeground="#a3a3a3")
+        self.Silhouette_Label.configure(foreground="#000000")
+        self.Silhouette_Label.configure(highlightbackground="#d9d9d9")
+        self.Silhouette_Label.configure(highlightcolor="black")
+        self.Silhouette_Label.configure(text='''Silhouette Width:''')
+
+        self.Number_Of_Style_Documents_Result_Label = tk.Label(self.Result_Labelframe)
+        self.Number_Of_Style_Documents_Result_Label.place(relx=0.542, rely=0.111, height=21, width=54
+                                                          , bordermode='ignore')
+        self.Number_Of_Style_Documents_Result_Label.configure(activebackground="#f9f9f9")
+        self.Number_Of_Style_Documents_Result_Label.configure(activeforeground="black")
+        self.Number_Of_Style_Documents_Result_Label.configure(background="#d9d9d9")
+        self.Number_Of_Style_Documents_Result_Label.configure(disabledforeground="#a3a3a3")
+        self.Number_Of_Style_Documents_Result_Label.configure(foreground="#000000")
+        self.Number_Of_Style_Documents_Result_Label.configure(highlightbackground="#d9d9d9")
+        self.Number_Of_Style_Documents_Result_Label.configure(highlightcolor="black")
+        self.Number_Of_Style_Documents_Result_Label.configure(text='''0''')
+
+        self.Number_Of_Style_Chunks_Result_Label = tk.Label(self.Result_Labelframe)
+        self.Number_Of_Style_Chunks_Result_Label.place(relx=0.542, rely=0.27, height=21, width=54
                 , bordermode='ignore')
-        self.Number_Of_Style_Result_Label.configure(activebackground="#f9f9f9")
-        self.Number_Of_Style_Result_Label.configure(activeforeground="black")
-        self.Number_Of_Style_Result_Label.configure(background="#d9d9d9")
-        self.Number_Of_Style_Result_Label.configure(disabledforeground="#a3a3a3")
-        self.Number_Of_Style_Result_Label.configure(foreground="#000000")
-        self.Number_Of_Style_Result_Label.configure(highlightbackground="#d9d9d9")
-        self.Number_Of_Style_Result_Label.configure(highlightcolor="black")
-        self.Number_Of_Style_Result_Label.configure(text='''0''')
+        self.Number_Of_Style_Chunks_Result_Label.configure(activebackground="#f9f9f9")
+        self.Number_Of_Style_Chunks_Result_Label.configure(activeforeground="black")
+        self.Number_Of_Style_Chunks_Result_Label.configure(background="#d9d9d9")
+        self.Number_Of_Style_Chunks_Result_Label.configure(disabledforeground="#a3a3a3")
+        self.Number_Of_Style_Chunks_Result_Label.configure(foreground="#000000")
+        self.Number_Of_Style_Chunks_Result_Label.configure(highlightbackground="#d9d9d9")
+        self.Number_Of_Style_Chunks_Result_Label.configure(highlightcolor="black")
+        self.Number_Of_Style_Chunks_Result_Label.configure(text='''0''')
 
         self.Max_Docs_In_Style_Result_Label = tk.Label(self.Result_Labelframe)
-        self.Max_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.421, height=21, width=54
+        self.Max_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.429, height=21, width=54
                 , bordermode='ignore')
         self.Max_Docs_In_Style_Result_Label.configure(activebackground="#f9f9f9")
         self.Max_Docs_In_Style_Result_Label.configure(activeforeground="black")
@@ -899,7 +935,7 @@ class Toplevel1:
         self.Max_Docs_In_Style_Result_Label.configure(text='''0''')
 
         self.Min_Docs_In_Style_Result_Label = tk.Label(self.Result_Labelframe)
-        self.Min_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.632, height=21, width=54
+        self.Min_Docs_In_Style_Result_Label.place(relx=0.542, rely=0.588, height=21, width=54
                 , bordermode='ignore')
         self.Min_Docs_In_Style_Result_Label.configure(activebackground="#f9f9f9")
         self.Min_Docs_In_Style_Result_Label.configure(activeforeground="black")
@@ -909,6 +945,18 @@ class Toplevel1:
         self.Min_Docs_In_Style_Result_Label.configure(highlightbackground="#d9d9d9")
         self.Min_Docs_In_Style_Result_Label.configure(highlightcolor="black")
         self.Min_Docs_In_Style_Result_Label.configure(text='''0''')
+
+        self.Silhouette_Result_Label = tk.Label(self.Result_Labelframe)
+        self.Silhouette_Result_Label.place(relx=0.542, rely=0.747, height=21, width=54
+                                                  , bordermode='ignore')
+        self.Silhouette_Result_Label.configure(activebackground="#f9f9f9")
+        self.Silhouette_Result_Label.configure(activeforeground="black")
+        self.Silhouette_Result_Label.configure(background="#d9d9d9")
+        self.Silhouette_Result_Label.configure(disabledforeground="#a3a3a3")
+        self.Silhouette_Result_Label.configure(foreground="#000000")
+        self.Silhouette_Result_Label.configure(highlightbackground="#d9d9d9")
+        self.Silhouette_Result_Label.configure(highlightcolor="black")
+        self.Silhouette_Result_Label.configure(text='''0''')
 
         self.export_button = tk.Button(self.Statistic_TNotebook)
         self.export_button.place(relx=0.237, rely=0.230, height=24, width=68)
@@ -1315,9 +1363,11 @@ class Toplevel1:
         :param event:
         :return:
         """
-        self.Number_Of_Style_Result_Label.configure(text=self.data.get_number_of_styles())
+        self.Number_Of_Style_Documents_Result_Label.configure(text=self.data.get_number_of_documents_styles())
+        self.Number_Of_Style_Chunks_Result_Label.configure(text=self.data.get_number_of_chunks_styles())
         self.Max_Docs_In_Style_Result_Label.configure(text=self.data.get_max_docs_in_style())
         self.Min_Docs_In_Style_Result_Label.configure(text=self.data.get_min_docs_in_style())
+        self.Silhouette_Result_Label.configure(text=self.data.get_silhouette())
         self.Graph_var.set("Documents Distribution")    # set default graph
 
     def set_graph(self, event=None):
