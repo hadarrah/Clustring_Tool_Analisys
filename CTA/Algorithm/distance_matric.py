@@ -36,11 +36,13 @@ class Distance_Matric(object):
         i = 0
         for chunk in self.comparable_chunks:
             chunk_metric_row = []
+            j = 0
 
             # calculate the distance between the chunks based on dzv function
             for compared_chunk in self.comparable_chunks:
-                dzv_val = self.compute_dzv(chunk, compared_chunk)
+                dzv_val = self.compute_dzv(chunk, compared_chunk) if (i <= j) else self.distance_metric[j][i]
                 chunk_metric_row.append(dzv_val)
+                j += 1
 
             self.distance_metric.append(chunk_metric_row)
             # save the chunk's index in the  metric in order to be able to recognize them after PAM

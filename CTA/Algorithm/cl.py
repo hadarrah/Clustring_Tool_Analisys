@@ -77,7 +77,7 @@ class CL(object):
                 cl_max = cl_result
                 indicator_max = cluster_indicator
 
-        return cl_max, indicator_max
+        return cl_max, indicator_max, max_silhouette
 
 
 if __name__ == "__main__":
