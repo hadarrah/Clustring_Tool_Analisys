@@ -111,7 +111,6 @@ class main(object):
         words = []  # list of good words
         wordsCount = 0
         for key in self.tfidfDic.keys():
-            print(key)
             text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
             for value in self.tfidfDic.values():  # each dictionary in Tf-Idf dictionary
                 sorted_value = sorted(value.items(),
@@ -128,7 +127,6 @@ class main(object):
                 i for i in text if i in words).split()  # delete from the original text the unnecessary words
             text = text[:self.num_of_words_per_doc]  # resize the list into the correct size
             words = []
-            print(text)
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
 
     def Step4(self):
