@@ -995,7 +995,7 @@ class Toplevel1:
         self.About_Label.configure(highlightcolor="black")
         self.About_Label.configure(wraplength=370)
         self.About_Label.configure(justify="center")
-        self.About_Label.configure(text="This application involving a several ranked and comparison methods in order to "
+        self.About_Label.configure(text="This application is involving a several ranked and comparison methods in order to "
                                         "analyze texts based on style recognition.\nThe algorithm flow works according "
                                         "to PTHG algorithm which described in Prof. Zeev (Vladimir) Volkovich's article - "
                                         "\n\"Patterning of writing style evolution by means of dynamic similarity\"\n\nThe application was written by\nHadar Rahamim and Aviram Kunio")
