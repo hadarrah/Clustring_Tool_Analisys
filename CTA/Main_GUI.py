@@ -998,7 +998,7 @@ class Toplevel1:
         self.About_Label.configure(text="This application is involving a several ranked and comparison methods in order to "
                                         "analyze texts based on style recognition.\nThe algorithm flow works according "
                                         "to PTHG algorithm which described in Prof. Zeev (Vladimir) Volkovich's article - "
-                                        "\n\"Patterning of writing style evolution by means of dynamic similarity\"\n\nThe application was written by\nHadar Rahamim and Aviram Kunio")
+                                        "\n\"Patterning of writing style evolution by means of dynamic similarity\"\n\nThe application was written by\nHadar Rahamim and Aviram Kounio")
 
         self.CopyRight_Label = tk.Label(top)
         self.CopyRight_Label.place(relx=0.422, rely=0.938, height=21, width=87)
