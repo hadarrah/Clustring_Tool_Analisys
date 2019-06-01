@@ -111,8 +111,6 @@ class main(object):
         words = {}  # dic of highest words in all documents (key= word, value= TfIdf value)
         wordsCount = 0
         totalWordsForChunks = []
-        #for key in self.tfidfDic.keys():
-            #text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
         for value in self.tfidfDic.values():  # each dictionary in Tf-Idf dictionary
             sorted_value = sorted(value.items(),
                                   key=operator.itemgetter(1))  # sorted dictionary by value(=Tf-Idf value)
@@ -124,29 +122,17 @@ class main(object):
                             words.update({k: val})  # update a total dictionary of all highest words from all documents
                             wordsCount += 1
             wordsCount = 0
-        print("The highest words")
-        print(words)
         sorted_dic = sorted(words.items(), key=operator.itemgetter(1))  #sort the 'all highest word from all documents' dic
         sorted_dic.reverse()                                            #inversed sorted dictionary -> max dictionary
-        print("The sorted words")
-        print(sorted_dic)
         counter = 0
         for k, val in sorted_dic:                                       #choose the highest words from all documents according to 'num_of_words_per_doc'
             if counter < self.num_of_words_per_doc:
                 totalWordsForChunks.append(k)
                 counter += 1
-        print("The highest words")
-        print(totalWordsForChunks)
         for key in self.tfidfDic.keys():
             text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
-            print("the original text")
-            print(text)
             text = ' '.join(i for i in text if i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
-            print("The text after filtering")
-            print(text)
             text = text[:self.num_of_words_per_doc]  # resize the list into the correct size
-            print("after resizing")
-            print(text)
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
     def Step4(self):
         """

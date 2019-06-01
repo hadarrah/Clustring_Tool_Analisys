@@ -45321,3 +45321,1472 @@ Document total comparable chunks:  1
                 Document cluster:  1
                         Chunk ID:  0 <-> Chunk Cluster: None
                         Chunk ID:  1 <-> Chunk Cluster: 1
+2019-06-01 15:40:46,018 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:40:46,018 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:40:47,894 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:40:47,894 INFO:Utils.logger: Set Sentences
+2019-06-01 15:40:47,972 INFO:Utils.logger: Build Model
+2019-06-01 15:41:10,701 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 15:41:29,869 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:41:53,094 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.    0.064 0.026 0.069 0.097 0.028 0.063 0.041]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.064 0.    0.093 0.144 0.164 0.061 0.092 0.101]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.026 0.093 0.    0.025 0.056 0.027 0.037 0.002]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.069 0.144 0.025 0.    0.019 0.035 0.004 0.031]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.097 0.164 0.056 0.019 0.    0.015 0.043 0.076]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.028 0.061 0.027 0.035 0.015 0.    0.021 0.005]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.063 0.092 0.037 0.004 0.043 0.021 0.    0.112]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: [[0.041 0.101 0.002 0.031 0.076 0.005 0.112 0.   ]]
+2019-06-01 15:41:54,219 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:41:54,234 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=2
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[5, 0, 2, 3, 4, 6, 7], [1]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.5027750864951456
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=3
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[0, 2], [1], [5, 3, 4, 6, 7]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.18091004254964915
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=4
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[0], [1], [7, 2, 5], [3, 4, 6]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.40844090484220674
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=5
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[0], [1], [2, 7], [3, 6], [4, 5]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.5171244639970304
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=6
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[0], [1], [2, 7], [3, 6], [4], [5]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.39112665303455507
+2019-06-01 15:41:54,234 INFO:Utils.logger: K=7
+2019-06-01 15:41:54,234 INFO:Utils.logger: [[0], [1], [2, 7], [3], [4], [5], [6]]
+2019-06-01 15:41:54,234 INFO:Utils.logger: Silhouette width=0.19512755194511255
+2019-06-01 15:41:54,234 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 15:41:54,234 INFO:Utils.logger: Analyze Data
+2019-06-01 15:41:54,234 INFO:Utils.logger: Number of Documents styles: 4
+2019-06-01 15:41:54,234 INFO:Utils.logger: Number of Chunks styles: 5
+2019-06-01 15:41:54,234 INFO:Utils.logger: Max documents in style: 32
+2019-06-01 15:41:54,234 INFO:Utils.logger: Min documents in style: 0
+2019-06-01 15:41:54,234 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 15:41:54,234 INFO:Utils.logger: Number of Documents: 37
+2019-06-01 15:41:54,234 INFO:Utils.logger: Number of clusters: 5
+2019-06-01 15:41:54,234 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 15:41:54,234 INFO:Utils.logger: 
+                   Document name:  1_Bereshit.txt
+                     Document ID:  0
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  2_Shmot.txt
+                     Document ID:  1
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  3_Va'Ykra.txt
+                     Document ID:  2
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  4_Ba'Midbar.txt
+                     Document ID:  3
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 1
+                        Chunk ID:  11 <-> Chunk Cluster: 2
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  5_Dvarim.txt
+                     Document ID:  4
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  6_Yehoshua.txt
+                     Document ID:  5
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  7_Shoftim.txt
+                     Document ID:  6
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  8_Shmuel_A.txt
+                     Document ID:  7
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,250 INFO:Utils.logger: 
+                   Document name:  9_Shmuel_B.txt
+                     Document ID:  8
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 3
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  10_Melachim_A.txt
+                     Document ID:  9
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  11_Melachim_B.txt
+                     Document ID:  10
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  12_Yshaiahu.txt
+                     Document ID:  11
+           Document total chunks:  8
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  13_Yrmiahu.txt
+                     Document ID:  12
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  14_Yehezkel.txt
+                     Document ID:  13
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 15:41:54,266 INFO:Utils.logger: 
+                   Document name:  15_Hoshea.txt
+                     Document ID:  14
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  16_Yoel.txt
+                     Document ID:  15
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  17_Amos.txt
+                     Document ID:  16
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  18_Ovadia.txt
+                     Document ID:  17
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  19_Yona.txt
+                     Document ID:  18
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  20_Micha.txt
+                     Document ID:  19
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  21_Nahum.txt
+                     Document ID:  20
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  22_Havakuk.txt
+                     Document ID:  21
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  23_Zefania.txt
+                     Document ID:  22
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  24_Hagai.txt
+                     Document ID:  23
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  25_Zecharia.txt
+                     Document ID:  24
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 15:41:54,281 INFO:Utils.logger: 
+                   Document name:  26_Malahi.txt
+                     Document ID:  25
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  27_Tehilim.txt
+                     Document ID:  26
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  4
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 4
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  28_Mishlei.txt
+                     Document ID:  27
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  29_Yiov.txt
+                     Document ID:  28
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  30_Shir Ha'Shirim.txt
+                     Document ID:  29
+           Document total chunks:  9
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  31_Ruth.txt
+                     Document ID:  30
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  32_Eicha.txt
+                     Document ID:  31
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 15:41:54,297 INFO:Utils.logger: 
+                   Document name:  33_Kohelet.txt
+                     Document ID:  32
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 15:41:54,313 INFO:Utils.logger: 
+                   Document name:  34_Ester.txt
+                     Document ID:  33
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  5
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 5
+2019-06-01 15:41:54,313 INFO:Utils.logger: 
+                   Document name:  35_Nehemia.txt
+                     Document ID:  34
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 15:41:54,313 INFO:Utils.logger: 
+                   Document name:  36_Divrei Ha'Yamim_A.txt
+                     Document ID:  35
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  5
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 5
+2019-06-01 15:41:54,313 INFO:Utils.logger: 
+                   Document name:  37_Divrei Ha'Yamim_B.txt
+                     Document ID:  36
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 4
+                        Chunk ID:  11 <-> Chunk Cluster: 3
+2019-06-01 16:28:36,598 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 16:28:36,614 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 16:28:38,474 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 16:28:38,474 INFO:Utils.logger: Set Sentences
+2019-06-01 16:28:38,552 INFO:Utils.logger: Build Model
+2019-06-01 16:28:56,595 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 16:29:12,492 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 16:29:31,968 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 16:29:31,968 INFO:Utils.logger: []
+2019-06-01 16:29:31,968 INFO:Utils.logger: Step 5: PAM
+2019-06-01 16:29:31,968 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 16:29:31,968 ERROR:Utils.logger: 0
+2019-06-01 16:30:36,068 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 16:30:36,068 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 16:30:37,928 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 16:30:37,928 INFO:Utils.logger: Set Sentences
+2019-06-01 16:30:38,006 INFO:Utils.logger: Build Model
+2019-06-01 16:30:55,998 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 16:31:11,792 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 16:31:21,857 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 16:31:21,857 INFO:Utils.logger: []
+2019-06-01 16:31:21,857 INFO:Utils.logger: Step 5: PAM
+2019-06-01 16:31:21,857 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 16:31:21,857 ERROR:Utils.logger: 0
+2019-06-01 16:31:59,677 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 16:31:59,677 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 16:32:01,552 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 16:32:01,552 INFO:Utils.logger: Set Sentences
+2019-06-01 16:32:01,630 INFO:Utils.logger: Build Model
+2019-06-01 16:32:19,633 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 16:32:35,263 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 16:32:35,263 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 16:32:37,248 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 16:32:37,248 INFO:Utils.logger: Set Sentences
+2019-06-01 16:32:37,326 INFO:Utils.logger: Build Model
+2019-06-01 16:32:55,496 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 16:33:11,296 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 16:33:31,819 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.    0.07  0.091 0.107 0.006 0.098 0.012]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.07  0.    0.157 0.158 0.053 0.121 0.06 ]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.091 0.157 0.    0.005 0.027 0.059 0.016]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.107 0.158 0.005 0.    0.074 0.028 0.061]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.006 0.053 0.027 0.074 0.    0.008 0.056]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.098 0.121 0.059 0.028 0.008 0.    0.11 ]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: [[0.012 0.06  0.016 0.061 0.056 0.11  0.   ]]
+2019-06-01 16:33:32,678 INFO:Utils.logger: Step 5: PAM
+2019-06-01 16:33:32,678 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 16:33:32,694 INFO:Utils.logger: K=2
+2019-06-01 16:33:32,694 INFO:Utils.logger: [[4, 0, 2, 3, 5, 6], [1]]
+2019-06-01 16:33:32,694 INFO:Utils.logger: Silhouette width=0.3569446567519314
+2019-06-01 16:33:32,694 INFO:Utils.logger: K=3
+2019-06-01 16:33:32,694 INFO:Utils.logger: [[0, 4, 6], [1], [3, 2, 5]]
+2019-06-01 16:33:32,694 INFO:Utils.logger: Silhouette width=0.4197867699864467
+2019-06-01 16:33:32,694 INFO:Utils.logger: K=4
+2019-06-01 16:33:32,694 INFO:Utils.logger: [[0, 4, 6], [1], [2], [3, 5]]
+2019-06-01 16:33:32,694 INFO:Utils.logger: Silhouette width=-0.007457214230421021
+2019-06-01 16:33:32,694 INFO:Utils.logger: K=5
+2019-06-01 16:33:32,694 INFO:Utils.logger: [[0, 6], [1], [2], [3], [4, 5]]
+2019-06-01 16:33:32,694 INFO:Utils.logger: Silhouette width=0.3393413770508836
+2019-06-01 16:33:32,694 INFO:Utils.logger: K=6
+2019-06-01 16:33:32,694 INFO:Utils.logger: [[0, 6], [1], [2], [3], [4], [5]]
+2019-06-01 16:33:32,694 INFO:Utils.logger: Silhouette width=-0.045214260812389315
+2019-06-01 16:33:32,694 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 16:33:32,694 INFO:Utils.logger: Analyze Data
+2019-06-01 16:33:32,694 INFO:Utils.logger: Number of Documents styles: 2
+2019-06-01 16:33:32,694 INFO:Utils.logger: Number of Chunks styles: 3
+2019-06-01 16:33:32,694 INFO:Utils.logger: Max documents in style: 35
+2019-06-01 16:33:32,694 INFO:Utils.logger: Min documents in style: 0
+2019-06-01 16:33:32,694 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 16:33:32,694 INFO:Utils.logger: Number of Documents: 37
+2019-06-01 16:33:32,694 INFO:Utils.logger: Number of clusters: 3
+2019-06-01 16:33:32,694 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 16:33:32,694 INFO:Utils.logger: 
+                   Document name:  1_Bereshit.txt
+                     Document ID:  74
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:33:32,694 INFO:Utils.logger: 
+                   Document name:  2_Shmot.txt
+                     Document ID:  75
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:33:32,694 INFO:Utils.logger: 
+                   Document name:  3_Va'Ykra.txt
+                     Document ID:  76
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 16:33:32,694 INFO:Utils.logger: 
+                   Document name:  4_Ba'Midbar.txt
+                     Document ID:  77
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 1
+                        Chunk ID:  11 <-> Chunk Cluster: 2
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  5_Dvarim.txt
+                     Document ID:  78
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  6_Yehoshua.txt
+                     Document ID:  79
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  7_Shoftim.txt
+                     Document ID:  80
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  8_Shmuel_A.txt
+                     Document ID:  81
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  9_Shmuel_B.txt
+                     Document ID:  82
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  10_Melachim_A.txt
+                     Document ID:  83
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:33:32,710 INFO:Utils.logger: 
+                   Document name:  11_Melachim_B.txt
+                     Document ID:  84
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  12_Yshaiahu.txt
+                     Document ID:  85
+           Document total chunks:  8
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  13_Yrmiahu.txt
+                     Document ID:  86
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  14_Yehezkel.txt
+                     Document ID:  87
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  15_Hoshea.txt
+                     Document ID:  88
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  16_Yoel.txt
+                     Document ID:  89
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  17_Amos.txt
+                     Document ID:  90
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  18_Ovadia.txt
+                     Document ID:  91
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:33:32,725 INFO:Utils.logger: 
+                   Document name:  19_Yona.txt
+                     Document ID:  92
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  20_Micha.txt
+                     Document ID:  93
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  21_Nahum.txt
+                     Document ID:  94
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  22_Havakuk.txt
+                     Document ID:  95
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  23_Zefania.txt
+                     Document ID:  96
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  24_Hagai.txt
+                     Document ID:  97
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  25_Zecharia.txt
+                     Document ID:  98
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  26_Malahi.txt
+                     Document ID:  99
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  27_Tehilim.txt
+                     Document ID:  100
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 3
+2019-06-01 16:33:32,741 INFO:Utils.logger: 
+                   Document name:  28_Mishlei.txt
+                     Document ID:  101
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  29_Yiov.txt
+                     Document ID:  102
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  30_Shir Ha'Shirim.txt
+                     Document ID:  103
+           Document total chunks:  9
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  31_Ruth.txt
+                     Document ID:  104
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  32_Eicha.txt
+                     Document ID:  105
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  33_Kohelet.txt
+                     Document ID:  106
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  34_Ester.txt
+                     Document ID:  107
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 3
+2019-06-01 16:33:32,757 INFO:Utils.logger: 
+                   Document name:  35_Nehemia.txt
+                     Document ID:  108
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:33:32,772 INFO:Utils.logger: 
+                   Document name:  36_Divrei Ha'Yamim_A.txt
+                     Document ID:  109
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 1
+2019-06-01 16:33:32,772 INFO:Utils.logger: 
+                   Document name:  37_Divrei Ha'Yamim_B.txt
+                     Document ID:  110
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 3
+                        Chunk ID:  11 <-> Chunk Cluster: 1
+2019-06-01 16:33:44,075 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 16:34:05,263 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.    0.074 0.083 0.093 0.006 0.076 0.024]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.074 0.    0.137 0.137 0.05  0.092 0.044]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.083 0.137 0.    0.006 0.019 0.057 0.012]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.093 0.137 0.006 0.    0.082 0.021 0.065]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.006 0.05  0.019 0.082 0.    0.018 0.042]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.076 0.092 0.057 0.021 0.018 0.    0.109]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[0.024 0.044 0.012 0.065 0.042 0.109 0.   ]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: Step 5: PAM
+2019-06-01 16:34:06,138 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 16:34:06,138 INFO:Utils.logger: K=2
+2019-06-01 16:34:06,138 INFO:Utils.logger: [[4, 0, 2, 3, 5, 6], [1]]
+2019-06-01 16:34:06,138 INFO:Utils.logger: Silhouette width=0.3106314421157893
+2019-06-01 16:34:06,153 INFO:Utils.logger: K=3
+2019-06-01 16:34:06,153 INFO:Utils.logger: [[0, 4], [1], [2, 3, 5, 6]]
+2019-06-01 16:34:06,153 INFO:Utils.logger: Silhouette width=0.31650995538223226
+2019-06-01 16:34:06,153 INFO:Utils.logger: K=4
+2019-06-01 16:34:06,153 INFO:Utils.logger: [[0, 4], [1], [2, 6], [3, 5]]
+2019-06-01 16:34:06,153 INFO:Utils.logger: Silhouette width=0.5599813878989482
+2019-06-01 16:34:06,153 INFO:Utils.logger: K=5
+2019-06-01 16:34:06,153 INFO:Utils.logger: [[0], [1], [2, 6], [3], [4, 5]]
+2019-06-01 16:34:06,153 INFO:Utils.logger: Silhouette width=-0.071480705225039
+2019-06-01 16:34:06,153 INFO:Utils.logger: K=6
+2019-06-01 16:34:06,153 INFO:Utils.logger: [[0], [1], [2, 6], [3], [4], [5]]
+2019-06-01 16:34:06,153 INFO:Utils.logger: Silhouette width=0.004278916809569671
+2019-06-01 16:34:06,153 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 16:34:06,153 INFO:Utils.logger: Analyze Data
+2019-06-01 16:34:06,153 INFO:Utils.logger: Number of Documents styles: 3
+2019-06-01 16:34:06,153 INFO:Utils.logger: Number of Chunks styles: 4
+2019-06-01 16:34:06,153 INFO:Utils.logger: Max documents in style: 34
+2019-06-01 16:34:06,153 INFO:Utils.logger: Min documents in style: 0
+2019-06-01 16:34:06,153 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 16:34:06,153 INFO:Utils.logger: Number of Documents: 37
+2019-06-01 16:34:06,153 INFO:Utils.logger: Number of clusters: 4
+2019-06-01 16:34:06,153 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 16:34:06,153 INFO:Utils.logger: 
+                   Document name:  1_Bereshit.txt
+                     Document ID:  37
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:34:06,153 INFO:Utils.logger: 
+                   Document name:  2_Shmot.txt
+                     Document ID:  38
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:34:06,153 INFO:Utils.logger: 
+                   Document name:  3_Va'Ykra.txt
+                     Document ID:  39
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 16:34:06,153 INFO:Utils.logger: 
+                   Document name:  4_Ba'Midbar.txt
+                     Document ID:  40
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 1
+                        Chunk ID:  11 <-> Chunk Cluster: 2
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  5_Dvarim.txt
+                     Document ID:  41
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  6_Yehoshua.txt
+                     Document ID:  42
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  7_Shoftim.txt
+                     Document ID:  43
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  8_Shmuel_A.txt
+                     Document ID:  44
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  9_Shmuel_B.txt
+                     Document ID:  45
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  10_Melachim_A.txt
+                     Document ID:  46
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:34:06,169 INFO:Utils.logger: 
+                   Document name:  11_Melachim_B.txt
+                     Document ID:  47
+           Document total chunks:  7
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  12_Yshaiahu.txt
+                     Document ID:  48
+           Document total chunks:  8
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  13_Yrmiahu.txt
+                     Document ID:  49
+           Document total chunks:  10
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  14_Yehezkel.txt
+                     Document ID:  50
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  15_Hoshea.txt
+                     Document ID:  51
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  16_Yoel.txt
+                     Document ID:  52
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  17_Amos.txt
+                     Document ID:  53
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  18_Ovadia.txt
+                     Document ID:  54
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:34:06,185 INFO:Utils.logger: 
+                   Document name:  19_Yona.txt
+                     Document ID:  55
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  20_Micha.txt
+                     Document ID:  56
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  21_Nahum.txt
+                     Document ID:  57
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  22_Havakuk.txt
+                     Document ID:  58
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  23_Zefania.txt
+                     Document ID:  59
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  24_Hagai.txt
+                     Document ID:  60
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  25_Zecharia.txt
+                     Document ID:  61
+           Document total chunks:  1
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  26_Malahi.txt
+                     Document ID:  62
+           Document total chunks:  3
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  27_Tehilim.txt
+                     Document ID:  63
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 3
+2019-06-01 16:34:06,200 INFO:Utils.logger: 
+                   Document name:  28_Mishlei.txt
+                     Document ID:  64
+           Document total chunks:  4
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  29_Yiov.txt
+                     Document ID:  65
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  30_Shir Ha'Shirim.txt
+                     Document ID:  66
+           Document total chunks:  9
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  31_Ruth.txt
+                     Document ID:  67
+           Document total chunks:  6
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  32_Eicha.txt
+                     Document ID:  68
+           Document total chunks:  2
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  33_Kohelet.txt
+                     Document ID:  69
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  34_Ester.txt
+                     Document ID:  70
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  4
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 4
+2019-06-01 16:34:06,216 INFO:Utils.logger: 
+                   Document name:  35_Nehemia.txt
+                     Document ID:  71
+           Document total chunks:  5
+Document total comparable chunks:  0
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+2019-06-01 16:34:06,232 INFO:Utils.logger: 
+                   Document name:  36_Divrei Ha'Yamim_A.txt
+                     Document ID:  72
+           Document total chunks:  11
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 1
+2019-06-01 16:34:06,232 INFO:Utils.logger: 
+                   Document name:  37_Divrei Ha'Yamim_B.txt
+                     Document ID:  73
+           Document total chunks:  12
+Document total comparable chunks:  2
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: None
+                        Chunk ID:  3 <-> Chunk Cluster: None
+                        Chunk ID:  4 <-> Chunk Cluster: None
+                        Chunk ID:  5 <-> Chunk Cluster: None
+                        Chunk ID:  6 <-> Chunk Cluster: None
+                        Chunk ID:  7 <-> Chunk Cluster: None
+                        Chunk ID:  8 <-> Chunk Cluster: None
+                        Chunk ID:  9 <-> Chunk Cluster: None
+                        Chunk ID:  10 <-> Chunk Cluster: 4
+                        Chunk ID:  11 <-> Chunk Cluster: 3
