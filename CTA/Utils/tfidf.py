@@ -1,4 +1,4 @@
-def compute_tfidf(self, docCollection):
+def compute_tfidf(docCollection):
     """
     Compute tf idf score fol all words in the documents
     :return:
@@ -16,11 +16,11 @@ def compute_tfidf(self, docCollection):
     for bow in bowArr:
         wordDic = (dict.fromkeys(wordSet, 0))  # build dictionary of zeros for each text(bow)
         for word in bow:
-            wordDic[word] += 1  # update number of word of each text i te dict
-        tf = computeTf(self, wordDic, len(bow))  # compute tf value for each document
+            wordDic[word] += 1  # update number of word of each text i to dict
+        tf = computeTf( wordDic, len(bow))  # compute tf value for each document
         tfBow.append(tf)
         wordD.append(wordDic)  # build list of dicts
-    idfs = computeIDF(self, wordD)  # compute idf value
+    idfs = computeIDF(wordD)  # compute idf value
 
     """cumpute of tfidf= tf*idf"""
     for t in tfBow:
@@ -32,7 +32,7 @@ def compute_tfidf(self, docCollection):
     return tfidfVal  # return dic: key=word, value= tf idf value
 
 
-def computeTf(self, wordDict, len):
+def computeTf( wordDict, len):
     """
         Compute de Tf function
     :param wordDict:
@@ -46,7 +46,7 @@ def computeTf(self, wordDict, len):
     return tfDict
 
 
-def computeIDF(self, documents):
+def computeIDF(documents):
     '''
     Compute the Idf function
     :param documents:

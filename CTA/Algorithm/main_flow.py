@@ -20,7 +20,7 @@ class main(object):
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        #self.log = logger.add_log_file(self.log, config)
+        # self.log = logger.add_log_file(self.log, config)
 
     def run(self, top):
         self.log.info("NEW REGRESSION IS STARTING!")
@@ -69,7 +69,6 @@ class main(object):
         # for debug
         self.print_result_to_log()
 
-
     def get_stage(self):
         return self.stage
 
@@ -91,7 +90,7 @@ class main(object):
             self.docList.append(Doc1)  # build list of document objects to Word2Vec
 
         # --Creating the Tf-Idf dictionary--#
-        self.tfidfDic = tfidf.compute_tfidf("", self.docCollection)
+        self.tfidfDic = tfidf.compute_tfidf(self.docCollection)
 
     def Step2(self):
         """
@@ -109,26 +108,46 @@ class main(object):
         Build and create chunks based on TF-IDF score.
         :return:
         """
-        words = []  # list of good words
+        words = {}  # dic of highest words in all documents (key= word, value= TfIdf value)
         wordsCount = 0
+        totalWordsForChunks = []
+        #for key in self.tfidfDic.keys():
+            #text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
+        for value in self.tfidfDic.values():  # each dictionary in Tf-Idf dictionary
+            sorted_value = sorted(value.items(),
+                                  key=operator.itemgetter(1))  # sorted dictionary by value(=Tf-Idf value)
+            sorted_value.reverse()  # inversed sorted dictionary -> max dictionary
+            for k, val in sorted_value:
+                if wordsCount < self.num_of_words_per_doc:  # while we did'nt get the num of words' count
+                    if val != 0:  # ignore the words with value 0
+                        if self.model.exist_in_vocab(k):
+                            words.update({k: val})  # update a total dictionary of all highest words from all documents
+                            wordsCount += 1
+            wordsCount = 0
+        print("The highest words")
+        print(words)
+        sorted_dic = sorted(words.items(), key=operator.itemgetter(1))  #sort the 'all highest word from all documents' dic
+        sorted_dic.reverse()                                            #inversed sorted dictionary -> max dictionary
+        print("The sorted words")
+        print(sorted_dic)
+        counter = 0
+        for k, val in sorted_dic:                                       #choose the highest words from all documents according to 'num_of_words_per_doc'
+            if counter < self.num_of_words_per_doc:
+                totalWordsForChunks.append(k)
+                counter += 1
+        print("The highest words")
+        print(totalWordsForChunks)
         for key in self.tfidfDic.keys():
             text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
-            for value in self.tfidfDic.values():  # each dictionary in Tf-Idf dictionary
-                sorted_value = sorted(value.items(),
-                                      key=operator.itemgetter(1))  # sorted dictionary by value(=Tf-Idf value)
-                sorted_value.reverse()  # inversed sorted dictionary -> max dictionary
-                for k, val in sorted_value:
-                    if wordsCount < self.num_of_words_per_doc:  # while we don't get the s(=num of words) count
-                        if val != 0:  # ignore the words with value 0
-                            if self.model.exist_in_vocab(k):
-                                words.append(k)  # build list of s highest tf-idf value that in the vocab
-                            wordsCount += 1
-                wordsCount = 0
-            text = ' '.join(i for i in text if i in words).split()  # delete from the original text the unnecessary words
+            print("the original text")
+            print(text)
+            text = ' '.join(i for i in text if i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
+            print("The text after filtering")
+            print(text)
             text = text[:self.num_of_words_per_doc]  # resize the list into the correct size
-            words = []
+            print("after resizing")
+            print(text)
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
-
     def Step4(self):
         """
         Build the distance metric.
@@ -182,4 +201,3 @@ if __name__ == "__main__":
     # Unitest
     config = configuration.config().setup()
     main = main(config, "blabla", None)
-

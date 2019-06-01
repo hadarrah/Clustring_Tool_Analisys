@@ -44260,3 +44260,1064 @@ Document total comparable chunks:  5
                         Chunk ID:  4 <-> Chunk Cluster: 3
                         Chunk ID:  5 <-> Chunk Cluster: 2
                         Chunk ID:  6 <-> Chunk Cluster: 1
+2019-06-01 11:33:57,000 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 11:33:57,000 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 11:33:57,109 ERROR:Utils.logger: computeIDF() missing 1 required positional argument: 'documents'
+2019-06-01 11:34:55,215 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 11:34:55,215 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 11:34:55,293 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 11:34:55,293 INFO:Utils.logger: Set Sentences
+2019-06-01 11:34:55,309 INFO:Utils.logger: Build Model
+2019-06-01 11:34:57,606 INFO:Utils.logger: Word2Vec(vocab=11299, size=20, alpha=0.025)
+2019-06-01 11:34:59,352 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 11:34:59,492 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 11:34:59,539 INFO:Utils.logger: [[0.    0.426 0.395 0.081]]
+2019-06-01 11:34:59,539 INFO:Utils.logger: [[0.426 0.    0.815 0.756]]
+2019-06-01 11:34:59,539 INFO:Utils.logger: [[0.395 0.815 0.    0.824]]
+2019-06-01 11:34:59,539 INFO:Utils.logger: [[0.081 0.756 0.824 0.   ]]
+2019-06-01 11:34:59,539 INFO:Utils.logger: Step 5: PAM
+2019-06-01 11:34:59,571 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 11:34:59,571 INFO:Utils.logger: K=2
+2019-06-01 11:34:59,571 INFO:Utils.logger: [[0, 2, 3], [1]]
+2019-06-01 11:34:59,571 INFO:Utils.logger: Silhouette width=0.27383580912139793
+2019-06-01 11:34:59,571 INFO:Utils.logger: K=3
+2019-06-01 11:34:59,571 INFO:Utils.logger: [[0, 3], [1], [2]]
+2019-06-01 11:34:59,571 INFO:Utils.logger: Silhouette width=0.42186114278010195
+2019-06-01 11:34:59,571 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 11:34:59,571 INFO:Utils.logger: Analyze Data
+2019-06-01 11:34:59,586 INFO:Utils.logger: Number of Documents styles: 3
+2019-06-01 11:34:59,586 INFO:Utils.logger: Number of Chunks styles: 3
+2019-06-01 11:34:59,586 INFO:Utils.logger: Max documents in style: 2
+2019-06-01 11:34:59,586 INFO:Utils.logger: Min documents in style: 1
+2019-06-01 11:34:59,586 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 11:34:59,586 INFO:Utils.logger: Number of Documents: 4
+2019-06-01 11:34:59,586 INFO:Utils.logger: Number of clusters: 3
+2019-06-01 11:34:59,586 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 11:34:59,586 INFO:Utils.logger: 
+                   Document name:  1_Bereshit.txt
+                     Document ID:  0
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 1
+2019-06-01 11:34:59,586 INFO:Utils.logger: 
+                   Document name:  2_Shmot.txt
+                     Document ID:  1
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  2
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 2
+2019-06-01 11:34:59,586 INFO:Utils.logger: 
+                   Document name:  3_Va'Ykra.txt
+                     Document ID:  2
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  3
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 3
+2019-06-01 11:34:59,586 INFO:Utils.logger: 
+                   Document name:  4_Ba'Midbar.txt
+                     Document ID:  3
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 1
+2019-06-01 11:45:21,362 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 11:45:21,362 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 11:45:21,455 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 11:45:21,455 INFO:Utils.logger: Set Sentences
+2019-06-01 11:45:21,471 INFO:Utils.logger: Build Model
+2019-06-01 11:45:23,503 INFO:Utils.logger: Word2Vec(vocab=9457, size=20, alpha=0.025)
+2019-06-01 11:45:24,831 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 11:45:24,909 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 11:45:24,941 INFO:Utils.logger: [[0.    0.157 0.455]]
+2019-06-01 11:45:24,941 INFO:Utils.logger: [[0.157 0.    0.204]]
+2019-06-01 11:45:24,941 INFO:Utils.logger: [[0.455 0.204 0.   ]]
+2019-06-01 11:45:24,941 INFO:Utils.logger: Step 5: PAM
+2019-06-01 11:45:24,956 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 11:45:24,956 INFO:Utils.logger: K=2
+2019-06-01 11:45:24,956 INFO:Utils.logger: [[0], [1, 2]]
+2019-06-01 11:45:24,956 INFO:Utils.logger: Silhouette width=0.10626141251818512
+2019-06-01 11:45:24,956 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 11:45:24,956 INFO:Utils.logger: Analyze Data
+2019-06-01 11:45:24,956 INFO:Utils.logger: Number of Documents styles: 2
+2019-06-01 11:45:24,956 INFO:Utils.logger: Number of Chunks styles: 2
+2019-06-01 11:45:24,956 INFO:Utils.logger: Max documents in style: 2
+2019-06-01 11:45:24,956 INFO:Utils.logger: Min documents in style: 1
+2019-06-01 11:45:24,956 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 11:45:24,956 INFO:Utils.logger: Number of Documents: 3
+2019-06-01 11:45:24,956 INFO:Utils.logger: Number of clusters: 2
+2019-06-01 11:45:24,956 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 11:45:24,956 INFO:Utils.logger: 
+                   Document name:  1_Bereshit.txt
+                     Document ID:  0
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 1
+2019-06-01 11:45:24,956 INFO:Utils.logger: 
+                   Document name:  2_Shmot.txt
+                     Document ID:  1
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  2
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 2
+2019-06-01 11:45:24,956 INFO:Utils.logger: 
+                   Document name:  3_Va'Ykra.txt
+                     Document ID:  2
+           Document total chunks:  3
+Document total comparable chunks:  1
+                Document cluster:  2
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: None
+                        Chunk ID:  2 <-> Chunk Cluster: 2
+2019-06-01 12:00:22,121 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:00:22,121 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:00:22,183 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:00:22,183 INFO:Utils.logger: Set Sentences
+2019-06-01 12:00:22,183 INFO:Utils.logger: Build Model
+2019-06-01 12:00:24,012 INFO:Utils.logger: Word2Vec(vocab=9457, size=20, alpha=0.025)
+2019-06-01 12:00:25,309 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:00:25,387 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:00:25,387 INFO:Utils.logger: []
+2019-06-01 12:00:25,387 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:00:25,387 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:00:25,387 ERROR:Utils.logger: 0
+2019-06-01 12:01:39,343 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:01:39,343 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:01:39,406 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:01:39,406 INFO:Utils.logger: Set Sentences
+2019-06-01 12:01:39,421 INFO:Utils.logger: Build Model
+2019-06-01 12:01:41,203 INFO:Utils.logger: Word2Vec(vocab=9457, size=20, alpha=0.025)
+2019-06-01 12:01:42,566 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:01:42,629 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:01:42,629 INFO:Utils.logger: []
+2019-06-01 12:01:42,629 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:01:42,629 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:01:42,629 ERROR:Utils.logger: 0
+2019-06-01 12:05:18,820 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:05:18,820 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:05:18,882 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:05:18,882 INFO:Utils.logger: Set Sentences
+2019-06-01 12:05:18,898 INFO:Utils.logger: Build Model
+2019-06-01 12:05:20,742 INFO:Utils.logger: Word2Vec(vocab=9457, size=20, alpha=0.025)
+2019-06-01 12:05:22,071 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:05:22,134 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:05:22,134 INFO:Utils.logger: []
+2019-06-01 12:05:22,134 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:05:22,134 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:05:22,134 ERROR:Utils.logger: 0
+2019-06-01 12:07:39,203 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:07:39,203 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:07:39,219 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:07:39,219 INFO:Utils.logger: Set Sentences
+2019-06-01 12:07:39,219 INFO:Utils.logger: Build Model
+2019-06-01 12:07:39,234 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:07:39,266 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:07:39,266 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:07:39,266 INFO:Utils.logger: []
+2019-06-01 12:07:39,266 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:07:39,266 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:07:39,266 ERROR:Utils.logger: 0
+2019-06-01 12:07:41,467 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:07:41,467 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:07:41,472 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:07:41,472 INFO:Utils.logger: Set Sentences
+2019-06-01 12:07:41,472 INFO:Utils.logger: Build Model
+2019-06-01 12:07:41,492 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:07:41,526 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:07:41,526 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:07:41,526 INFO:Utils.logger: []
+2019-06-01 12:07:41,526 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:07:41,532 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:07:41,532 ERROR:Utils.logger: 0
+2019-06-01 12:08:01,945 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:08:01,945 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:08:01,945 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:08:01,945 INFO:Utils.logger: Set Sentences
+2019-06-01 12:08:01,945 INFO:Utils.logger: Build Model
+2019-06-01 12:08:01,976 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:08:01,992 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:08:01,992 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:08:01,992 INFO:Utils.logger: []
+2019-06-01 12:08:02,008 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:08:02,008 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:08:02,008 ERROR:Utils.logger: 0
+2019-06-01 12:08:56,656 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:08:56,656 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:08:56,672 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:08:56,672 INFO:Utils.logger: Set Sentences
+2019-06-01 12:08:56,672 INFO:Utils.logger: Build Model
+2019-06-01 12:08:56,687 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:08:56,719 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:08:56,719 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:08:56,719 INFO:Utils.logger: []
+2019-06-01 12:08:56,719 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:08:56,734 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:08:56,734 ERROR:Utils.logger: 0
+2019-06-01 12:10:54,904 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:10:54,904 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:10:54,920 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:10:54,920 INFO:Utils.logger: Set Sentences
+2019-06-01 12:10:54,920 INFO:Utils.logger: Build Model
+2019-06-01 12:10:54,935 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:10:54,967 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:10:54,967 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:10:54,967 INFO:Utils.logger: []
+2019-06-01 12:10:54,967 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:10:54,967 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:10:54,967 ERROR:Utils.logger: 0
+2019-06-01 12:11:59,702 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:11:59,702 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:11:59,718 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:11:59,718 INFO:Utils.logger: Set Sentences
+2019-06-01 12:11:59,718 INFO:Utils.logger: Build Model
+2019-06-01 12:11:59,733 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:11:59,764 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:11:59,764 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:11:59,764 INFO:Utils.logger: []
+2019-06-01 12:11:59,764 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:11:59,780 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:11:59,780 ERROR:Utils.logger: 0
+2019-06-01 12:13:12,574 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:13:12,574 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:13:12,574 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:13:12,574 INFO:Utils.logger: Set Sentences
+2019-06-01 12:13:12,574 INFO:Utils.logger: Build Model
+2019-06-01 12:13:12,605 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:13:12,621 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:13:12,637 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:13:12,637 INFO:Utils.logger: []
+2019-06-01 12:13:12,637 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:13:12,637 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:13:12,637 ERROR:Utils.logger: 0
+2019-06-01 12:30:37,740 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:30:37,740 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:30:37,756 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:30:37,756 INFO:Utils.logger: Set Sentences
+2019-06-01 12:30:37,756 INFO:Utils.logger: Build Model
+2019-06-01 12:30:37,787 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:30:37,819 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:30:37,819 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:30:37,819 INFO:Utils.logger: []
+2019-06-01 12:30:37,819 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:30:37,834 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:30:37,834 ERROR:Utils.logger: 0
+2019-06-01 12:55:11,870 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:55:11,870 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:55:11,886 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:55:11,886 INFO:Utils.logger: Set Sentences
+2019-06-01 12:55:11,886 INFO:Utils.logger: Build Model
+2019-06-01 12:55:11,901 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:55:11,933 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:55:11,948 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:55:11,948 INFO:Utils.logger: []
+2019-06-01 12:55:11,948 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:55:11,948 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:55:11,948 ERROR:Utils.logger: 0
+2019-06-01 12:58:48,247 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 12:58:48,247 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 12:58:48,262 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 12:58:48,262 INFO:Utils.logger: Set Sentences
+2019-06-01 12:58:48,262 INFO:Utils.logger: Build Model
+2019-06-01 12:58:48,278 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 12:58:48,309 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 12:58:48,325 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 12:58:48,325 INFO:Utils.logger: []
+2019-06-01 12:58:48,325 INFO:Utils.logger: Step 5: PAM
+2019-06-01 12:58:48,325 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 12:58:48,325 ERROR:Utils.logger: 0
+2019-06-01 13:00:42,873 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:00:42,873 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:00:42,889 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:00:42,889 INFO:Utils.logger: Set Sentences
+2019-06-01 13:00:42,889 INFO:Utils.logger: Build Model
+2019-06-01 13:00:42,904 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:00:42,936 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:00:42,951 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:00:42,951 INFO:Utils.logger: []
+2019-06-01 13:00:42,951 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:00:42,951 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:00:42,951 ERROR:Utils.logger: 0
+2019-06-01 13:04:09,264 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:04:09,264 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:04:09,264 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:04:09,264 INFO:Utils.logger: Set Sentences
+2019-06-01 13:04:09,280 INFO:Utils.logger: Build Model
+2019-06-01 13:04:09,295 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:04:09,327 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:04:09,342 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:04:09,342 INFO:Utils.logger: []
+2019-06-01 13:04:09,342 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:04:09,342 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:04:09,342 ERROR:Utils.logger: 0
+2019-06-01 13:17:04,132 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:17:04,132 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:17:04,132 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:17:04,132 INFO:Utils.logger: Set Sentences
+2019-06-01 13:17:04,132 INFO:Utils.logger: Build Model
+2019-06-01 13:17:04,179 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:17:04,226 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:22:01,872 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:22:01,872 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:22:01,887 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:22:01,887 INFO:Utils.logger: Set Sentences
+2019-06-01 13:22:01,887 INFO:Utils.logger: Build Model
+2019-06-01 13:22:01,903 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:22:01,934 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:22:01,934 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:22:01,934 INFO:Utils.logger: []
+2019-06-01 13:22:01,934 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:22:01,950 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:22:01,950 ERROR:Utils.logger: 0
+2019-06-01 13:32:59,343 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:32:59,343 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:32:59,343 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:32:59,343 INFO:Utils.logger: Set Sentences
+2019-06-01 13:32:59,343 INFO:Utils.logger: Build Model
+2019-06-01 13:32:59,375 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:32:59,390 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:32:59,406 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:32:59,406 INFO:Utils.logger: []
+2019-06-01 13:32:59,406 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:32:59,406 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:32:59,406 ERROR:Utils.logger: 0
+2019-06-01 13:37:19,937 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:37:19,937 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:37:19,937 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:37:19,937 INFO:Utils.logger: Set Sentences
+2019-06-01 13:37:19,937 INFO:Utils.logger: Build Model
+2019-06-01 13:37:19,968 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:37:20,000 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:37:20,000 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:37:20,000 INFO:Utils.logger: []
+2019-06-01 13:37:20,000 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:37:20,015 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:37:20,015 ERROR:Utils.logger: 0
+2019-06-01 13:37:53,924 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:37:53,924 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:37:53,924 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:37:53,924 INFO:Utils.logger: Set Sentences
+2019-06-01 13:37:53,924 INFO:Utils.logger: Build Model
+2019-06-01 13:37:53,955 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:37:53,987 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:37:53,987 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:37:53,987 INFO:Utils.logger: []
+2019-06-01 13:37:53,987 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:37:53,987 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:37:53,987 ERROR:Utils.logger: 0
+2019-06-01 13:41:19,856 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:41:19,856 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:41:19,871 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:41:19,871 INFO:Utils.logger: Set Sentences
+2019-06-01 13:41:19,871 INFO:Utils.logger: Build Model
+2019-06-01 13:41:19,903 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:41:19,918 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:41:19,918 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:41:19,918 INFO:Utils.logger: []
+2019-06-01 13:41:19,934 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:41:19,934 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:41:19,934 ERROR:Utils.logger: 0
+2019-06-01 13:45:02,666 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:45:02,666 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:45:02,681 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:45:02,681 INFO:Utils.logger: Set Sentences
+2019-06-01 13:45:02,681 INFO:Utils.logger: Build Model
+2019-06-01 13:45:02,712 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:45:02,728 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:45:02,728 ERROR:Utils.logger: too many values to unpack (expected 2)
+2019-06-01 13:46:26,009 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:46:26,009 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:46:26,009 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:46:26,009 INFO:Utils.logger: Set Sentences
+2019-06-01 13:46:26,009 INFO:Utils.logger: Build Model
+2019-06-01 13:46:26,041 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:46:26,072 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:46:26,072 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 13:46:26,072 INFO:Utils.logger: []
+2019-06-01 13:46:26,072 INFO:Utils.logger: Step 5: PAM
+2019-06-01 13:46:26,072 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 13:46:26,072 ERROR:Utils.logger: 0
+2019-06-01 13:48:15,557 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:48:15,557 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:48:15,557 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:48:15,557 INFO:Utils.logger: Set Sentences
+2019-06-01 13:48:15,557 INFO:Utils.logger: Build Model
+2019-06-01 13:48:15,588 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:48:15,604 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:48:15,604 ERROR:Utils.logger: unhashable type: 'slice'
+2019-06-01 13:50:12,154 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:50:12,170 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:50:12,170 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:50:12,170 INFO:Utils.logger: Set Sentences
+2019-06-01 13:50:12,170 INFO:Utils.logger: Build Model
+2019-06-01 13:50:12,185 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:50:12,217 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:50:12,217 ERROR:Utils.logger: unhashable type: 'slice'
+2019-06-01 13:51:07,238 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:51:07,238 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:51:07,238 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:51:07,238 INFO:Utils.logger: Set Sentences
+2019-06-01 13:51:07,238 INFO:Utils.logger: Build Model
+2019-06-01 13:51:07,269 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:51:07,285 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:51:07,285 ERROR:Utils.logger: unhashable type: 'slice'
+2019-06-01 13:52:39,570 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 13:52:39,570 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 13:52:39,570 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 13:52:39,570 INFO:Utils.logger: Set Sentences
+2019-06-01 13:52:39,570 INFO:Utils.logger: Build Model
+2019-06-01 13:52:39,601 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 13:52:39,632 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 13:52:39,632 ERROR:Utils.logger: unhashable type: 'slice'
+2019-06-01 14:00:27,299 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:00:27,299 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:00:27,299 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:00:27,299 INFO:Utils.logger: Set Sentences
+2019-06-01 14:00:27,299 INFO:Utils.logger: Build Model
+2019-06-01 14:00:27,361 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:00:27,392 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:01:38,364 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:01:38,364 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:01:38,364 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:01:38,364 INFO:Utils.logger: Set Sentences
+2019-06-01 14:01:38,364 INFO:Utils.logger: Build Model
+2019-06-01 14:01:38,426 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:01:38,473 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:01:59,433 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:01:59,433 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:01:59,433 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:01:59,433 INFO:Utils.logger: Set Sentences
+2019-06-01 14:01:59,433 INFO:Utils.logger: Build Model
+2019-06-01 14:01:59,480 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:01:59,542 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:05:02,203 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:05:02,203 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:05:02,203 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:05:02,203 INFO:Utils.logger: Set Sentences
+2019-06-01 14:05:02,219 INFO:Utils.logger: Build Model
+2019-06-01 14:05:02,265 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:05:02,312 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:06:02,552 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:06:02,552 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:06:02,552 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:06:02,552 INFO:Utils.logger: Set Sentences
+2019-06-01 14:06:02,552 INFO:Utils.logger: Build Model
+2019-06-01 14:06:02,583 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:06:02,614 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:06:02,614 ERROR:Utils.logger: '<' not supported between instances of 'dict' and 'int'
+2019-06-01 14:07:11,239 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:07:11,239 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:07:11,239 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:07:11,239 INFO:Utils.logger: Set Sentences
+2019-06-01 14:07:11,239 INFO:Utils.logger: Build Model
+2019-06-01 14:07:11,270 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:07:11,301 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:07:11,301 ERROR:Utils.logger: dictionary update sequence element #0 has length 1; 2 is required
+2019-06-01 14:09:56,998 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:09:56,998 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:09:57,014 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:09:57,014 INFO:Utils.logger: Set Sentences
+2019-06-01 14:09:57,014 INFO:Utils.logger: Build Model
+2019-06-01 14:09:57,045 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:09:57,060 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:09:57,060 ERROR:Utils.logger: dictionary update sequence element #0 has length 1; 2 is required
+2019-06-01 14:17:06,225 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:17:06,225 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:17:06,232 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:17:06,232 INFO:Utils.logger: Set Sentences
+2019-06-01 14:17:06,232 INFO:Utils.logger: Build Model
+2019-06-01 14:17:06,259 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:17:06,286 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:17:06,290 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:17:06,291 INFO:Utils.logger: []
+2019-06-01 14:17:06,293 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:17:06,297 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:17:06,297 ERROR:Utils.logger: 0
+2019-06-01 14:17:47,161 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:17:47,162 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:17:47,168 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:17:47,169 INFO:Utils.logger: Set Sentences
+2019-06-01 14:17:47,170 INFO:Utils.logger: Build Model
+2019-06-01 14:17:47,199 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:17:47,226 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:17:47,229 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:17:47,230 INFO:Utils.logger: []
+2019-06-01 14:17:47,233 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:17:47,237 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:17:47,237 ERROR:Utils.logger: 0
+2019-06-01 14:20:40,148 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:20:40,149 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:20:40,154 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:20:40,155 INFO:Utils.logger: Set Sentences
+2019-06-01 14:20:40,155 INFO:Utils.logger: Build Model
+2019-06-01 14:20:40,179 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:20:40,203 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:20:40,206 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:20:40,206 INFO:Utils.logger: []
+2019-06-01 14:20:40,210 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:20:40,212 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:20:40,212 ERROR:Utils.logger: 0
+2019-06-01 14:23:10,307 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:23:10,307 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:23:10,314 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:23:10,314 INFO:Utils.logger: Set Sentences
+2019-06-01 14:23:10,315 INFO:Utils.logger: Build Model
+2019-06-01 14:23:10,342 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:23:10,370 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:23:10,374 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:23:10,374 INFO:Utils.logger: []
+2019-06-01 14:23:10,377 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:23:10,380 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:23:10,380 ERROR:Utils.logger: 0
+2019-06-01 14:23:42,816 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:23:42,817 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:23:42,823 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:23:42,824 INFO:Utils.logger: Set Sentences
+2019-06-01 14:23:42,824 INFO:Utils.logger: Build Model
+2019-06-01 14:23:42,850 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:23:42,874 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:23:42,878 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:23:42,878 INFO:Utils.logger: []
+2019-06-01 14:23:42,880 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:23:42,882 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:23:42,883 ERROR:Utils.logger: 0
+2019-06-01 14:26:55,924 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:26:55,924 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:26:55,931 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:26:55,931 INFO:Utils.logger: Set Sentences
+2019-06-01 14:26:55,932 INFO:Utils.logger: Build Model
+2019-06-01 14:26:55,959 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:26:55,983 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:26:55,986 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:26:55,987 INFO:Utils.logger: []
+2019-06-01 14:26:55,989 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:26:55,992 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:26:55,992 ERROR:Utils.logger: 0
+2019-06-01 14:27:44,585 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:27:44,585 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:27:44,592 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:27:44,592 INFO:Utils.logger: Set Sentences
+2019-06-01 14:27:44,592 INFO:Utils.logger: Build Model
+2019-06-01 14:27:44,619 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:27:44,646 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:27:44,649 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:27:44,649 INFO:Utils.logger: []
+2019-06-01 14:27:44,652 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:27:44,655 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:27:44,655 ERROR:Utils.logger: 0
+2019-06-01 14:30:17,207 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:30:17,207 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:30:17,214 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:30:17,214 INFO:Utils.logger: Set Sentences
+2019-06-01 14:30:17,214 INFO:Utils.logger: Build Model
+2019-06-01 14:30:17,243 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:30:17,273 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:30:17,276 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:30:17,276 INFO:Utils.logger: []
+2019-06-01 14:30:17,279 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:30:17,283 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:30:17,284 ERROR:Utils.logger: 0
+2019-06-01 14:31:10,258 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:31:10,259 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:31:10,267 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:31:10,268 INFO:Utils.logger: Set Sentences
+2019-06-01 14:31:10,269 INFO:Utils.logger: Build Model
+2019-06-01 14:31:10,320 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:31:10,366 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:33:19,669 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:33:19,669 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:33:19,676 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:33:19,676 INFO:Utils.logger: Set Sentences
+2019-06-01 14:33:19,676 INFO:Utils.logger: Build Model
+2019-06-01 14:33:19,702 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:33:19,730 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:33:19,733 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:33:19,734 INFO:Utils.logger: []
+2019-06-01 14:33:19,738 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:33:19,740 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:33:19,741 ERROR:Utils.logger: 0
+2019-06-01 14:34:11,777 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:34:11,777 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:34:11,784 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:34:11,784 INFO:Utils.logger: Set Sentences
+2019-06-01 14:34:11,785 INFO:Utils.logger: Build Model
+2019-06-01 14:34:11,811 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:34:11,837 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:34:11,840 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:34:11,840 INFO:Utils.logger: []
+2019-06-01 14:34:11,844 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:34:11,847 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:34:11,847 ERROR:Utils.logger: 0
+2019-06-01 14:34:48,943 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:34:48,943 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:34:48,950 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:34:48,951 INFO:Utils.logger: Set Sentences
+2019-06-01 14:34:48,951 INFO:Utils.logger: Build Model
+2019-06-01 14:34:48,979 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:34:49,006 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:34:49,009 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:34:49,009 INFO:Utils.logger: []
+2019-06-01 14:34:49,012 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:34:49,015 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:34:49,015 ERROR:Utils.logger: 0
+2019-06-01 14:43:09,444 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:43:09,444 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:43:09,452 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:43:09,452 INFO:Utils.logger: Set Sentences
+2019-06-01 14:43:09,453 INFO:Utils.logger: Build Model
+2019-06-01 14:43:09,478 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:43:09,505 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:43:09,506 ERROR:Utils.logger: 'list' object has no attribute 'values'
+2019-06-01 14:44:06,242 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:44:06,243 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:44:06,250 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:44:06,250 INFO:Utils.logger: Set Sentences
+2019-06-01 14:44:06,250 INFO:Utils.logger: Build Model
+2019-06-01 14:44:06,276 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:44:06,303 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:44:06,303 ERROR:Utils.logger: 'list' object has no attribute 'split'
+2019-06-01 14:44:50,619 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:44:50,619 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:44:50,626 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:44:50,626 INFO:Utils.logger: Set Sentences
+2019-06-01 14:44:50,627 INFO:Utils.logger: Build Model
+2019-06-01 14:44:50,652 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:44:50,676 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:44:50,679 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:44:50,679 INFO:Utils.logger: []
+2019-06-01 14:44:50,681 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:44:50,683 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:44:50,683 ERROR:Utils.logger: 0
+2019-06-01 14:45:52,393 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:45:52,394 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:45:52,400 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:45:52,401 INFO:Utils.logger: Set Sentences
+2019-06-01 14:45:52,401 INFO:Utils.logger: Build Model
+2019-06-01 14:45:52,430 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:45:52,454 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:45:52,455 ERROR:Utils.logger: 'list' object has no attribute 'values'
+2019-06-01 14:47:24,205 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:47:24,205 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:47:24,212 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:47:24,212 INFO:Utils.logger: Set Sentences
+2019-06-01 14:47:24,212 INFO:Utils.logger: Build Model
+2019-06-01 14:47:24,240 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:47:24,267 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:47:24,270 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:47:24,271 INFO:Utils.logger: []
+2019-06-01 14:47:24,274 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:47:24,277 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:47:24,277 ERROR:Utils.logger: 0
+2019-06-01 14:49:27,350 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:49:27,350 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:49:27,356 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:49:27,357 INFO:Utils.logger: Set Sentences
+2019-06-01 14:49:27,357 INFO:Utils.logger: Build Model
+2019-06-01 14:49:27,383 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:49:27,410 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:49:27,415 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:49:27,416 INFO:Utils.logger: []
+2019-06-01 14:49:27,418 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:49:27,422 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:49:27,422 ERROR:Utils.logger: 0
+2019-06-01 14:50:13,660 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:50:13,660 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:50:13,666 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:50:13,667 INFO:Utils.logger: Set Sentences
+2019-06-01 14:50:13,667 INFO:Utils.logger: Build Model
+2019-06-01 14:50:13,693 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:50:13,718 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:50:13,720 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:50:13,721 INFO:Utils.logger: []
+2019-06-01 14:50:13,723 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:50:13,726 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:50:13,727 ERROR:Utils.logger: 0
+2019-06-01 14:51:42,063 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:51:42,063 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:51:42,071 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:51:42,071 INFO:Utils.logger: Set Sentences
+2019-06-01 14:51:42,071 INFO:Utils.logger: Build Model
+2019-06-01 14:51:42,099 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:51:42,127 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:51:42,130 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:51:42,130 INFO:Utils.logger: []
+2019-06-01 14:51:42,133 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:51:42,136 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:51:42,137 ERROR:Utils.logger: 0
+2019-06-01 14:55:50,763 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:55:50,763 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:55:50,779 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:55:50,779 INFO:Utils.logger: Set Sentences
+2019-06-01 14:55:50,779 INFO:Utils.logger: Build Model
+2019-06-01 14:55:50,810 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:55:50,841 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:55:50,841 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 14:55:50,841 INFO:Utils.logger: []
+2019-06-01 14:55:50,841 INFO:Utils.logger: Step 5: PAM
+2019-06-01 14:55:50,841 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 14:55:50,841 ERROR:Utils.logger: 0
+2019-06-01 14:57:41,924 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:57:41,924 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:57:41,924 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:57:41,940 INFO:Utils.logger: Set Sentences
+2019-06-01 14:57:41,940 INFO:Utils.logger: Build Model
+2019-06-01 14:57:41,987 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:57:42,034 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 14:58:33,056 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 14:58:33,056 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 14:58:33,056 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 14:58:33,056 INFO:Utils.logger: Set Sentences
+2019-06-01 14:58:33,072 INFO:Utils.logger: Build Model
+2019-06-01 14:58:33,134 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 14:58:33,197 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:00:06,236 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:00:06,251 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:00:06,251 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:00:06,251 INFO:Utils.logger: Set Sentences
+2019-06-01 15:00:06,251 INFO:Utils.logger: Build Model
+2019-06-01 15:00:06,282 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 15:00:06,298 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:00:06,298 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:00:06,314 INFO:Utils.logger: []
+2019-06-01 15:00:06,314 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:00:06,314 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:00:06,314 ERROR:Utils.logger: 0
+2019-06-01 15:01:00,232 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:01:00,232 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:01:00,232 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:01:00,247 INFO:Utils.logger: Set Sentences
+2019-06-01 15:01:00,247 INFO:Utils.logger: Build Model
+2019-06-01 15:01:00,263 INFO:Utils.logger: Word2Vec(vocab=12, size=20, alpha=0.025)
+2019-06-01 15:01:00,294 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:01:00,294 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:01:00,294 INFO:Utils.logger: []
+2019-06-01 15:01:00,294 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:01:00,294 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:01:00,294 ERROR:Utils.logger: 0
+2019-06-01 15:01:48,472 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:01:48,472 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:01:48,472 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:01:48,472 INFO:Utils.logger: Set Sentences
+2019-06-01 15:01:48,472 INFO:Utils.logger: Build Model
+2019-06-01 15:01:48,503 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:01:48,535 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:01:48,535 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:01:48,535 INFO:Utils.logger: []
+2019-06-01 15:01:48,535 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:01:48,535 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:01:48,535 ERROR:Utils.logger: 0
+2019-06-01 15:02:30,986 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:02:30,986 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:02:31,002 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:02:31,002 INFO:Utils.logger: Set Sentences
+2019-06-01 15:02:31,002 INFO:Utils.logger: Build Model
+2019-06-01 15:02:31,017 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:02:31,049 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:02:31,049 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:02:31,049 INFO:Utils.logger: []
+2019-06-01 15:02:31,049 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:02:31,049 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:02:31,049 ERROR:Utils.logger: 0
+2019-06-01 15:05:17,079 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:05:17,079 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:05:17,095 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:05:17,095 INFO:Utils.logger: Set Sentences
+2019-06-01 15:05:17,095 INFO:Utils.logger: Build Model
+2019-06-01 15:05:17,110 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:05:17,142 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:05:17,142 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:05:17,142 INFO:Utils.logger: []
+2019-06-01 15:05:17,142 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:05:17,142 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:05:17,142 ERROR:Utils.logger: 0
+2019-06-01 15:06:24,006 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:06:24,006 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:06:24,021 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:06:24,021 INFO:Utils.logger: Set Sentences
+2019-06-01 15:06:24,021 INFO:Utils.logger: Build Model
+2019-06-01 15:06:24,037 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:06:24,068 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:06:24,068 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:06:24,068 INFO:Utils.logger: []
+2019-06-01 15:06:24,068 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:06:24,084 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:06:24,084 ERROR:Utils.logger: 0
+2019-06-01 15:07:12,480 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:07:12,480 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:07:12,480 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:07:12,480 INFO:Utils.logger: Set Sentences
+2019-06-01 15:07:12,480 INFO:Utils.logger: Build Model
+2019-06-01 15:07:12,511 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:07:12,527 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:07:12,542 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:07:12,542 INFO:Utils.logger: []
+2019-06-01 15:07:12,542 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:07:12,542 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:07:12,542 ERROR:Utils.logger: 0
+2019-06-01 15:08:36,795 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:08:36,795 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:08:36,795 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:08:36,795 INFO:Utils.logger: Set Sentences
+2019-06-01 15:08:36,795 INFO:Utils.logger: Build Model
+2019-06-01 15:08:36,826 INFO:Utils.logger: Word2Vec(vocab=11, size=20, alpha=0.025)
+2019-06-01 15:08:36,841 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:08:36,857 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:08:36,857 INFO:Utils.logger: []
+2019-06-01 15:08:36,857 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:08:36,857 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:08:36,857 ERROR:Utils.logger: 0
+2019-06-01 15:09:37,821 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:09:37,821 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:09:39,774 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:09:39,774 INFO:Utils.logger: Set Sentences
+2019-06-01 15:09:39,852 INFO:Utils.logger: Build Model
+2019-06-01 15:09:49,904 INFO:Utils.logger: Word2Vec(vocab=40847, size=20, alpha=0.025)
+2019-06-01 15:09:57,995 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:10:01,574 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:10:01,574 INFO:Utils.logger: []
+2019-06-01 15:10:01,574 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:10:01,574 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:10:01,590 ERROR:Utils.logger: 0
+2019-06-01 15:12:04,139 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:12:04,139 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:12:05,983 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:12:05,983 INFO:Utils.logger: Set Sentences
+2019-06-01 15:12:06,061 INFO:Utils.logger: Build Model
+2019-06-01 15:12:16,035 INFO:Utils.logger: Word2Vec(vocab=40311, size=20, alpha=0.025)
+2019-06-01 15:12:23,866 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:12:37,826 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:12:37,826 INFO:Utils.logger: []
+2019-06-01 15:12:37,841 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:12:37,841 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:12:37,841 ERROR:Utils.logger: 0
+2019-06-01 15:14:46,010 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:14:46,010 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:14:47,823 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:14:47,823 INFO:Utils.logger: Set Sentences
+2019-06-01 15:14:47,901 INFO:Utils.logger: Build Model
+2019-06-01 15:15:06,526 INFO:Utils.logger: Word2Vec(vocab=40311, size=300, alpha=0.025)
+2019-06-01 15:15:22,374 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:15:36,551 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:15:36,551 INFO:Utils.logger: []
+2019-06-01 15:15:36,551 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:15:36,551 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:15:36,551 ERROR:Utils.logger: 0
+2019-06-01 15:18:50,061 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:18:50,061 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:18:50,076 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:18:50,076 INFO:Utils.logger: Set Sentences
+2019-06-01 15:18:50,076 INFO:Utils.logger: Build Model
+2019-06-01 15:18:50,123 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:18:50,170 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:19:24,184 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:19:24,184 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:19:24,184 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:19:24,184 INFO:Utils.logger: Set Sentences
+2019-06-01 15:19:24,184 INFO:Utils.logger: Build Model
+2019-06-01 15:19:24,246 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:19:24,293 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:20:11,825 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:20:11,825 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:20:11,841 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:20:11,841 INFO:Utils.logger: Set Sentences
+2019-06-01 15:20:11,841 INFO:Utils.logger: Build Model
+2019-06-01 15:20:11,887 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:20:11,934 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:22:32,539 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:22:32,539 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:22:32,539 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:22:32,539 INFO:Utils.logger: Set Sentences
+2019-06-01 15:22:32,539 INFO:Utils.logger: Build Model
+2019-06-01 15:22:32,586 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:22:32,633 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:23:41,252 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:23:41,252 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:23:41,267 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:23:41,267 INFO:Utils.logger: Set Sentences
+2019-06-01 15:23:41,267 INFO:Utils.logger: Build Model
+2019-06-01 15:23:41,314 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:23:41,361 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:24:11,936 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:24:11,936 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:24:11,936 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:24:11,936 INFO:Utils.logger: Set Sentences
+2019-06-01 15:24:11,936 INFO:Utils.logger: Build Model
+2019-06-01 15:24:11,982 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:24:12,029 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:26:12,298 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:26:12,298 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:26:12,313 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:26:12,313 INFO:Utils.logger: Set Sentences
+2019-06-01 15:26:12,313 INFO:Utils.logger: Build Model
+2019-06-01 15:26:12,360 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:26:12,407 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:27:21,437 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:27:21,437 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:27:21,453 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:27:21,453 INFO:Utils.logger: Set Sentences
+2019-06-01 15:27:21,453 INFO:Utils.logger: Build Model
+2019-06-01 15:27:21,499 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:27:21,546 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:29:13,115 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:29:13,115 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:29:13,115 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:29:13,130 INFO:Utils.logger: Set Sentences
+2019-06-01 15:29:13,130 INFO:Utils.logger: Build Model
+2019-06-01 15:29:13,177 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:29:13,224 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:30:30,876 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:30:30,876 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:30:30,876 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:30:30,876 INFO:Utils.logger: Set Sentences
+2019-06-01 15:30:30,876 INFO:Utils.logger: Build Model
+2019-06-01 15:30:30,907 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:30:30,938 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:30:30,938 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:30:30,938 ERROR:Utils.logger: division by zero
+2019-06-01 15:31:33,735 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:31:33,735 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:31:33,750 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:31:33,750 INFO:Utils.logger: Set Sentences
+2019-06-01 15:31:33,750 INFO:Utils.logger: Build Model
+2019-06-01 15:31:33,766 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:31:33,797 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:31:33,797 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:31:33,797 INFO:Utils.logger: []
+2019-06-01 15:31:33,797 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:31:33,813 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:31:33,813 ERROR:Utils.logger: 0
+2019-06-01 15:33:05,718 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:33:05,718 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:33:05,733 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:33:05,733 INFO:Utils.logger: Set Sentences
+2019-06-01 15:33:05,733 INFO:Utils.logger: Build Model
+2019-06-01 15:33:05,749 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:33:05,780 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:33:05,780 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:33:05,780 INFO:Utils.logger: []
+2019-06-01 15:33:05,796 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:33:05,796 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:33:05,796 ERROR:Utils.logger: 0
+2019-06-01 15:33:38,106 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:33:38,106 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:33:38,122 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:33:38,122 INFO:Utils.logger: Set Sentences
+2019-06-01 15:33:38,122 INFO:Utils.logger: Build Model
+2019-06-01 15:33:38,138 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:33:38,169 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:33:38,169 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:33:38,169 INFO:Utils.logger: []
+2019-06-01 15:33:38,169 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:33:38,169 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:33:38,169 ERROR:Utils.logger: 0
+2019-06-01 15:34:05,576 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:34:05,576 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:34:05,592 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:34:05,592 INFO:Utils.logger: Set Sentences
+2019-06-01 15:34:05,592 INFO:Utils.logger: Build Model
+2019-06-01 15:34:05,608 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:34:05,639 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:34:05,639 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:34:05,639 INFO:Utils.logger: []
+2019-06-01 15:34:05,639 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:34:05,639 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:34:05,639 ERROR:Utils.logger: 0
+2019-06-01 15:34:58,649 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:34:58,649 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:34:58,665 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:34:58,665 INFO:Utils.logger: Set Sentences
+2019-06-01 15:34:58,665 INFO:Utils.logger: Build Model
+2019-06-01 15:34:58,680 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:34:58,711 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:34:58,727 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:34:58,727 INFO:Utils.logger: []
+2019-06-01 15:34:58,727 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:34:58,727 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:34:58,727 ERROR:Utils.logger: 0
+2019-06-01 15:35:40,820 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:35:40,820 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:35:40,836 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:35:40,836 INFO:Utils.logger: Set Sentences
+2019-06-01 15:35:40,836 INFO:Utils.logger: Build Model
+2019-06-01 15:35:40,851 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:35:40,883 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:35:40,883 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:35:40,883 INFO:Utils.logger: []
+2019-06-01 15:35:40,883 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:35:40,883 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:35:40,883 ERROR:Utils.logger: 0
+2019-06-01 15:36:17,495 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:36:17,495 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:36:17,495 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:36:17,495 INFO:Utils.logger: Set Sentences
+2019-06-01 15:36:17,495 INFO:Utils.logger: Build Model
+2019-06-01 15:36:17,526 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:36:17,557 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:36:17,557 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:36:17,557 INFO:Utils.logger: [[0. 0.]]
+2019-06-01 15:36:17,557 INFO:Utils.logger: [[0. 0.]]
+2019-06-01 15:36:17,557 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:36:17,557 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:36:17,557 ERROR:Utils.logger: 'NoneType' object is not subscriptable
+2019-06-01 15:36:47,629 INFO:Utils.logger: NEW REGRESSION IS STARTING!
+2019-06-01 15:36:47,629 INFO:Utils.logger: Step 1: Get Texts
+2019-06-01 15:36:47,645 INFO:Utils.logger: Step 2: Word2Vec
+2019-06-01 15:36:47,645 INFO:Utils.logger: Set Sentences
+2019-06-01 15:36:47,645 INFO:Utils.logger: Build Model
+2019-06-01 15:36:47,676 INFO:Utils.logger: Word2Vec(vocab=11, size=300, alpha=0.025)
+2019-06-01 15:36:47,692 INFO:Utils.logger: Step 3: Build Chunks
+2019-06-01 15:36:47,707 INFO:Utils.logger: Step 4: Build Distance Metric
+2019-06-01 15:36:47,707 INFO:Utils.logger: [[0. 0. 0.]]
+2019-06-01 15:36:47,707 INFO:Utils.logger: [[0. 0. 0.]]
+2019-06-01 15:36:47,707 INFO:Utils.logger: [[0. 0. 0.]]
+2019-06-01 15:36:47,707 INFO:Utils.logger: Step 5: PAM
+2019-06-01 15:36:47,738 INFO:Utils.logger: Step 6: Silhouette
+2019-06-01 15:36:47,738 INFO:Utils.logger: K=2
+2019-06-01 15:36:47,738 INFO:Utils.logger: [[0, 2], [1]]
+2019-06-01 15:36:47,738 INFO:Utils.logger: Silhouette width=0.0
+2019-06-01 15:36:47,738 INFO:Utils.logger: Step 7: Statistical Data
+2019-06-01 15:36:47,738 INFO:Utils.logger: Analyze Data
+2019-06-01 15:36:47,738 INFO:Utils.logger: Number of Documents styles: 2
+2019-06-01 15:36:47,738 INFO:Utils.logger: Number of Chunks styles: 2
+2019-06-01 15:36:47,738 INFO:Utils.logger: Max documents in style: 2
+2019-06-01 15:36:47,738 INFO:Utils.logger: Min documents in style: 1
+2019-06-01 15:36:47,738 INFO:Utils.logger: *********REGRESSION SUMMARY*********
+2019-06-01 15:36:47,738 INFO:Utils.logger: Number of Documents: 3
+2019-06-01 15:36:47,738 INFO:Utils.logger: Number of clusters: 2
+2019-06-01 15:36:47,738 INFO:Utils.logger: *********Documents and Chunks*********
+2019-06-01 15:36:47,738 INFO:Utils.logger: 
+                   Document name:  a.txt
+                     Document ID:  0
+           Document total chunks:  2
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: 1
+2019-06-01 15:36:47,738 INFO:Utils.logger: 
+                   Document name:  b.txt
+                     Document ID:  1
+           Document total chunks:  2
+Document total comparable chunks:  1
+                Document cluster:  2
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: 2
+2019-06-01 15:36:47,738 INFO:Utils.logger: 
+                   Document name:  c.txt
+                     Document ID:  2
+           Document total chunks:  2
+Document total comparable chunks:  1
+                Document cluster:  1
+                        Chunk ID:  0 <-> Chunk Cluster: None
+                        Chunk ID:  1 <-> Chunk Cluster: 1
