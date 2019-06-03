@@ -81,8 +81,9 @@ class Document(object):
             else:
                 index += 1
         #print(self.chunksVec)
-        if chunkCount < self.DelayPar:
-            print("Number of chunks incorrect")
+        #if chunkCount < self.DelayPar:
+            #print("Number of chunks incorrect")
+            #return
 
     @staticmethod
     def get_docCollection():

@@ -589,7 +589,7 @@ class Toplevel1:
         self.Number_Of_Words_Label.configure(foreground="#000000")
         self.Number_Of_Words_Label.configure(highlightbackground="#d9d9d9")
         self.Number_Of_Words_Label.configure(highlightcolor="black")
-        self.Number_Of_Words_Label.configure(text='''Number of Words in Document:''')
+        self.Number_Of_Words_Label.configure(text='''Number of Words:''')
 
         self.Number_Of_Words_Spinbox = tk.Spinbox(self.TFIDF_Labelframe, from_=1.0, to=100.0)
         self.Number_Of_Words_Spinbox.place(relx=0.396, rely=0.462, relheight=0.400
