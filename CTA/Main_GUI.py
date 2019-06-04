@@ -580,7 +580,7 @@ class Toplevel1:
         self.TFIDF_Labelframe.configure(width=150)
 
         self.Number_Of_Words_Label = tk.Label(self.TFIDF_Labelframe)
-        self.Number_Of_Words_Label.place(relx=0.019, rely=0.462, height=21, width=176
+        self.Number_Of_Words_Label.place(relx=0.088, rely=0.462, height=21, width=176
                 , bordermode='ignore')
         self.Number_Of_Words_Label.configure(activebackground="#f9f9f9")
         self.Number_Of_Words_Label.configure(activeforeground="black")

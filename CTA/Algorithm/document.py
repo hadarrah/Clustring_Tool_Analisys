@@ -8,14 +8,11 @@ import os
 
 
 class Document(object):
-    ID = -1
 
-    def __init__(self, filepath, config):
+    def __init__(self, filepath, config, id):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        #self.log = logger.add_log_file(self.log, config)
-        self.docID = None
-        self.set_docID()
+        self.docID = id
         self.docPath = filepath
         self.basename = os.path.basename(filepath)
         self.docText = self.getText(self.docPath)
@@ -26,7 +23,6 @@ class Document(object):
         self.cluster = None
         self.s = int(config.get("TF-IDF", "num_of_words_per_doc"))
         self.confog = config
-        Document.set_ID(self)
 
     def get_chunksVec(self):
         """
@@ -63,8 +59,7 @@ class Document(object):
         chunkList = []
         chunkCount = 0
         preChunks = []
-        #print(words)
-        for w in words[index:]:
+        for w in words:
             if model.exist_in_vocab(w):
                 chunkList.append(w)
                 wordsCount += 1
@@ -72,7 +67,7 @@ class Document(object):
                     if ((chunkID + 1)> self.DelayPar):
                         preChunks = self.chunks[chunkID - self.DelayPar:chunkID]
                     ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model, preChunks)
-                    self.chunksVec.append(ch.chunkVec)
+                    #self.chunksVec.append(ch.chunkVec)
                     self.chunks.append(ch)
                     chunkCount += 1
                     chunkList = []
@@ -80,10 +75,6 @@ class Document(object):
                     chunkID += 1
             else:
                 index += 1
-        #print(self.chunksVec)
-        #if chunkCount < self.DelayPar:
-            #print("Number of chunks incorrect")
-            #return
 
     @staticmethod
     def get_docCollection():
@@ -112,33 +103,12 @@ class Document(object):
         with open(filepath, mode='r', encoding='utf-8-sig', errors='ignore') as file_handler:
             return file_handler.read()
 
-    def set_docID(self):
-        """
-        Set the number of document
-        :return:
-        """
-        self.docID = Document.ID + 1
-
     def get_docID(self):
         """
         Get the number of document
         :return:
          """
         return self.docID
-
-    def set_ID(self):
-        """
-        Set the global ID
-        :return:
-        """
-        Document.ID = Document.ID + 1
-
-    def get_ID(self):
-        """
-        Get the global ID
-        :return:
-         """
-        return Document.ID
 
     def get_docText(self):
         """

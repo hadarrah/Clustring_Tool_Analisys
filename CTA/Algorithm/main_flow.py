@@ -6,7 +6,7 @@ from Algorithm.statistical_data import Statistical_Data
 from Utils import logger
 from Utils import configuration
 from Utils.Word2VecWrapper import Model
-import operator
+from Utils import Filtering
 from Utils import tfidf
 
 
@@ -83,12 +83,13 @@ class main(object):
         self.docCollection = {}  # all documents in one document as a dictionary
         self.docList = []  # list of Document objects
 
+        i = 0
         # --Creating the Documents collections--#
         for d in self.documents:
-            Doc1 = Document(d, self.config)
+            Doc1 = Document(d, self.config, i)
             self.docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents to TF-IDF
             self.docList.append(Doc1)  # build list of document objects to Word2Vec
-
+            i += 1
         # --Creating the Tf-Idf dictionary--#
         self.tfidfDic = tfidf.compute_tfidf(self.docCollection)
 
@@ -108,39 +109,18 @@ class main(object):
         Build and create chunks based on TF-IDF score.
         :return:
         """
-        words = {}  # dic of highest words in all documents (key= word, value= TfIdf value)
-        wordsCount = 0
-        totalWordsForChunks = []
-        for value in self.tfidfDic.values():  # each dictionary in Tf-Idf dictionary
-            sorted_value = sorted(value.items(),
-                                  key=operator.itemgetter(1))  # sorted dictionary by value(=Tf-Idf value)
-            sorted_value.reverse()  # inversed sorted dictionary -> max dictionary
-            for k, val in sorted_value:
-                if wordsCount < self.num_of_words_per_doc:  # while we did'nt get the num of words' count
-                    if val != 0:  # ignore the words with value 0
-                        if self.model.exist_in_vocab(k):
-                            words.update({k: val})  # update a total dictionary of all highest words from all documents
-                            wordsCount += 1
-            wordsCount = 0
-        print("all x words from each doc")
-        print(words)
-        sorted_dic = sorted(words.items(), key=operator.itemgetter(1))  #sort the 'all highest word from all documents' dic
-        sorted_dic.reverse()                                            #inversed sorted dictionary -> max dictionary
-        print("sorted words list")
-        print(sorted_dic)
-        counter = 0
-        for k, val in sorted_dic:                                       #choose the highest words from all documents according to 'num_of_words_per_doc'
-            if counter < self.num_of_words_per_doc:
-                totalWordsForChunks.append(k)
-                counter += 1
-        print("The x words from all docs")
-        print(totalWordsForChunks)
+        totalWordsForChunks = Filtering.Filter(self.tfidfDic, self.num_of_words_per_doc, self.model, self.docList)
         for key in self.tfidfDic.keys():
             text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
-            text = ' '.join(i for i in text if i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
+            text = ' '.join(i for i in text if
+                            i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
             print("the text after filtering")
             print(text)
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
+            if len(self.docList[key].get_comparable_chunks()) == 0:  # none chunks exception
+                raise Exception("There are not comparable chunks in several documents. Please select different "
+                                "parameters in TF-IDF and Chunks sections")
+
     def Step4(self):
         """
         Build the distance metric.
