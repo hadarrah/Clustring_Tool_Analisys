@@ -16,20 +16,10 @@ class Document(object):
         self.docPath = filepath
         self.basename = os.path.basename(filepath)
         self.docText = self.getText(self.docPath)
-        self.chunksVec = []  # the distances vector
         self.chunks = []
         self.chunkSize = int(config.get("CHUNKS", "size"))
         self.DelayPar = int(config.get("CHUNKS", "delay"))
         self.cluster = None
-        self.s = int(config.get("TF-IDF", "num_of_words_per_doc"))
-        self.confog = config
-
-    def get_chunksVec(self):
-        """
-        Get the chunk's vector
-        :return:
-        """
-        return self.chunksVec
 
     def get_chunks(self):
         """
@@ -67,7 +57,6 @@ class Document(object):
                     if ((chunkID + 1)> self.DelayPar):
                         preChunks = self.chunks[chunkID - self.DelayPar:chunkID]
                     ch = chunk.Chunk(config, chunkList, self.get_docID(), chunkID, model, preChunks)
-                    #self.chunksVec.append(ch.chunkVec)
                     self.chunks.append(ch)
                     chunkCount += 1
                     chunkList = []
@@ -170,22 +159,5 @@ class Document(object):
 
 
 
-if __name__ == "__main__":
-    config = configuration.config().setup()
-    model = Word2VecWrapper.Model(config,
-                                  filepath="C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\wiki.he.vec")
-    s = int(config.get("TF-IDF", "num_of_words_per_doc"))
-    model.build_model()
-    wordsList = []
-    docCollection = {}  # all documents in one document as a dictionary
-    docList = []  # list of Document objects
-    Doc = ["C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\a.txt",
-           "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\b.txt"]
-    #  "C:\\Users\\Aviram Kounio\\Google Drive\\סמסטר ח\\פרויקט חלק ב\\Text\\c.txt"
-    for d in Doc:  # d = document path
-        Doc1 = Document(d, config)
-        docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents
-        docList.append(Doc1)  # build list of document objects
-        Doc1.createChunks(["אבירם", "גר", "בבית"], model, config)
-        print(Doc1)
-        break
+#if __name__ == "__main__":
+

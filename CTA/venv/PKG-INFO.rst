@@ -1,4 +1,4 @@
-|Documentation| |DOI|
+|Documentation| |JOSS|
 
 PyClustering
 ============
@@ -6,19 +6,19 @@ PyClustering
 **pyclustering** is a Python, C++ data mining library (clustering
 algorithm, oscillatory networks, neural networks). The library provides
 Python and C++ implementations (via CCORE library) of each algorithm or
-model. CCORE library is a part of pyclustering and supported only for
-32, 64-bit Linux and 32, 64-bit Windows operating systems.
+model. CCORE library is a part of pyclustering and supported for
+Linux, Windows and MacOS operating systems.
 
 Official repository: https://github.com/annoviko/pyclustering/
 
-Documentation: https://codedocs.xyz/annoviko/pyclustering/
+Documentation: https://pyclustering.github.io/docs/0.9.0/html/index.html
 
 Dependencies
 ============
 
 **Required packages**: scipy, matplotlib, numpy, Pillow
 
-**Python version**: >=3.4 (32-bit, 64-bit)
+**Python version**: >=3.5 (32-bit, 64-bit)
 
 **C++ version**: >= 14 (32-bit, 64-bit)
 
@@ -59,7 +59,7 @@ Manual installation from official repository using GCC:
     $ git clone https://github.com/annoviko/pyclustering.git .
 
     # compile CCORE library (core of the pyclustering library).
-    $ cd pyclustering/ccore
+    $ cd ccore/
     $ make ccore_x64        # build for 64-bit OS
 
     # $ make ccore_x86      # build for 32-bit OS
@@ -101,16 +101,18 @@ Library Content
 - **BIRCH** (pyclustering.cluster.birch);
 - **BSAS** (pyclustering.cluster.bsas);
 - **CLARANS** (pyclustering.cluster.clarans);
+- **CLIQUE** (pyclustering.cluster.clique);
 - **CURE** (pyclustering.cluster.cure);
 - **DBSCAN** (pyclustering.cluster.dbscan);
 - **Elbow** (pyclustering.cluster.elbow);
 - **EMA** (pyclustering.cluster.ema);
+- **Fuzzy C-Means** (pyclustering.cluster.fcm);
 - **GA (Genetic Algorithm)** (pyclustering.cluster.ga);
 - **HSyncNet** (pyclustering.cluster.hsyncnet);
 - **K-Means** (pyclustering.cluster.kmeans);
 - **K-Means++** (pyclustering.cluster.center_initializer);
 - **K-Medians** (pyclustering.cluster.kmedians);
-- **K-Medoids (PAM)** (pyclustering.cluster.kmedoids);
+- **K-Medoids** (pyclustering.cluster.kmedoids);
 - **MBSAS** (pyclustering.cluster.mbsas);
 - **OPTICS** (pyclustering.cluster.optics);
 - **ROCK** (pyclustering.cluster.rock);
@@ -149,23 +151,30 @@ Library Content
 Cite the Library
 ================
 
-If you are using pyclustering library in a scientific paper, please, cite the library.
+If you are using pyclustering library in a scientific paper, please, cite the library:
+
+Novikov, A., 2019. PyClustering: Data Mining Library. Journal of Open Source Software, 4(36), p.1230. Available at: http://dx.doi.org/10.21105/joss.01230.
 
 BibTeX entry:
 
 .. code::
 
-    @misc{andrei_novikov_2018_1491324,
-        author       = {Andrei Novikov},
-        title        = {annoviko/pyclustering: pyclustering 0.8.2 release},
-        month        = nov,
-        year         = 2018,
-        doi          = {10.5281/zenodo.1491324},
-        url          = {https://doi.org/10.5281/zenodo.1491324}
+    @article{Novikov2019,
+        doi         = {10.21105/joss.01230},
+        url         = {https://doi.org/10.21105/joss.01230},
+        year        = 2019,
+        month       = {apr},
+        publisher   = {The Open Journal},
+        volume      = {4},
+        number      = {36},
+        pages       = {1230},
+        author      = {Andrei Novikov},
+        title       = {{PyClustering}: Data Mining Library},
+        journal     = {Journal of Open Source Software}
     }
 
 
 .. |Documentation| image:: https://codedocs.xyz/annoviko/pyclustering.svg
    :target: https://codedocs.xyz/annoviko/pyclustering/
-.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1491324.svg
-   :target: https://doi.org/10.5281/zenodo.1491324
+.. |JOSS| image:: http://joss.theoj.org/papers/10.21105/joss.01230/status.svg
+   :target: https://doi.org/10.21105/joss.01230
