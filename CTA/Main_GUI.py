@@ -1521,7 +1521,7 @@ class Toplevel1:
             doc_paths = list(texts_input)
 
         else:
-            messagebox.showerror("Input Error", "You must insert a texts")
+            messagebox.showerror("Input Error", "You must insert texts")
             return
 
         vec_path = vec_input if (vec_input) else None

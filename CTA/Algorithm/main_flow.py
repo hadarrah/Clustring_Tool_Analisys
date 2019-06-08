@@ -87,9 +87,12 @@ class main(object):
         # --Creating the Documents collections--#
         for d in self.documents:
             Doc1 = Document(d, self.config, i)
-            self.docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents to TF-IDF
-            self.docList.append(Doc1)  # build list of document objects to Word2Vec
-            i += 1
+            if Doc1.getText(d) == '':
+                raise Exception("The text file '{}' is empty! Please load a new one.".format(d))
+            else:
+                self.docCollection[Doc1.get_docID()] = Doc1.getText(d)  # build dic of documents to TF-IDF
+                self.docList.append(Doc1)  # build list of document objects to Word2Vec
+                i += 1
         # --Creating the Tf-Idf dictionary--#
         self.tfidfDic = tfidf.compute_tfidf(self.docCollection)
 
@@ -100,7 +103,9 @@ class main(object):
         """
         if (self.external_vec):
             self.model = Model(self.config, filepath=self.external_vec)
+            self.log.info("Using an external word embedding file")
         else:
+            self.log.info("Creating a word embedding file")
             self.model = Model(self.config, documents=self.docList)
         self.model.build_model()
 

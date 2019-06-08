@@ -17,7 +17,7 @@ def compute_tfidf(docCollection):
         wordDic = (dict.fromkeys(wordSet, 0))  # build dictionary of zeros for each text(bow)
         for word in bow:
             wordDic[word] += 1  # update number of word of each text i to dict
-        tf = computeTf( wordDic, len(bow))  # compute tf value for each document
+        tf = computeTf(wordDic, len(bow))  # compute tf value for each document
         tfBow.append(tf)
         wordD.append(wordDic)  # build list of dicts
     idfs = computeIDF(wordD)  # compute idf value
