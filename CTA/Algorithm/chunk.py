@@ -5,10 +5,9 @@ import numpy as np
 import logging
 
 
-
 class Chunk(object):
 
-    def __init__(self, config, text, docID, chunkID, model, preChunks = []):
+    def __init__(self, config, text, docID, chunkID, model, preChunks=[]):
         self.chunk_size = config.get("CHUNKS", "size")
         self.delay = config.get("CHUNKS", "delay")
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
@@ -17,11 +16,11 @@ class Chunk(object):
         self.chunkVec = None
         self.Doc = text
         self.docID = docID
-        self.model= model
+        self.model = model
         self.cluster = None
         self.preChunks = preChunks
         Chunk.createVec(self)
-        #self.log = logger.add_log_file(self.log, config)
+        # self.log = logger.add_log_file(self.log, config)
 
     def get_precursors_chunks(self):
         """
@@ -33,7 +32,6 @@ class Chunk(object):
 
     def getchunkVec(self):
         return self.chunkVec
-
 
     def getdocID(self):
         """
@@ -74,18 +72,13 @@ class Chunk(object):
         for d1 in self.Doc:
             j = 0
             for d2 in self.Doc:
-                if (j < i): # skip all the precursors words include this one
+                if (j < i):  # skip all the precursors words include this one
                     j += 1
                     continue
-                cos = np.dot(self.model.get_vector(d1),self.model.get_vector(d2))/(np.linalg.norm(self.model.get_vector(d1))*np.linalg.norm(self.model.get_vector(d2)))
+                cos = np.dot(self.model.get_vector(d1), self.model.get_vector(d2)) / (
+                            np.linalg.norm(self.model.get_vector(d1)) * np.linalg.norm(self.model.get_vector(d2)))
                 cosResult.append(cos)
             i += 1
         self.chunkVec = np.array(cosResult)
 
-
-
-#if __name__ == "__main__":
-
-
-
-
+# if __name__ == "__main__":

@@ -65,23 +65,6 @@ class Document(object):
             else:
                 index += 1
 
-    @staticmethod
-    def get_docCollection():
-        """
-        Get the document collection
-        :return:
-        """
-        return Document.docCollection
-
-    @staticmethod
-    def set_docCollection( docID, docText):
-        """
-        Insert each new document into docs collection (dictionary)
-        :param docID:
-        :param docText:
-        :return:
-        """
-        Document.docCollection = {docID: docText}
 
     def getText(self, filepath):
         """

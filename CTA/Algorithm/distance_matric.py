@@ -35,8 +35,10 @@ class Distance_Matric(object):
         self.log.info("total comparable chunks: " + str(len(self.comparable_chunks)))
         # iterate all over the comparable chunks and build their row in the metric
         i = 0
+        counter = len(self.comparable_chunks)
         for chunk in self.comparable_chunks:
-            self.log.info("calculating metric's cell for chunk ID {} in Doc ID {}".format(chunk.getChunkID(), chunk.getdocID()))
+            counter -= 1
+            self.log.info("calculating metric's cell for chunk ID {} in Doc ID {}.   (chunks left: {})".format(chunk.getChunkID(), chunk.getdocID(), counter))
             chunk_metric_row = []
             j = 0
 
