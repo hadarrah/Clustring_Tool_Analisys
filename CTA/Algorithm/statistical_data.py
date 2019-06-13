@@ -9,9 +9,10 @@ class Statistical_Data(object):
     """
     This class responsible on analyzing and generating data based on the last regression.
     """
-    def __init__(self, config, documents, number_of_clusters, silhouette_width):
+    def __init__(self, config, documents, number_of_clusters, silhouette_width, max_chunks_in_doc):
         self.config = config
         self.documents = documents
+        self.max_chunks_in_doc = max_chunks_in_doc
         self.number_of_chunks_styles = number_of_clusters
         self.silhouette_width = round(silhouette_width, 6)
         self.max_docs_in_style = None
@@ -113,15 +114,20 @@ class Statistical_Data(object):
         styles = []
         i = 1
         if (isinstance(doc, str) and doc == "All Documents"):
+            chunks_leading_zeroes_str = ":0{}d".format(len(str(self.max_chunks_in_doc)))
+            ch_str = "ch-{" + chunks_leading_zeroes_str + "}"
+            doc_chunk_str = "doc-{}-" + ch_str
             for document in self.documents:
                 i = 1
                 for chunk in document.get_comparable_chunks():
-                    chunks.append("doc-{}-ch-{}".format(document.get_basename().split(".")[0], str(i)))
+                    chunks.append(doc_chunk_str.format(document.get_basename().split(".")[0], i))
                     styles.append(chunk.get_cluster() + 1)
                     i += 1
         else:
+            leading_zeroes_str = ":0{}d".format(len(str(len(doc.get_comparable_chunks()))))
+            ch_str = "ch-{" + leading_zeroes_str + "}"
             for chunk in doc.get_comparable_chunks():
-                chunks.append("ch-{}".format(str(i)))
+                chunks.append(ch_str.format(i))
                 styles.append(chunk.get_cluster()+1)
                 i += 1
 
@@ -137,15 +143,20 @@ class Statistical_Data(object):
         zv = []
         i = 1
         if (isinstance(doc, str) and doc == "All Documents"):
+            chunks_leading_zeroes_str = ":0{}d".format(len(str(self.max_chunks_in_doc)))
+            ch_str = "ch-{" + chunks_leading_zeroes_str + "}"
+            doc_chunk_str = "doc-{}-" + ch_str
             for document in self.documents:
                 i = 1
                 for chunk in document.get_comparable_chunks():
-                    chunks.append("doc-{}-ch-{}".format(document.get_basename().split(".")[0], str(i)))
+                    chunks.append(doc_chunk_str.format(document.get_basename().split(".")[0], i))
                     zv.append(Distance_Matric.compute_zv(chunk, chunk.get_precursors_chunks()))
                     i += 1
         else:
+            leading_zeroes_str = ":0{}d".format(len(str(len(doc.get_comparable_chunks()))))
+            ch_str = "ch-{" + leading_zeroes_str + "}"
             for chunk in doc.get_comparable_chunks():
-                chunks.append("ch-{}".format(str(i)))
+                chunks.append(ch_str.format(i))
                 zv.append(Distance_Matric.compute_zv(chunk, chunk.get_precursors_chunks()))
                 i += 1
 

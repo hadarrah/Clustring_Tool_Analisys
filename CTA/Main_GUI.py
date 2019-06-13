@@ -1436,7 +1436,7 @@ class Toplevel1:
             messagebox.showerror("Regression Error", "There is no data to export, please run a regression before export")
             return
         self.xlsx_path = asksaveasfilename(title='Select a csv file', filetypes=[("XLSX Files", ".xlsx")])
-        if self.xlsx_path is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        if self.xlsx_path is None or not self.xlsx_path:  # asksaveasfile return `None` if dialog closed with "cancel".
             return
 
         if (not self.xlsx_path.endswith(r'.xlsx')):
@@ -1451,7 +1451,8 @@ class Toplevel1:
             elif (case == "ZV dependencies"):
                 doc = self.index_dict_document[self.Document_TCombobox.get()]
                 csv_generator.export_zv_dependencies(self.xlsx_path, self.df_toExport, self.data, doc)
-            messagebox.showinfo("Export Data", "Export data successful!")
+            if (os.path.isfile(self.xlsx_path)):
+                messagebox.showinfo("Export Data", "Export data successful!")
         except Exception as e:
             messagebox.showerror("Export Data", "Export data failed: " + str(e))
 

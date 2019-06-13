@@ -115,6 +115,7 @@ class main(object):
         :return:
         """
         totalWordsForChunks = Filtering.Filter(self.tfidfDic, self.num_of_words_per_doc, self.model, self.docList)
+        self.max_chunks_in_doc = 0
         for key in self.tfidfDic.keys():
             text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
             text = ' '.join(i for i in text if
@@ -122,6 +123,8 @@ class main(object):
             print("the text after filtering")
             print(text)
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
+            if (len(self.docList[key].get_chunks()) > self.max_chunks_in_doc):
+                self.max_chunks_in_doc = len(self.docList[key].get_chunks())
             if len(self.docList[key].get_comparable_chunks()) == 0:  # none chunks exception
                 raise Exception("There are not comparable chunks in several documents. Please select different "
                                 "parameters in TF-IDF and Chunks sections")
@@ -163,7 +166,8 @@ class main(object):
         Analyze the statistical data from last regression.
         :return:
         """
-        self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()), self.silhouette_width)
+        self.data = Statistical_Data(self.config, self.docList, len(self.best_cl.get_clusters()), self.silhouette_width,
+                                     self.max_chunks_in_doc)
         self.data.analyze_data()
 
     def print_result_to_log(self):

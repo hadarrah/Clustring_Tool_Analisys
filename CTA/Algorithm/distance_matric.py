@@ -1,7 +1,7 @@
 from Utils import logger
 from Utils import configuration
 import numpy as np
-from scipy.stats import spearmanr
+import pandas as pd
 import math
 import logging
 
@@ -11,12 +11,18 @@ class Distance_Matric(object):
     This class responsible on the distance metric which will delivered into PAM algorithm.
     The input is a documents collection with chunks.
     """
+    vectors_dict = {}
+    corr_matrix = None
+
     def __init__(self, config, documents):
         self.config = config
         self.distance_metric = []
         self.documents = documents
         self.comparable_chunks = []
         self.chunks_index = {}
+        self.transferred_vectors = []
+        Distance_Matric.vectors_dict = {}
+        Distance_Matric.corr_matrix = None
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
@@ -29,10 +35,24 @@ class Distance_Matric(object):
         """
         np.seterr(divide='ignore', invalid='ignore')
         # get all the comparable chunks
+        vector_size = int(self.config.get("CHUNKS", "size"))
+        vector_size = int((vector_size*(vector_size-1))/2)
+        i = 0
         for doc in self.documents:
-            self.comparable_chunks.extend(doc.get_comparable_chunks())    # <- from Aviram
+            self.comparable_chunks.extend(doc.get_comparable_chunks())
+            for chunk in doc.get_chunks():
+                # transfer chunks vector and treat them as a columns in order to use pd.DataFrame.corr function
+                for j in range(0, vector_size):
+                    if (i == 0):
+                        initial_vector = [chunk.getchunkVec()[j]]
+                        self.transferred_vectors.append(initial_vector)
+                    else:
+                        self.transferred_vectors[j].append(chunk.getchunkVec()[j])
+                Distance_Matric.vectors_dict["{}{}".format(chunk.getdocID(), chunk.getChunkID())] = i
+                i += 1
 
         self.log.info("total comparable chunks: " + str(len(self.comparable_chunks)))
+        self.create_spearman_matrix()
         # iterate all over the comparable chunks and build their row in the metric
         i = 0
         counter = len(self.comparable_chunks)
@@ -72,6 +92,17 @@ class Distance_Matric(object):
 
         return abs(zv_homogeneous_1 + zv_homogeneous_2 - zv_heterogeneous_1 - zv_heterogeneous_2)
 
+    def create_spearman_matrix(self):
+        """
+        Create spearman correlation matrix for all chunks (including the incomparable chunks)
+        :return:
+        """
+        self.log.info("Calculate spearman correlation matrix")
+        df = pd.DataFrame(self.transferred_vectors)
+        Distance_Matric.corr_matrix = df.corr(method="spearman")
+        print(str(Distance_Matric.corr_matrix))
+
+
     @staticmethod
     def compute_zv(chunk, precursors_chunks):
         """
@@ -81,9 +112,10 @@ class Distance_Matric(object):
         :return: similarity value between the chunks
         """
         sum = 0
-        chunk_vec = chunk.getchunkVec()
         for pre_chunk in precursors_chunks:
-            corr, p_value = spearmanr(chunk_vec, pre_chunk.getchunkVec())
+            i = Distance_Matric.vectors_dict["{}{}".format(chunk.getdocID(), chunk.getChunkID())]
+            j = Distance_Matric.vectors_dict["{}{}".format(pre_chunk.getdocID(), pre_chunk.getChunkID())]
+            corr = Distance_Matric.corr_matrix[i][j]
             if (math.isnan(corr)):
                 corr = 0.0
             sum += corr
