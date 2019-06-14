@@ -4,7 +4,6 @@ from Algorithm.distance_matric import Distance_Matric
 from Algorithm.cl import CL
 from Algorithm.statistical_data import Statistical_Data
 from Utils import logger
-from Utils import configuration
 from Utils.Word2VecWrapper import Model
 from Utils import Filtering
 from Utils import tfidf
@@ -20,7 +19,6 @@ class main(object):
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        # self.log = logger.add_log_file(self.log, config)
 
     def run(self, top):
         self.log.info("NEW REGRESSION IS STARTING!")
@@ -117,11 +115,8 @@ class main(object):
         totalWordsForChunks = Filtering.Filter(self.tfidfDic, self.num_of_words_per_doc, self.model, self.docList)
         self.max_chunks_in_doc = 0
         for key in self.tfidfDic.keys():
-            text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
-            text = ' '.join(i for i in text if
-                            i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
-            print("the text after filtering")
-            print(text)
+            unfiltered_text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
+            text = [i for i in unfiltered_text if i in totalWordsForChunks]  # delete from the original text the unnecessary words
             self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
             if (len(self.docList[key].get_chunks()) > self.max_chunks_in_doc):
                 self.max_chunks_in_doc = len(self.docList[key].get_chunks())
@@ -142,8 +137,8 @@ class main(object):
         Generate the clustring results in range[from, to]
         :return:
         """
-        self.clustring_results = CL(self.config, self.matric.get_distance_metric())
-        self.clustring_results.generate_clusters()
+        self.clustering_results = CL(self.config, self.matric.get_distance_metric())
+        self.clustering_results.generate_clusters()
 
     def Step6(self):
         """
@@ -151,7 +146,7 @@ class main(object):
         document according to the best result
         :return:
         """
-        self.best_cl, self.clusters_indicator, self.silhouette_width = self.clustring_results.get_best_clustering_result()
+        self.best_cl, self.clusters_indicator, self.silhouette_width = self.clustering_results.get_best_clustering_result()
         # for each comparable chunk we calculate his cluster and then based on majority votes
         # assign the documents into a specific cluster
 
@@ -178,8 +173,3 @@ class main(object):
         for doc in self.docList:
             self.log.info(doc)
 
-
-if __name__ == "__main__":
-    # Unitest
-    config = configuration.config().setup()
-    main = main(config, "blabla", None)

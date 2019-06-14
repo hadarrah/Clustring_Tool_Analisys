@@ -1,7 +1,5 @@
 from Utils import logger
-from Utils import configuration
 import logging
-from Algorithm.document import Document
 from Algorithm.distance_matric import Distance_Matric
 import operator
 

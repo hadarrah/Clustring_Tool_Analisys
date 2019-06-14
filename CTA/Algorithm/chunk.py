@@ -1,6 +1,4 @@
 from Utils import logger
-from Utils import configuration
-from Utils import Word2VecWrapper
 import numpy as np
 import logging
 
@@ -20,7 +18,6 @@ class Chunk(object):
         self.cluster = None
         self.preChunks = preChunks
         Chunk.createVec(self)
-        # self.log = logger.add_log_file(self.log, config)
 
     def get_precursors_chunks(self):
         """
@@ -80,5 +77,3 @@ class Chunk(object):
                 cosResult.append(cos)
             i += 1
         self.chunkVec = np.array(cosResult)
-
-# if __name__ == "__main__":

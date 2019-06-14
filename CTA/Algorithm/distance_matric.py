@@ -1,5 +1,4 @@
 from Utils import logger
-from Utils import configuration
 import numpy as np
 import pandas as pd
 import math
@@ -26,7 +25,6 @@ class Distance_Matric(object):
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        #self.log = logger.add_log_file(self.log, config)
 
     def build_metric(self):
         """
@@ -34,6 +32,7 @@ class Distance_Matric(object):
         :return:
         """
         np.seterr(divide='ignore', invalid='ignore')
+
         # get all the comparable chunks
         vector_size = int(self.config.get("CHUNKS", "size"))
         vector_size = int((vector_size*(vector_size-1))/2)
@@ -53,6 +52,7 @@ class Distance_Matric(object):
 
         self.log.info("total comparable chunks: " + str(len(self.comparable_chunks)))
         self.create_spearman_matrix()
+
         # iterate all over the comparable chunks and build their row in the metric
         i = 0
         counter = len(self.comparable_chunks)
@@ -74,9 +74,9 @@ class Distance_Matric(object):
             i += 1
         self.distance_metric = np.matrix(self.distance_metric)
         np.set_printoptions(precision=3)
+        self.log.info("Distance Matrix:")
         for row in self.distance_metric:
             self.log.info(row)
-
 
     def compute_dzv(self, chunk1, chunk2):
         """
@@ -101,7 +101,6 @@ class Distance_Matric(object):
         df = pd.DataFrame(self.transferred_vectors)
         Distance_Matric.corr_matrix = df.corr(method="spearman")
         print(str(Distance_Matric.corr_matrix))
-
 
     @staticmethod
     def compute_zv(chunk, precursors_chunks):
@@ -135,11 +134,5 @@ class Distance_Matric(object):
         :return: dictionary where key is chunk's row from distance metric and value is the chunk object
         """
         return self.chunks_index
-
-
-if __name__ == "__main__":
-    # Unitest
-    config = configuration.config().setup()
-    # functions
 
 

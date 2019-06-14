@@ -29,7 +29,6 @@ class Model(object):
         self.vectors = None
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
-        #self.log = logger.add_log_file(self.log, config)
         if (documents):
             self.set_sentences(documents)
 
@@ -74,7 +73,6 @@ class Model(object):
         :param word: word string
         :return: if exist -> word vector, otherwise -1
         """
-        #self.log.info("Get Vector: " + str(word))
         try:
             vec = self.word_vectors[word]
         except Exception as e:
@@ -85,27 +83,3 @@ class Model(object):
     def exist_in_vocab(self, word):
         return (word in self.word_vectors)
 
-if __name__ == "__main__":
-    config = configuration.config().setup()
-
-    # option 1: external word embedding
-    model = Model(config, filepath="C:\\Users\\Hadar\\Downloads\\wiki.he\\wiki.he.vec")
-
-    # option 2: create word embedding based on the documents collection
-    #documents = ["C:\\Users\\Hadar\\Downloads\\texts\\Bamidbar_chapter_B.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Bereshit_chapter_A.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\MelachimB_chapter_C.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Shoftim_chapter_H.txt",
-    #             "C:\\Users\\Hadar\\Downloads\\texts\\Yiov_chapter_A.txt"]
-#
-    #model = Model(config, documents=documents)
-    model.build_model()
-
-    word = "אֶ֖לֶף"
-    if(model.exist_in_vocab(word)):
-        print(str(model.get_vector(word)))
-
-    word = "אהבה"
-    if (model.exist_in_vocab(word)):
-        print(str(model.get_vector(word)))
-    print()

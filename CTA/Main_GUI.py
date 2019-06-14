@@ -33,7 +33,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.pyplot import Figure
 import pandas as pd
 from Utils import csv_generator
-import copy
 
 config = configuration.config().setup()
 log = logger.setup()
