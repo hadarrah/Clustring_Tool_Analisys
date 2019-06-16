@@ -16,25 +16,20 @@ def Filter(tfidfDic, num_of_words_per_doc, model, docList):
                         words.update({k: val})  # update a total dictionary of all highest words from all documents
                         wordsCount += 1
         wordsCount = 0
-    print("all x words from each doc")
-    print(words)
+
     sorted_dic = sorted(words.items(),
                         key=operator.itemgetter(1))  # sort the 'all highest word from all documents' dic
     sorted_dic.reverse()  # inversed sorted dictionary -> max dictionary
-    print("sorted words list")
-    print(sorted_dic)
+
     counter = 0
     for k, val in sorted_dic:  # choose the highest words from all documents according to 'num_of_words_per_doc'
         if counter < num_of_words_per_doc:
             totalWordsForChunks.append(k)
             counter += 1
-    print("The {} words from all docs".format(num_of_words_per_doc))
-    print(totalWordsForChunks)
+
     for key in tfidfDic.keys():
         text = docList[key].get_docText().split()  # getting the doc text by key(=id)
-        text = ' '.join(i for i in text if
-                        i in totalWordsForChunks).split()  # delete from the original text the unnecessary words
-        print("the text after filtering")
-        print(text)
+        text = [i for i in text if i in totalWordsForChunks]  # delete from the original text the unnecessary words
+
 
     return totalWordsForChunks
