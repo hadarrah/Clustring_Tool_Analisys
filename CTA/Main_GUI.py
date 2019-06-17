@@ -34,7 +34,7 @@ from matplotlib.pyplot import Figure
 import pandas as pd
 from Utils import csv_generator
 
-config = configuration.config().setup()
+config = configuration.config()
 log = logger.setup()
 log = logger.add_log_file(log, config)
 doc_paths = list()
@@ -1538,6 +1538,20 @@ class Toplevel1:
             config.set("Word2Vec", "training_model", training)
             config.set("Word2Vec", "context_window", context_window)
             config.set("Word2Vec", "text_delimiter", delimiter)
+
+        log.info("########################################################################")
+        log.info("                     Starting new regression")
+        log.info("########################################################################")
+        log.info("Configuration:")
+        log.info("Range from: " + str(from_range))
+        log.info("Range to: " + str(to_range))
+        log.info("TF-IDF number of words: " + str(number_of_words))
+        log.info("Chunk size: " + str(chunk_size))
+        log.info("Chunk delay: " + str(delay))
+        log.info("Word2Vec architecture: " + str(arch))
+        log.info("Word2Vec training model: " + str(training))
+        log.info("Word2Vec context window: " + str(context_window))
+        log.info("Word2Vec text delimiter: " + str(delimiter))
 
         self.clean_all_steps()
 
