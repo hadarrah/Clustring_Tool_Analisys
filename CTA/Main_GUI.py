@@ -42,12 +42,20 @@ vec_path = None
 
 STYLE_RANGE = [i for i in range(2, 100)]
 DELIMITERS = [r'\n', r'\.', r'\[.*?\]']
-V_PATH = ".\\images\\green_v.png"
-X_PATH = ".\\images\\red_x.png"
 
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
+    return os.path.join(base_path, relative_path)
 
+V_PATH = resource_path(".\\images\\green_v.png")
+X_PATH = resource_path(".\\images\\red_x.png")
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
