@@ -1,6 +1,9 @@
 
 class config(object):
-
+    """
+    This class implemented the configparser module.
+    For each variable the user can get and set a new value.
+    """
     def __init__(self):
         self.logfile = "CTA_Regression.log"
         self.size = "2"
