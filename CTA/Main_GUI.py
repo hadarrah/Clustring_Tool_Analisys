@@ -1065,9 +1065,7 @@ class Toplevel1:
 
         # save the files path
         self.num_of_files = root.tk.splitlist(self.doc_paths)
-        if (len(self.num_of_files) < 3):
-            messagebox.showerror("Error selected files", "You must select at least 3 files")
-            return
+
         self.texts_list.delete(0, 'end')
         for doc in self.num_of_files:
             self.texts_list.insert(0, os.path.basename(doc))
@@ -1527,9 +1525,12 @@ class Toplevel1:
         global root
         if (texts_input):
             doc_paths = list(texts_input)
-
         else:
             messagebox.showerror("Input Error", "You must insert texts")
+            return
+
+        if (len(doc_paths) < 3):
+            messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
 
         vec_path = vec_input if (vec_input) else None
