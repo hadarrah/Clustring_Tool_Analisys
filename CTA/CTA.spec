@@ -24,7 +24,6 @@ for d in a.datas:
 a.datas += [('.\\images\\green_v.png','C:\\Users\Hadar\\PycharmProjects\\Clustring_Tool_Analisys\\CTA\\Images\\green_v.png', 'Data')]
 a.datas += [('.\\images\\red_x.png','C:\\Users\Hadar\\PycharmProjects\\Clustring_Tool_Analisys\\CTA\\Images\\red_x.png', 'Data')]
 
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
