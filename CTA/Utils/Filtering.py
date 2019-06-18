@@ -27,9 +27,5 @@ def Filter(tfidfDic, num_of_words_per_doc, model, docList):
             totalWordsForChunks.append(k)
             counter += 1
 
-    for key in tfidfDic.keys():
-        text = docList[key].get_docText().split()  # getting the doc text by key(=id)
-        text = [i for i in text if i in totalWordsForChunks]  # delete from the original text the unnecessary words
-
 
     return totalWordsForChunks

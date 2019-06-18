@@ -13,7 +13,7 @@ class config(object):
         self.num_of_words_per_doc = "4"
         self.arch = "Skip-Gram"
         self.training_model = "Softmax"
-        self.context_window = "4"
+        self.context_window = "5"
         self.dimension = "300"
         self.text_delimiter = r'\[.*?\]'
 
