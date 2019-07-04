@@ -61,7 +61,7 @@ class Document(object):
                     wordsCount = 0
                     chunkID += 1
                     self.log.info("Chunk {chunk_id} in Document {doc_id} was created successfully, the chunk's vector is:".
-                                  format(chunk_id=str(chunkID), doc_id=str(self.get_docID())))
+                                  format(chunk_id=str(chunkID), doc_id=str(self.get_basename())))
                     self.log.info(ch.getchunkVec())
             else:
                 index += 1

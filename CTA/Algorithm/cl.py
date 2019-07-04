@@ -1,8 +1,7 @@
 from Utils import logger
 from pyclustering.cluster.kmedoids import kmedoids
-from sklearn.metrics import silhouette_score
 import logging
-
+from pyclustering.cluster.silhouette import silhouette
 
 class CL(object):
     """
@@ -50,7 +49,11 @@ class CL(object):
                 cluster_indicator[chunk_index] = i
             i += 1
 
-        silhouette_width = silhouette_score(self.distance_metric, cluster_indicator, metric="precomputed")
+        silhouette_width_list = silhouette(self.distance_metric,clusters).process().get_score()
+        silhouette_width = 0
+        for score in silhouette_width_list:
+            silhouette_width += score
+        silhouette_width = float(silhouette_width)/len(silhouette_width_list)
         self.log.info("K={num_clusters}".format(num_clusters=str(len(clusters))))
         self.log.info("{result}".format(result=str(clusters)))
         self.log.info("Silhouette width={sil}".format(sil=str(silhouette_width)))

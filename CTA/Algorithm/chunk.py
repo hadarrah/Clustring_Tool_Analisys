@@ -1,7 +1,7 @@
 from Utils import logger
 import numpy as np
 import logging
-
+import math
 
 class Chunk(object):
 
@@ -17,6 +17,7 @@ class Chunk(object):
         self.model = model
         self.cluster = None
         self.preChunks = preChunks
+        self.ranked_vec = {}
         Chunk.createVec(self)
 
     def get_precursors_chunks(self):
@@ -77,3 +78,17 @@ class Chunk(object):
                 cosResult.append(cos)
             i += 1
         self.chunkVec = np.array(cosResult)
+        self.create_cumulative_vector(self.chunkVec)
+
+    def create_cumulative_vector(self, vector):
+        self.cummulative_vector = np.cumsum(vector)
+        size = len(self.cummulative_vector)
+        interval = math.floor(size/20)
+        vec = []
+        for i in range(0, size, interval):
+            vec.append(self.cummulative_vector[i])
+
+        self.shrinked_vector = np.array(vec)
+
+    def get_shrinked_cummulative_vec(self):
+        return self.shrinked_vector
