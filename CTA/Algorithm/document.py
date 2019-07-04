@@ -60,9 +60,9 @@ class Document(object):
                     chunkList = []
                     wordsCount = 0
                     chunkID += 1
-                    self.log.info("Chunk {chunk_id} in Document {doc_id} was created successfully, the chunk's vector is:".
-                                  format(chunk_id=str(chunkID), doc_id=str(self.get_basename())))
-                    self.log.info(ch.getchunkVec())
+                    self.log.info("Chunk {chunk_id} in Document {doc_id} was created successfully, the chunk's vector is:\n{vec}".
+                                  format(chunk_id=str(chunkID), doc_id=str(self.get_basename()), vec=str(ch.getchunkVec())))
+                    self.log.info("Chunk cumulative shrinked vector is:\n{vec}".format(vec=str(ch.get_shrinked_cummulative_vec())))
             else:
                 index += 1
 

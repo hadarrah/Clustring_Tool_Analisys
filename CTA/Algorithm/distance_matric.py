@@ -1,6 +1,5 @@
 from Utils import logger
 import numpy as np
-import pandas as pd
 import logging
 from sklearn.neighbors import DistanceMetric as DM
 
@@ -93,7 +92,7 @@ class Distance_Matric(object):
         """
         dist = DM.get_metric('chebyshev')
         Distance_Matric.chebyshev_distance = dist.pairwise(self.chebyshev_mat)
-        self.log.info(str(Distance_Matric.chebyshev_distance))
+        self.log.info("Chebyshev matrix:\n" + str(Distance_Matric.chebyshev_distance))
 
 
     @staticmethod

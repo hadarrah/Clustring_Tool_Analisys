@@ -81,12 +81,12 @@ class Chunk(object):
         self.create_cumulative_vector(self.chunkVec)
 
     def create_cumulative_vector(self, vector):
-        self.cummulative_vector = np.cumsum(vector)
-        size = len(self.cummulative_vector)
+        self.cumulative_vector = np.cumsum(vector)
+        size = len(self.cumulative_vector)
         interval = math.floor(size/20)
         vec = []
         for i in range(0, size, interval):
-            vec.append(self.cummulative_vector[i])
+            vec.append(self.cumulative_vector[i])
 
         self.shrinked_vector = np.array(vec)
 
