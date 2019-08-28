@@ -7,7 +7,8 @@ from Utils import logger
 from Utils.Word2VecWrapper import Model
 from Utils import Filtering
 from Utils import tfidf
-
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
 
 class main(object):
 
@@ -19,6 +20,7 @@ class main(object):
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
         self.log = logger.setup()
+        self.build_chunks = build_chunks
 
     def run(self, top):
         self.log.info("NEW REGRESSION IS STARTING!")
@@ -114,15 +116,23 @@ class main(object):
         """
         totalWordsForChunks = Filtering.Filter(self.tfidfDic, self.num_of_words_per_doc, self.model, self.docList)
         self.max_chunks_in_doc = 0
-        for key in self.tfidfDic.keys():
-            unfiltered_text = self.docList[key].get_docText().split()  # getting the doc text by key(=id)
-            text = [i for i in unfiltered_text if i in totalWordsForChunks]  # delete from the original text the unnecessary words
-            self.docList[key].createChunks(text, self.model, self.config)  # create chunks for each document
-            if (len(self.docList[key].get_chunks()) > self.max_chunks_in_doc):
-                self.max_chunks_in_doc = len(self.docList[key].get_chunks())
-            if len(self.docList[key].get_comparable_chunks()) == 0:  # none chunks exception
-                raise Exception("There are not comparable chunks in several documents. Please select different "
-                                "parameters in TF-IDF and Chunks sections")
+
+        num_of_cpu = int(multiprocessing.cpu_count())
+
+        # prepare arguments
+        updates_in_parallel = []
+        for doc in self.docList:
+            updates_in_parallel.append({"doc": doc, "model": self.model, "config": self.config, "totalWordsForChunks": totalWordsForChunks})
+
+        # create pool
+        pool = ThreadPool(num_of_cpu)
+        results = pool.map(self.build_chunks, updates_in_parallel)
+
+        # close the pool and wait for the work to finish
+        pool.close()
+        pool.join()
+
+        self.max_chunks_in_doc = max(results)
 
     def Step4(self):
         """
@@ -173,3 +183,19 @@ class main(object):
         for doc in self.docList:
             self.log.info(doc)
 
+
+def build_chunks(args_dict):
+    doc = args_dict["doc"]
+    model = args_dict["model"]
+    config = args_dict["config"]
+    totalWordsForChunks = args_dict["totalWordsForChunks"]
+
+    unfiltered_text = doc.get_docText().split()  # getting the doc text by key(=id)
+    text = [i for i in unfiltered_text if
+            i in totalWordsForChunks]  # delete from the original text the unnecessary words
+    doc.createChunks(text, model, config)  # create chunks for each document
+    chunks_in_doc = len(doc.get_chunks())
+    if len(doc.get_comparable_chunks()) == 0:  # none chunks exception
+        raise Exception("There are not comparable chunks in several documents. Please select different "
+                        "parameters in TF-IDF and Chunks sections")
+    return chunks_in_doc
