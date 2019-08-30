@@ -1,6 +1,7 @@
 import numpy as np
 import logging
 import math
+from Utils import logger
 
 class Chunk(object):
 
@@ -8,6 +9,7 @@ class Chunk(object):
         self.chunk_size = config.get("CHUNKS", "size")
         self.delay = config.get("CHUNKS", "delay")
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
         self.chunkID = chunkID
         self.chunkVec = None
         self.Doc = text

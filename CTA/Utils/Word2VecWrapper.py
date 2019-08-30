@@ -3,6 +3,7 @@ from gensim.models import KeyedVectors
 from gensim.test.utils import datapath
 import logging
 import re
+from Utils import logger
 
 class Model(object):
     """
@@ -26,6 +27,7 @@ class Model(object):
         self.sentences = []
         self.vectors = None
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
         if (documents):
             self.set_sentences(documents)
 

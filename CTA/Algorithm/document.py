@@ -2,12 +2,14 @@ from Algorithm import chunk
 import logging
 import operator
 import os
+from Utils import logger
 
 
 class Document(object):
 
     def __init__(self, filepath, config, id):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
         self.docID = id
         self.docPath = filepath
         self.basename = os.path.basename(filepath)

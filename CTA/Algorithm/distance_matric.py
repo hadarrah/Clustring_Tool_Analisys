@@ -1,6 +1,7 @@
 import numpy as np
 import logging
 from sklearn.neighbors import DistanceMetric as DM
+from Utils import logger
 
 class Distance_Matric(object):
     """
@@ -22,6 +23,7 @@ class Distance_Matric(object):
         Distance_Matric.corr_matrix = None
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
 
     def build_metric(self):
         """

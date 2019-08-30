@@ -1,6 +1,7 @@
 import logging
 from Algorithm.distance_matric import Distance_Matric
 import operator
+from Utils import logger
 
 class Statistical_Data(object):
     """
@@ -16,6 +17,7 @@ class Statistical_Data(object):
         self.min_docs_in_style = None
         self.number_of_documents_styles = 0
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
 
     def analyze_data(self):
         """

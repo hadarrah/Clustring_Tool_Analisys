@@ -6,6 +6,7 @@ from Algorithm.statistical_data import Statistical_Data
 from Utils.Word2VecWrapper import Model
 from Utils import Filtering
 from Utils import tfidf
+from Utils import logger
 import multiprocessing
 from multiprocessing.dummy import Pool as ThreadPool
 
@@ -18,6 +19,7 @@ class main(object):
         self.external_vec = external_vec
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
         self.build_chunks = build_chunks
 
     def run(self, top):

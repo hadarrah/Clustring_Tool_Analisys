@@ -3,6 +3,7 @@ import logging
 from pyclustering.cluster.silhouette import silhouette
 import multiprocessing
 from multiprocessing.dummy import Pool as ThreadPool
+from Utils import logger
 
 
 class CL(object):
@@ -14,8 +15,8 @@ class CL(object):
         self.config = config
         self.distance_metric = distance_metric
         self.clustring_results = []
-
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
+        self.log = logger.add_log_file(self.log, config.get("GENERAL", "logfile"))
 
     def generate_clusters(self):
         """
