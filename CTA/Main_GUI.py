@@ -1449,7 +1449,7 @@ class Toplevel1:
         self.index_dict_document = {}
         self.value_list_document.append("All Documents")
         self.index_dict_document["All Documents"] = "All Documents"
-        for doc in self.data.get_documents():
+        for doc in sorted(self.data.get_documents(), key=lambda x: x.get_basename()):
             self.value_list_document.append(doc.get_basename())
             self.index_dict_document[doc.get_basename()] = doc
         self.Document_var.set(self.value_list_document[0])
