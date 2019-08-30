@@ -1,4 +1,3 @@
-from Utils import logger
 import numpy as np
 import logging
 from sklearn.neighbors import DistanceMetric as DM
@@ -23,7 +22,6 @@ class Distance_Matric(object):
         Distance_Matric.corr_matrix = None
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.setup()
 
     def build_metric(self):
         """
@@ -66,10 +64,10 @@ class Distance_Matric(object):
             i += 1
         self.distance_metric = np.matrix(self.distance_metric)
         np.set_printoptions(precision=3)
-        self.log.info("Distance Matrix:")
-        self.log.info(self.distance_metric)
+        self.log.debug("Distance Matrix:")
+        self.log.debug(self.distance_metric)
         for row in self.distance_metric:
-            self.log.info(row)
+            self.log.debug(row)
 
     def compute_dzv(self, chunk1, chunk2):
         """
@@ -92,7 +90,7 @@ class Distance_Matric(object):
         """
         dist = DM.get_metric('chebyshev')
         Distance_Matric.chebyshev_distance = dist.pairwise(self.chebyshev_mat)
-        self.log.info("Chebyshev matrix:\n" + str(Distance_Matric.chebyshev_distance))
+        self.log.debug("Chebyshev matrix:\n" + str(Distance_Matric.chebyshev_distance))
 
 
     @staticmethod
@@ -125,3 +123,27 @@ class Distance_Matric(object):
         :return: dictionary where key is chunk's row from distance metric and value is the chunk object
         """
         return self.chunks_index
+
+
+def threading_wrapper_zv(args_dict):
+    chunk = args_dict["chunk"]
+    precursors_chunks = args_dict["precursors_chunks"]
+    formula_element = args_dict["formula_element"]
+
+    zv = compute_zv2(chunk, precursors_chunks)
+    return formula_element, zv
+
+def compute_zv2(chunk, precursors_chunks):
+    """
+    ZV function from PTHG algorithm.
+    :param chunk: Chunk to compare with
+    :param precursors_chunks: set of precursors Chunks to compare with (based on the delay parameter)
+    :return: similarity value between the chunks
+    """
+    sum = 0
+    for pre_chunk in precursors_chunks:
+        i = Distance_Matric.vectors_dict["{}{}".format(chunk.getdocID(), chunk.getChunkID())]
+        j = Distance_Matric.vectors_dict["{}{}".format(pre_chunk.getdocID(), pre_chunk.getChunkID())]
+        dist = Distance_Matric.chebyshev_distance[i][j]
+        sum += dist
+    return sum/int(len(precursors_chunks))

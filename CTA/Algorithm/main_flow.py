@@ -3,7 +3,6 @@ from Algorithm.document import Document
 from Algorithm.distance_matric import Distance_Matric
 from Algorithm.cl import CL
 from Algorithm.statistical_data import Statistical_Data
-from Utils import logger
 from Utils.Word2VecWrapper import Model
 from Utils import Filtering
 from Utils import tfidf
@@ -19,7 +18,6 @@ class main(object):
         self.external_vec = external_vec
         self.stage = 1
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.setup()
         self.build_chunks = build_chunks
 
     def run(self, top):

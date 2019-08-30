@@ -1,8 +1,6 @@
 from gensim.models import word2vec
 from gensim.models import KeyedVectors
 from gensim.test.utils import datapath
-from Utils import logger
-from Utils import configuration
 import logging
 import re
 
@@ -28,7 +26,6 @@ class Model(object):
         self.sentences = []
         self.vectors = None
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.setup()
         if (documents):
             self.set_sentences(documents)
 

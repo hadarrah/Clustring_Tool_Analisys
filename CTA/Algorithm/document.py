@@ -1,5 +1,4 @@
 from Algorithm import chunk
-from Utils import logger
 import logging
 import operator
 import os
@@ -9,7 +8,6 @@ class Document(object):
 
     def __init__(self, filepath, config, id):
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.setup()
         self.docID = id
         self.docPath = filepath
         self.basename = os.path.basename(filepath)
@@ -60,9 +58,10 @@ class Document(object):
                     chunkList = []
                     wordsCount = 0
                     chunkID += 1
-                    self.log.info("Chunk {chunk_id} in Document {doc_id} was created successfully, the chunk's vector is:\n{vec}".
-                                  format(chunk_id=str(chunkID), doc_id=str(self.get_basename()), vec=str(ch.getchunkVec())))
-                    self.log.info("Chunk cumulative shrinked vector is:\n{vec}".format(vec=str(ch.get_shrinked_cummulative_vec())))
+                    self.log.info("Chunk {chunk_id} in Document {doc_id} was created successfully".
+                                  format(chunk_id=str(chunkID), doc_id=str(self.get_basename())))
+                    self.log.debug("Chunk's vector is:\n{vec}".format(vec=str(ch.getchunkVec())))
+                    self.log.debug("Chunk cumulative shrinked vector is:\n{vec}".format(vec=str(ch.get_shrinked_cummulative_vec())))
             else:
                 index += 1
 

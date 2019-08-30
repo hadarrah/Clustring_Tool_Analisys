@@ -21,6 +21,7 @@ except ImportError:
 
 import main_support
 
+import logging
 from Utils import logger
 from Utils import configuration
 from Algorithm.main_flow import main as main_regression
@@ -35,8 +36,8 @@ import pandas as pd
 from Utils import csv_generator
 
 config = configuration.config()
-log = logger.setup()
-log = logger.add_log_file(log, config)
+#log = logger.setup()
+#log = logger.add_log_file(log, config)
 doc_paths = list()
 vec_path = None
 
@@ -98,6 +99,7 @@ class Toplevel1:
         self.doc_paths = []
         self.data = None
         self.df_toExport = None
+        self.Debug_Log_Cbutton = None
         self.case = ""
         self.style = ttk.Style()
         if sys.platform == "win32":
@@ -109,7 +111,7 @@ class Toplevel1:
             [('selected', _compcolor), ('active',_ana2color)])
 
         top.geometry("616x469+388+146")
-        top.title("Clustring Text Tool")
+        top.title("Clustering Tool Analysis")
         top.configure(background="#d9d9d9")
         top.configure(highlightbackground="#d9d9d9")
         top.configure(highlightcolor="black")
@@ -323,22 +325,22 @@ class Toplevel1:
         self.TSeparator2 = ttk.Separator(self.General_TNotebook)
         self.TSeparator2.place(relx=0.085, rely=0.537, relwidth=0.847)
 
-        self.Enable_Cbutton = tk.Checkbutton(self.Advanced_Option_TNotebook)
-        self.Enable_Cbutton.place(relx=0.051, rely=0.014, relheight=0.061
-                , relwidth=0.107)
-        self.Enable_Cbutton.configure(activebackground="#ececec")
-        self.Enable_Cbutton.configure(activeforeground="#000000")
-        self.Enable_Cbutton.configure(background="#d9d9d9")
-        self.Enable_Cbutton.configure(disabledforeground="#a3a3a3")
-        self.Enable_Cbutton.configure(foreground="#000000")
-        self.Enable_Cbutton.configure(highlightbackground="#d9d9d9")
-        self.Enable_Cbutton.configure(highlightcolor="black")
-        self.Enable_Cbutton.configure(justify='left')
-        self.Enable_Cbutton.configure(text='''Enable''')
-        self.Enable_Cbutton_var = tk.IntVar()
-        self.Enable_Cbutton.configure(variable=self.Enable_Cbutton_var)
-        self.Enable_Cbutton.configure(command=self.enable_button_handler)
-        self.Enable_Cbutton.deselect()
+
+        self.Debug_Log_Cbutton = tk.Checkbutton(self.Advanced_Option_TNotebook)
+        self.Debug_Log_Cbutton.place(relx=0.041, rely=0.014, relheight=0.061
+                                  , relwidth=0.207)
+        self.Debug_Log_Cbutton.configure(activebackground="#ececec")
+        self.Debug_Log_Cbutton.configure(activeforeground="#000000")
+        self.Debug_Log_Cbutton.configure(background="#d9d9d9")
+        self.Debug_Log_Cbutton.configure(disabledforeground="#a3a3a3")
+        self.Debug_Log_Cbutton.configure(foreground="#000000")
+        self.Debug_Log_Cbutton.configure(highlightbackground="#d9d9d9")
+        self.Debug_Log_Cbutton.configure(highlightcolor="black")
+        self.Debug_Log_Cbutton.configure(justify='left')
+        self.Debug_Log_Cbutton.configure(text='''Debug Log''')
+        self.Debug_Log_Cbutton_var = tk.IntVar()
+        self.Debug_Log_Cbutton.configure(variable=self.Debug_Log_Cbutton_var)
+        self.Debug_Log_Cbutton.deselect()
 
         self.Word2Vec_Labelframe = tk.LabelFrame(self.Advanced_Option_TNotebook)
         self.Word2Vec_Labelframe.place(relx=0.068, rely=0.500, relheight=0.478
@@ -364,7 +366,6 @@ class Toplevel1:
         self.Skip_Gram_Radiobutton.configure(highlightbackground="#d9d9d9")
         self.Skip_Gram_Radiobutton.configure(highlightcolor="black")
         self.Skip_Gram_Radiobutton.configure(justify='left')
-        self.Skip_Gram_Radiobutton.configure(state='disabled')
         self.Skip_Gram_Radiobutton.configure(text='''Skip Gram''')
         self.Skip_Gram_Radiobutton.configure(variable=self.arch_var)
         self.Skip_Gram_Radiobutton.configure(value="Skip-Gram")
@@ -381,7 +382,6 @@ class Toplevel1:
         self.CBOW_Radiobutton.configure(highlightbackground="#d9d9d9")
         self.CBOW_Radiobutton.configure(highlightcolor="black")
         self.CBOW_Radiobutton.configure(justify='left')
-        self.CBOW_Radiobutton.configure(state='disabled')
         self.CBOW_Radiobutton.configure(text='''CBOW''')
         self.CBOW_Radiobutton.configure(variable=self.arch_var)
         self.CBOW_Radiobutton.configure(value="CBOW")
@@ -400,7 +400,6 @@ class Toplevel1:
         self.Softmax_Radiobutton.configure(highlightbackground="#d9d9d9")
         self.Softmax_Radiobutton.configure(highlightcolor="black")
         self.Softmax_Radiobutton.configure(justify='left')
-        self.Softmax_Radiobutton.configure(state='disabled')
         self.Softmax_Radiobutton.configure(text='''Softmax''')
         self.Softmax_Radiobutton.configure(variable=self.training_var)
         self.Softmax_Radiobutton.configure(value="Softmax")
@@ -416,7 +415,6 @@ class Toplevel1:
         self.Negative_Sampling_Radiobutton.configure(highlightbackground="#d9d9d9")
         self.Negative_Sampling_Radiobutton.configure(highlightcolor="black")
         self.Negative_Sampling_Radiobutton.configure(justify='left')
-        self.Negative_Sampling_Radiobutton.configure(state='disabled')
         self.Negative_Sampling_Radiobutton.configure(text='''Negative Sampling''')
         self.Negative_Sampling_Radiobutton.configure(variable=self.training_var)
         self.Negative_Sampling_Radiobutton.configure(value="Negative_Sampling")
@@ -485,7 +483,6 @@ class Toplevel1:
         self.Context_Windows_Spinbox.configure(insertbackground="black")
         self.Context_Windows_Spinbox.configure(selectbackground="#c4c4c4")
         self.Context_Windows_Spinbox.configure(selectforeground="black")
-        self.Context_Windows_Spinbox.configure(state='disabled')
         self.Context_Windows_var = tk.StringVar(root)
         self.Context_Windows_var.set(config.get("Word2Vec", "context_window"))
         self.Context_Windows_Spinbox.configure(textvariable=self.Context_Windows_var)
@@ -500,7 +497,6 @@ class Toplevel1:
         self.Delimiter_window.configure(foreground="#000000")
         self.Delimiter_window.configure(highlightbackground="#d9d9d9")
         self.Delimiter_window.configure(highlightcolor="black")
-        self.Delimiter_window.configure(state='disabled')
 
         self.Chunks_Labelframe = tk.LabelFrame(self.Advanced_Option_TNotebook)
         self.Chunks_Labelframe.place(relx=0.068, rely=0.240, relheight=0.255
@@ -526,7 +522,6 @@ class Toplevel1:
         self.Chunk_Size_Spinbox.configure(insertbackground="black")
         self.Chunk_Size_Spinbox.configure(selectbackground="#c4c4c4")
         self.Chunk_Size_Spinbox.configure(selectforeground="black")
-        self.Chunk_Size_Spinbox.configure(state='disabled')
         self.Chunk_Size_var = tk.StringVar(root)
         self.Chunk_Size_var.set(config.get("CHUNKS", "size"))
         self.Chunk_Size_Spinbox.configure(textvariable=self.Chunk_Size_var)
@@ -545,7 +540,6 @@ class Toplevel1:
         self.Delay_Spinbox.configure(insertbackground="black")
         self.Delay_Spinbox.configure(selectbackground="#c4c4c4")
         self.Delay_Spinbox.configure(selectforeground="black")
-        self.Delay_Spinbox.configure(state='disabled')
         self.Delay_var = tk.StringVar(root)
         self.Delay_var.set(config.get("CHUNKS", "delay"))
         self.Delay_Spinbox.configure(textvariable=self.Delay_var)
@@ -611,7 +605,6 @@ class Toplevel1:
         self.Number_Of_Words_Spinbox.configure(insertbackground="black")
         self.Number_Of_Words_Spinbox.configure(selectbackground="#c4c4c4")
         self.Number_Of_Words_Spinbox.configure(selectforeground="black")
-        self.Number_Of_Words_Spinbox.configure(state='disabled')
         self.Number_Of_Words_var = tk.StringVar(root)
         self.Number_Of_Words_var.set(config.get("TF-IDF", "num_of_words_per_doc"))
         self.Number_Of_Words_Spinbox.configure(textvariable=self.Number_Of_Words_var)
@@ -629,17 +622,19 @@ class Toplevel1:
         self.run_button.configure(highlightcolor="black")
         self.run_button.configure(pady="0")
         self.run_button.configure(text='''RUN!''')
-        self.run_button.configure(command=lambda : self.start_regression(self.doc_paths, self.vec_entry.get(),
-                                                                    self.from_var.get(),
-                                                                    self.to_var.get(),
-                                                                    self.Enable_Cbutton_var.get(),
-                                                                    self.Number_Of_Words_var.get(),
-                                                                    self.Chunk_Size_var.get(),
-                                                                    self.Delay_var.get(),
-                                                                    self.arch_var.get(),
-                                                                    self.training_var.get(),
-                                                                    self.Context_Windows_var.get(),
-                                                                    self.Delimiter_var.get()))
+        self.run_button.configure(command=lambda : self.start_regression(self.doc_paths,
+                                                                         self.vec_entry.get(),
+                                                                         self.add_word_emedding_Cbutton_var.get(),
+                                                                         self.from_var.get(),
+                                                                         self.to_var.get(),
+                                                                         self.Number_Of_Words_var.get(),
+                                                                         self.Chunk_Size_var.get(),
+                                                                         self.Delay_var.get(),
+                                                                         self.arch_var.get(),
+                                                                         self.training_var.get(),
+                                                                         self.Context_Windows_var.get(),
+                                                                         self.Delimiter_var.get(),
+                                                                         self.Debug_Log_Cbutton_var.get()))
 
         self.Processing_Labelframe = tk.LabelFrame(self.Running_TNotebook)
         self.Processing_Labelframe.place(relx=0.051, rely=0.146, relheight=0.768
@@ -1169,34 +1164,6 @@ class Toplevel1:
         if (int(self.Delay_Spinbox.get()) == round((int(self.Number_Of_Words_Spinbox.get())/int(self.Chunk_Size_Spinbox.get()))-0.5)):
             self.Delay_Spinbox.invoke("buttondown")
 
-    def enable_button_handler(self, event=None):
-        """
-        Handle the "Enable" checkbox in Advanced Options.
-        :param event:
-        :return:
-        """
-        set = self.Enable_Cbutton_var.get()
-        if (set):
-            self.Number_Of_Words_Spinbox.configure(state='normal')
-            self.Delay_Spinbox.configure(state='normal')
-            self.Chunk_Size_Spinbox.configure(state='normal')
-            self.Context_Windows_Spinbox.configure(state='normal')
-            self.Softmax_Radiobutton.configure(state="normal")
-            self.Negative_Sampling_Radiobutton.configure(state="normal")
-            self.CBOW_Radiobutton.configure(state="normal")
-            self.Skip_Gram_Radiobutton.configure(state="normal")
-            self.Delimiter_window.configure(state="normal")
-        else:
-            self.Number_Of_Words_Spinbox.configure(state='disable')
-            self.Delay_Spinbox.configure(state='disable')
-            self.Chunk_Size_Spinbox.configure(state='disable')
-            self.Context_Windows_Spinbox.configure(state='disable')
-            self.Softmax_Radiobutton.configure(state="disable")
-            self.Negative_Sampling_Radiobutton.configure(state="disable")
-            self.CBOW_Radiobutton.configure(state="disable")
-            self.Skip_Gram_Radiobutton.configure(state="disable")
-            self.Delimiter_window.configure(state="disable")
-
     def set_v_stage(self, stage, event=None):
         """
         General sign step for "V".
@@ -1503,15 +1470,15 @@ class Toplevel1:
         Popupmenu1.configure(foreground="black")
         Popupmenu1.post(event.x_root, event.y_root)
 
-    def start_regression(self, texts_input, vec_input, from_range, to_range, enable_advanced, number_of_words,
-                         chunk_size, delay, arch, training, context_window, delimiter):
+    def start_regression(self, texts_input, vec_input, enabled_vec, from_range, to_range, number_of_words,
+                         chunk_size, delay, arch, training, context_window, delimiter, debug_log):
         """
         This function run the main flow algorithm based on the input and the parameters.
         :param texts_input: list of paths to the documents
         :param vec_input: path for external word embedding file
+        :param enabled_vec: if turn on then check for external word embadding file
         :param from_range: value of "from" range
         :param to_range: value of "to" range
-        :param enable_advanced: True\False if "Enable" checkbox for advanced option.
         :param number_of_words: number of word parameter
         :param chunk_size: chunk size parameter
         :param delay: delay parameter
@@ -1519,6 +1486,7 @@ class Toplevel1:
         :param training: training parameter
         :param context_window: context window value
         :param delimiter: type of delimiter.
+        :param debug_log: if turn on then log in debug level.
         :return:
         """
         # we should check if all the files are exist before running the algorithm
@@ -1533,20 +1501,27 @@ class Toplevel1:
             messagebox.showerror("Error selected files", "You must select at least 3 files")
             return
 
-        vec_path = vec_input if (vec_input) else None
+        vec_path = vec_input if (enabled_vec and vec_input) else None
 
         # set the config object according to user's request.
         config.set("CLUSTER", "from", from_range)
         config.set("CLUSTER", "to", to_range)
 
-        if (enable_advanced):
-            config.set("TF-IDF", "num_of_words_per_doc", number_of_words)
-            config.set("CHUNKS", "size", chunk_size)
-            config.set("CHUNKS", "delay", delay)
-            config.set("Word2Vec", "arch", arch)
-            config.set("Word2Vec", "training_model", training)
-            config.set("Word2Vec", "context_window", context_window)
-            config.set("Word2Vec", "text_delimiter", delimiter)
+        config.set("TF-IDF", "num_of_words_per_doc", number_of_words)
+        config.set("CHUNKS", "size", chunk_size)
+        config.set("CHUNKS", "delay", delay)
+        config.set("Word2Vec", "arch", arch)
+        config.set("Word2Vec", "training_model", training)
+        config.set("Word2Vec", "context_window", context_window)
+        config.set("Word2Vec", "text_delimiter", delimiter)
+
+
+        logger.reset_logging()
+        if (debug_log):
+            log = logger.setup(logging.DEBUG)
+        else:
+            log = logger.setup(logging.INFO)
+        log = logger.add_log_file(log, config.get("GENERAL", "logfile"))
 
         log.info("########################################################################")
         log.info("                     Starting new regression")

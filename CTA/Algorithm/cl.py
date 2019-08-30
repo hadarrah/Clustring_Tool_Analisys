@@ -1,4 +1,3 @@
-from Utils import logger
 from pyclustering.cluster.kmedoids import kmedoids
 import logging
 from pyclustering.cluster.silhouette import silhouette
@@ -17,7 +16,6 @@ class CL(object):
         self.clustring_results = []
 
         self.log = logging.getLogger(__name__ + "." + __class__.__name__)
-        self.log = logger.setup()
 
     def generate_clusters(self):
         """
@@ -25,14 +23,23 @@ class CL(object):
         :return:
         """
         to = min(int(self.config.get("CLUSTER", "to"))+1, len(self.distance_metric))
+
+        num_of_cpu = int(multiprocessing.cpu_count())
+
+        # prepare arguments
+        updates_in_parallel = []
         for k in range(int(self.config.get("CLUSTER", "from")), to):
-            self.log.info("Calculate for k={}".format(str(k)))
-            intial_mediods_index = [index for index in range(0, k)] # randomize initial mediods start from 0 till k
-            kmedoids_instance = kmedoids(self.distance_metric, intial_mediods_index, data_type='distance_matrix')
-            kmedoids_instance.process()
-            self.clustring_results.append(kmedoids_instance)
+            updates_in_parallel.append({"distance_metric": self.distance_metric, "k": k, "log": self.log})
 
+        # create pool
+        pool = ThreadPool(num_of_cpu)
+        results = pool.map(calculate_k_clusters, updates_in_parallel)
 
+        # close the pool and wait for the work to finish
+        pool.close()
+        pool.join()
+
+        self.clustring_results = results
 
     def get_best_clustering_result(self):
         """
@@ -99,3 +106,15 @@ def get_silhouette(args_dict):
     log.info("{result}".format(result=str(clusters)))
     log.info("Silhouette width={sil}".format(sil=str(silhouette_width)))
     return silhouette_width, cluster_indicator, cl
+
+
+def calculate_k_clusters(args_dict):
+    log = args_dict["log"]
+    distance_metric = args_dict["distance_metric"]
+    k = args_dict["k"]
+
+    log.info("Calculate for k={}".format(str(k)))
+    intial_mediods_index = [index for index in range(0, k)]  # randomize initial mediods start from 0 till k
+    kmedoids_instance = kmedoids(distance_metric, intial_mediods_index, data_type='distance_matrix')
+    kmedoids_instance.process()
+    return kmedoids_instance
