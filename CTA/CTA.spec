@@ -1,4 +1,6 @@
 # -*- mode: python -*-
+import sys
+sys.setrecursionlimit(5000)
 
 block_cipher = None
 
@@ -7,7 +9,7 @@ a = Analysis(['Main_GUI.py'],
              pathex=['C:\\Users\\Hadar\\PycharmProjects\\Clustring_Tool_Analisys\\CTA'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports = ['pandas._libs.tslibs.timedeltas', 'sklearn.neighbors.typedefs'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -15,7 +17,6 @@ a = Analysis(['Main_GUI.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-
 for d in a.datas:
     if 'pyconfig' in d[0]:
         a.datas.remove(d)
